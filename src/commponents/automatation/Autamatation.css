@@ -1,0 +1,35 @@
+.automat-item1 {
+    background: url(../../../public/image/automat/automat1bg.png);
+    background-size: cover;
+    grid-column: 1/3;
+}
+
+.automat-item2 {
+    background: url(../../../public/image/automat/automat2bg.png);
+    background-size: cover;
+    grid-column: 3/6;
+}
+
+.automat-item3 {
+    background: url(../../../public/image/automat/automat3bg.png);
+    background-size: cover;
+    grid-column: 1/4;
+}
+
+.automat-item4 {
+    background: url(../../../public/image/automat/automat4bg.png);
+    background-size: cover;
+    grid-column: 4/6;
+}
+
+.automat-item5 {
+    background: url(../../../public/image/automat/automat5bg.png);
+    background-size: cover;
+    grid-column: 1/3;
+}
+
+.automat-item6 {
+    background: url(../../../public/image/automat/automat6bg.png);
+    background-size: cover;
+    grid-column: 3/6;
+}
