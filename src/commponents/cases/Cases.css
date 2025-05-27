@@ -1,0 +1,4 @@
+.cases-swiper-slide {
+    display: flex;
+    height: calc(100% - 20px);
+}

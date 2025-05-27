@@ -12,7 +12,11 @@ export default function Intro() {
             </div>
             <span className='text-[#818181] txt-2 mt-[15px]'>No setup required. Get started in 60 seconds.</span>
             <div className='w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg'>
-                <img alt='' />
+                <div className='relative mb-[10px]'>
+                    <img src={`${process.env.PUBLIC_URL}/image/intro/intro-gif.gif`} alt='ball' className='object-cover w-[115px]' />
+                    <img src={`${process.env.PUBLIC_URL}/image/intro/intro-gif-shadow.svg`} className='absolute bottom-[-40px]' />
+                </div>
+
                 <h2 className='title-2 max-w-[460px]'>Meet your AI Agent</h2>
                 <p className='text-[#818181] max-w-[400px] text-center mt-[15px]'>Your AI Agent is more than a tool — it’s a team member. It learns your processes, talks to clients, and executes tasks — so you can focus on what really matters.</p>
                 <p className='text-[#818181] mt-[40px]'>Just paste your link below</p>

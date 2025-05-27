@@ -87,6 +87,13 @@ button {
     margin: auto;
 }
 
+.section-2 {
+    width: calc((100% - 1200px) / 2 + 1200px);
+    margin: auto;
+    margin-right: 0;
+    overflow: hidden;
+}
+
 .subtitle-cover {
     font-size: 30px;
     font-weight: 500;
@@ -120,19 +127,24 @@ button {
     font-size: 17px;
     font-weight: 600;
     border-radius: 10px;
-    background-image:
+    /* background-image:
         linear-gradient(#000, #000),
-        linear-gradient(90deg, #930202, #DE2322, #FEC802);
+        linear-gradient(90deg, #930202, #DE2322, #FEC802); */
+    background: linear-gradient(#000, #000) padding-box,
+        linear-gradient(90deg, #930202, #DE2322, #FEC802) border-box;
     background-origin: border-box;
     background-clip: padding-box, border-box;
     border-bottom: 4px solid transparent;
     transition: .2s ease-in;
+    transition: background 0.4s ease-in, color 0.4s ease-in;
 }
 
 .black-btn:hover {
-    background-image:
+    /* background-image:
         linear-gradient(90deg, #930202, #DE2322, #FEC802),
-        linear-gradient(90deg, #930202, #DE2322, #FEC802);
+        linear-gradient(90deg, #930202, #DE2322, #FEC802); */
+    background: linear-gradient(#FB5D21, #FB5D21) padding-box,
+        linear-gradient(90deg, #FB5D21, #FB5D21, #FB5D21) border-box;
 }
 
 .white-btn {
@@ -166,7 +178,7 @@ button {
     padding: 11px 31px;
 }
 
-    /* .orange-btn:hover {
+/* .orange-btn:hover {
         background-image:
             linear-gradient(90deg, #930202, #DE2322, #FEC802),
             linear-gradient(90deg, #930202, #DE2322, #FEC802);
@@ -183,4 +195,61 @@ button {
     -webkit-backdrop-filter: blur(10px);
     background-color: rgba(78, 78, 78, 0.3);
     border-radius: 10px;
+}
+
+.swiper-control-btns {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    font-size: 30px;
+    color: #000 !important;
+}
+
+.disabled-button-class {
+    color: #818181 !important;
+}
+
+.swiper-control-btns::after {
+    display: none !important;
+}
+
+.custom-swiper-pagination {
+    width: fit-content !important;
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    display: flex !important;
+    gap: 15px !important;
+}
+
+.custom-swiper-pagination * {
+    margin: 0 !important;
+}
+
+.custom-swiper-pagination .swiper-pagination-bullet {
+    width: 30px !important;
+    height: 3px !important;
+    border-radius: 4px !important;
+    background-color: #818181 !important;
+}
+
+.custom-swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #000 !important;
+    width: 90px !important;
+}
+
+.gradient-overlay {
+    width: 100%;
+    background: linear-gradient(to top,
+            rgba(241, 241, 241, 0) 0%,
+            rgba(241, 241, 241, 1) 50%,
+            rgba(241, 241, 241, 0) 100%);
+    position: absolute;
+    bottom: -40px;
+    height: 80px;
 }

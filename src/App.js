@@ -9,6 +9,11 @@ import Autamatation from './commponents/automatation/Autamatation';
 import Footer from './commponents/footer/Footer';
 import Strategy from './commponents/strategy-guide/Strategy';
 import Question from './commponents/question/Question';
+import Methodology from './commponents/methodology/Methodology';
+import Cases from './commponents/cases/Cases';
+import Template from './commponents/templates/Template';
+import Team from './commponents/team/Team';
+import News from './commponents/news/News';
 
 function App() {
 
@@ -39,6 +44,12 @@ function App() {
           <Intro />
           <About />
           <Autamatation />
+          <Methodology />
+          <Cases />
+          <Template />
+          <Team />
+
+          <News />
           <Question />
           <Strategy />
         </div>
