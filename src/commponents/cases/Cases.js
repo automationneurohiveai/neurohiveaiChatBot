@@ -53,7 +53,7 @@ export default function Cases() {
 
 
     return (
-        <section className="section-2 flex flex-col gap-[30px]">
+        <section className="section-2 flex flex-col gap-[30px]" id='cases'>
             <div className='max-w-[1200px] flex items-end justify-between'>
                 <div className='flex flex-col gap-[5px]'>
                     <span className="title-top-type">

@@ -48,7 +48,7 @@ export default function Template() {
 
 
     return (
-        <section className="section-2 flex gap-[70px]">
+        <section className="section-2 flex gap-[70px]" id='templates'>
             <div className='min-w-[418px] flex flex-col'>
                 <span className="title-top-type">
                     <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">

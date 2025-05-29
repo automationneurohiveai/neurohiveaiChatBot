@@ -48,7 +48,7 @@ export default function Autamatation() {
                     <div className='max-w-[310px] mt-[53px] py-[35px] px-[23px] bg-[#F1F1F1] rounded-[20px] shadow-xl flex flex-col items-center'>
                         <img src={`${process.env.PUBLIC_URL}/image/automat/fraction.png`} />
                         <div className='mt-[5px] flex items-center gap-[5px]'>
-                            <img src={`${process.env.PUBLIC_URL}/image/automat/`} />
+                            <img src={`${process.env.PUBLIC_URL}/image/automat/automat-fte-graph.svg`} />
                             <p className='text-linear caption-capital-1'>0,15 FTE</p>
                         </div>
                         <span className='mt-[20px] text-center subtitle-16 text-[#818181]'>Example: 20 hours/month = 0.15 FTE (15% of full-time working hours)</span>

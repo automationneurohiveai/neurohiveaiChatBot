@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -252,4 +256,5 @@ button {
     position: absolute;
     bottom: -40px;
     height: 80px;
+    z-index: 11;
 }

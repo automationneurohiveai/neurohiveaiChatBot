@@ -7,74 +7,74 @@ export default function Methodology() {
         {
             count: '01',
             title: 'Evaluate AI Potential',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Analyze challenges and optimization areas',
+            result: 'Clear understanding of where AI brings value',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-1.jpg`,
         },
         {
             count: '02',
             title: 'Define Goals & KPIs',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Set measurable business objectives',
+            result: 'Concrete goals instead of “AI for the sake of AI”',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-2.jpg`,
         },
         {
             count: '03',
-            title: 'Prioritize Data Security',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            title: 'Ensure Data Security',
+            task: 'Protect data, define policies and access',
+            result: 'Minimized risks',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-3.jpg`,
         },
         {
             count: '04',
-            title: 'Ensure Ethics ',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            title: 'Ensure Ethics and Compliance ',
+            task: 'Address GDPR, transparency, and auditing',
+            result: 'Legal and ethical assurance',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-4.jpg`,
         },
         {
             count: '05',
             title: 'Organize Your Data',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Structure sources, clean and update data',
+            result: 'High-quality “fuel” for AI',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-5.jpg`,
         }
     ];
     const methods2 = [
         {
             count: '06',
             title: 'Build Team AI Literacy',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Train and engage the team',
+            result: 'Less resistance, more understanding',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-6.jpg`,
         },
         {
             count: '07',
             title: 'Audit AI Tools',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Evaluate existing tools and systems',
+            result: 'Clear map for optimization',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-7.jpg`,
         },
         {
             count: '08',
             title: 'Measure Performance',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Track KPIs, ROI, and analytics',
+            result: 'Transparent performance metrics',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-8.jpg`,
         },
         {
             count: '09',
-            title: 'Allocate Resources ',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            title: 'Allocate Implementation Resources',
+            task: 'Budget, team, and infrastructure planning',
+            result: 'Balanced cost and impact',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-9.jpg`,
         },
         {
             count: '10',
             title: 'Stay Adaptive',
-            task: 'Task: Analyze challenges and optimization areas',
-            result: 'Result: Clear understanding of where AI brings value',
-            gif: `${process.env.PUBLIC_URL}/image/methodology/Frame243.png`,
+            task: 'Scale, integrate, and evolve',
+            result: 'A living, responsive AI strategy',
+            gif: `${process.env.PUBLIC_URL}/image/methodology/step-10.jpg`,
         }
     ];
 
@@ -113,21 +113,21 @@ export default function Methodology() {
                             </div>
                             {index === activeMethod && (
                                 <div className='flex flex-col gap-[5px] ml-[40px] mt-[10px]'>
-                                    <p className='title-3 text-[#818181]'>{method.task}</p>
-                                    <p className='title-3 text-[#000]'>{method.result}</p>
+                                    <p className='title-3 text-[#818181]'>Task:{method.task}</p>
+                                    <p className='title-3 text-[#000]'>Result:{method.result}</p>
                                 </div>
                             )}
                         </div>
                     ))}
                 </div>
                 <div className='w-[50%] rounded-[10px] shadow-xl'>
-                    <img src={`${methods[activeMethod].gif}`} />
+                    <img src={`${methods[activeMethod].gif}`} className='w-full h-full rounded-[10px]' />
                 </div>
 
             </div>
             <div className='flex gap-[20px] w-full'>
                 <div className='w-[50%] rounded-[10px] shadow-xl'>
-                    <img src={`${methods2[activeMethod2].gif}`} />
+                    <img src={`${methods2[activeMethod2].gif}`} className='w-full h-full rounded-[10px]'/>
                 </div>
                 <div className='flex flex-col w-[50%]'>
                     {methods2.map((method, index) => (
@@ -138,8 +138,8 @@ export default function Methodology() {
                             </div>
                             {index === activeMethod2 && (
                                 <div className='flex flex-col gap-[5px] ml-[40px] mt-[10px]'>
-                                    <p className='title-3 text-[#818181]'>{method.task}</p>
-                                    <p className='title-3 text-[#000]'>{method.result}</p>
+                                    <p className='title-3 text-[#818181]'>Task:{method.task}</p>
+                                    <p className='title-3 text-[#000]'>Result:{method.result}</p>
                                 </div>
                             )}
                         </div>

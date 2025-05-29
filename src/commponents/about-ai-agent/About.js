@@ -10,6 +10,10 @@ export default function About() {
 
                     Assistent</span>
                 <h2 className="section-title">About your AI Agent</h2>
+                {/* <img src={`${process.env.PUBLIC_URL}/image/assistent/gif.gif`} /> */}
+                <div className="rounded-[20px] overflow-hidden mt-[30px]">
+                    <video src={`${process.env.PUBLIC_URL}/image/assistent/gif.mp4`} autoPlay muted className="rounded-[20px]" loop />
+                </div>
             </div>
             <div className="flex flex-col gap-[30px] max-w-[447px]">
                 <span className="txt-18 text-[#818181] mt-[6px]">Your AI Agent is more than a tool — it’s a team member. It learns your processes, talks to clients, and executes tasks —so you can focus on what really matters.</span>

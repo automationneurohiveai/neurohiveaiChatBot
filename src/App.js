@@ -14,6 +14,8 @@ import Cases from './commponents/cases/Cases';
 import Template from './commponents/templates/Template';
 import Team from './commponents/team/Team';
 import News from './commponents/news/News';
+import Review from './commponents/reviews/Review';
+import Tools from './commponents/tools/Tools';
 
 function App() {
 
@@ -46,9 +48,10 @@ function App() {
           <Autamatation />
           <Methodology />
           <Cases />
-          <Template />
+          <Template/>
           <Team />
-
+          <Review />
+          <Tools />
           <News />
           <Question />
           <Strategy />

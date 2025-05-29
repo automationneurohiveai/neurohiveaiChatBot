@@ -11,8 +11,8 @@ export default function Header() {
                 <img src={`${process.env.PUBLIC_URL}/image/NeuroHiveAILK.png`} alt="NeuroLk" />
                 <nav>
                     <ul className='flex gap-[40px]'>
-                        <li><NavLink to='/' className='txt-1 text-white'>Templates</NavLink></li>
-                        <li><NavLink to='/' className='txt-1 text-white'>Use Cases</NavLink></li>
+                        <li><a href='#templates' className='txt-1 text-white'>Templates</a></li>
+                        <li><a href='#cases' className='txt-1 text-white'>Use Cases</a></li>
                         <li><NavLink to='/' className='txt-1 text-white'>Contact</NavLink></li>
                         <li><NavLink to='/' className='txt-1 text-white'>Knowledge Hub</NavLink></li>
                     </ul>
