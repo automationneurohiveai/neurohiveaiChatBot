@@ -1,23 +1,26 @@
 export default function About() {
 
     return (
-        <section className="section flex gap-[120px]">
-            <div className="flex flex-col">
-                <span className="title-top-type">
-                    <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="3.5" cy="3.5" r="3.5" fill="#818181" />
-                    </svg>
+        <section className="section flex flex-col gap-[30px]">
+            <div className="flex justify-between mob:flex-col">
+                <div className="flex flex-col">
+                    <span className="title-top-type">
+                        <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="3.5" cy="3.5" r="3.5" fill="#818181" />
+                        </svg>
 
-                    Assistent</span>
-                <h2 className="section-title">About your AI Agent</h2>
-                {/* <img src={`${process.env.PUBLIC_URL}/image/assistent/gif.gif`} /> */}
-                <div className="rounded-[20px] overflow-hidden mt-[30px]">
+                        Assistent</span>
+                    <h2 className="section-title">About your AI Agent</h2>
+                    {/* <img src={`${process.env.PUBLIC_URL}/image/assistent/gif.gif`} /> */}
+
+                </div>
+                <span className="txt-18 text-[#818181] mt-[6px] max-w-[447px]">Your AI Agent is more than a tool — it’s a team member. It learns your processes, talks to clients, and executes tasks —so you can focus on what really matters.</span>
+            </div>
+            <div className="flex gap-[120px] mob:flex-col-reverse mob:gap-[30px]">
+                <div className="rounded-[20px] overflow-hidden mob:w-full">
                     <video src={`${process.env.PUBLIC_URL}/image/assistent/gif.mp4`} autoPlay muted className="rounded-[20px]" loop />
                 </div>
-            </div>
-            <div className="flex flex-col gap-[30px] max-w-[447px]">
-                <span className="txt-18 text-[#818181] mt-[6px]">Your AI Agent is more than a tool — it’s a team member. It learns your processes, talks to clients, and executes tasks —so you can focus on what really matters.</span>
-                <div className="flex flex-col gap-[20px]">
+                <div className="flex gap-[20px] flex-col max-w-[447px] mob:w-full mob:max-w-full">
                     <div className="flex gap-[15px]">
                         <svg className="min-w-[40px]" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="40" height="40" rx="7" fill="#E9D4CD" />
@@ -68,6 +71,7 @@ export default function About() {
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     );

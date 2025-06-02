@@ -1,5 +1,5 @@
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -188,6 +188,15 @@ button {
             linear-gradient(90deg, #930202, #DE2322, #FEC802);
     } */
 
+.href-btn {
+    width: fit-content;
+    font-size: 17px;
+    font-weight: 600;
+    color: #818181;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #818181;
+}
+
 
 .header-parent {
     position: fixed;
@@ -257,4 +266,109 @@ button {
     bottom: -40px;
     height: 80px;
     z-index: 11;
+}
+
+.burger-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger-menu-btn span {
+    width: 27px;
+    height: 3px;
+    background: #fff;
+    border-radius: 4px;
+    transition: .3s;
+    transform-origin: left;
+}
+
+.burger-menu-btn span {
+    width: 27px;
+    height: 3px;
+    background: #fff;
+    border-radius: 4px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: left center;
+    display: block;
+}
+
+.burger-menu-btn.burger-close span:nth-of-type(1) {
+    transform: rotate(45deg) translate(2px, -5px);
+}
+
+.burger-menu-btn.burger-close span:nth-of-type(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.burger-menu-btn.burger-close span:nth-of-type(3) {
+    transform: rotate(-45deg) translate(3px, 4px);
+}
+
+@media screen and (max-width: 1201px) {
+
+    .section  {
+        max-width: 347px;
+    }
+    .section-2 {
+        width: 100%;
+        max-width: 347px;
+        margin: auto;
+    }
+
+    .section-title {
+        font-size: 40px;
+        letter-spacing: -2.1px;
+    }
+
+    .header-parent {
+        width: calc(100% - 60px);
+
+    }
+
+    .header {
+        width: 100%;
+        padding: 11px 15px;
+    }
+
+    .desktop-head-right,
+    .nav-desktop {
+        display: none;
+    }
+
+    .burger-menu-btn {
+        display: flex;
+    }
+
+    .intro {
+        padding: 0 16px;
+        padding-top: 110px;
+    }
+
+    .intro h1 {
+        max-width: 100%;
+        font-size: 54px;
+    }
+
+    .intro>h2 {
+        margin-top: 24px;
+        line-height: 100%;
+        max-width: 100%;
+    }
+
+    .title-2 {
+        font-size: 30px;
+    }
+
+    .subtitle-1 {
+        font-size: 18px;
+    }
+
+    .title-3 {
+        font-size: 16px;
+    }
+
+    
 }

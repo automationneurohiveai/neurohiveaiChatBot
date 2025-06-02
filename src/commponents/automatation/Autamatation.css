@@ -33,3 +33,13 @@
     background-size: cover;
     grid-column: 3/6;
 }
+
+@media screen and (max-width: 1201px) {
+    .automat-item {
+        padding: 30px;
+    }
+
+    .automat-item:nth-last-child(-n + 3) {
+        display: none;
+    }
+}

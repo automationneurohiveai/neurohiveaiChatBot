@@ -42,13 +42,13 @@ function App() {
         <div className='header-parent' ref={headerRef} style={{ opacity: 0 }}>
           <Header />
         </div>
-        <div ref={introRef} style={{ opacity: 0 }} className='flex flex-col gap-[150px] '>
+        <div ref={introRef} style={{ opacity: 0 }} className='flex flex-col gap-[150px] mob:gap-[120px]'>
           <Intro />
           <About />
           <Autamatation />
           <Methodology />
           <Cases />
-          <Template/>
+          <Template />
           <Team />
           <Review />
           <Tools />

@@ -19,6 +19,25 @@
 .methodology-task-item-active p.subtitle-1 {
     color: #FB5D21;
 }
+
 .methodology-task-item-active h3.subtitle-1 {
     color: #000;
+}
+
+@media screen and (max-width: 1200px) {
+    .methodology-task-item {
+        padding: 25px;
+    }
+
+    .methodology-task-item svg {
+        transition: .3s ease-in-out;
+    }
+
+    .methodology-task-item-active svg {
+        transform: rotate(180deg);
+    }
+
+    .methodology-task-item-active svg path {
+        stroke: #000;
+    }
 }

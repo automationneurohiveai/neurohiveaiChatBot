@@ -1,0 +1,29 @@
+
+.burger-menu {
+    width: 100%;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 38px;
+    background-color: rgba(78, 78, 78, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    transform: rotateX(-180deg);
+    transform-origin: top;
+    transition: .3s ease-in;
+    backface-visibility: hidden;
+}
+
+.burger-menu-active {
+    transform: rotateY(0);
+}
+
+.burger-menu nav ul {
+    align-items: center;
+    flex-direction: column;
+}
