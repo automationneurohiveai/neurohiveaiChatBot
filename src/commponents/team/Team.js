@@ -1,11 +1,13 @@
 import './Team.css';
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import useIsDesktop from '../useIsDesktop';
 
 export default function Team() {
+    const isDesktop = useIsDesktop();
 
     const sliders = [
         {
@@ -79,13 +81,22 @@ export default function Team() {
             <Swiper
                 className='w-full h-[510px]'
                 spaceBetween={20}
-                slidesPerView={4.2}
+                slidesPerView={1.3}
+                breakpoints={{
+                    1200: {
+                        slidesPerView: 4.2,
+                    }
+                }}
                 loop={false}
                 navigation={{
                     nextEl: '.team-swiper-button-next',
                     prevEl: '.team-swiper-button-prev',
                 }}
-                modules={[Navigation]}
+                pagination={{
+                    el: '.team-pagination',
+                    clickable: true
+                }}
+                modules={[Navigation, Pagination]}
                 onSwiper={(swiper) => {
                     swiperRef.current = swiper;
                     setAtStart(swiper.isBeginning);
@@ -108,7 +119,7 @@ export default function Team() {
                                     <p className='subtitle-16 text-[#818181]'>{item.proffesion}</p>
                                 </div>
                                 <a href={`${item.linkedin}`} className='p-[11px] bg-[#E9E9E9] rounded-[4px] shadow-xl'>
-                                    <img src={`${process.env.PUBLIC_URL}/image/Linkedin.svg`}/>
+                                    <img src={`${process.env.PUBLIC_URL}/image/Linkedin.svg`} />
                                 </a>
                             </div>
                             <p className='mt-[10px] text-[#818181]'>{item.about}</p>
@@ -117,6 +128,12 @@ export default function Team() {
                 ))}
 
             </Swiper>
+            {!isDesktop && (
+                <div className='w-full justify-between items-center hidden mob:flex'>
+                    <div className='team-pagination swiper-pagination custom-swiper-pagination'></div>
+                </div>
+            )}
+
         </div>
     );
 }

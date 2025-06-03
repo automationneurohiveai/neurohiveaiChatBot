@@ -370,5 +370,7 @@ button {
         font-size: 16px;
     }
 
-    
+    .txt-caption {
+        font-size: 14px;
+    }
 }

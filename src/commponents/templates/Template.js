@@ -1,10 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import './Template.css';
-import { useRef, useState } from 'react';
 import './Template.css';
 
 export default function Template() {
@@ -48,7 +47,7 @@ export default function Template() {
 
 
     return (
-        <section className="section-2 flex gap-[70px]" id='templates'>
+        <section className="section-2 flex gap-[70px] mob:flex-col" id='templates'>
             <div className='min-w-[418px] flex flex-col'>
                 <span className="title-top-type">
                     <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +76,12 @@ export default function Template() {
                 <Swiper
                     className='w-full'
                     spaceBetween={20}
-                    slidesPerView={2.8}
+                    slidesPerView={1.2}
+                    breakpoints={{
+                        1200: {
+                            slidesPerView: 2.8,
+                        }
+                    }}
                     loop={false}
                     navigation={{
                         nextEl: '.template-swiper-button-next',
@@ -85,7 +89,7 @@ export default function Template() {
                     }}
                     modules={[Navigation, Pagination]}
                     pagination={{
-                        el: '.custom-swiper-pagination',
+                        el: '.template-pagination',
                         clickable: true
                     }}
                     onSwiper={(swiper) => {
@@ -116,11 +120,11 @@ export default function Template() {
 
                 </Swiper>
                 <div className='w-full flex justify-between items-center pr-[120px]'>
-                    <div className='flex items-center gap-[50px]'>
+                    <div className='flex items-center gap-[50px] mob:hidden'>
                         <div className={`template-swiper-button-prev swiper-button-prev cursor-pointer swiper-control-btns ${atStart ? 'disabled-button-class' : ''}`}>←</div>
                         <div className={`template-swiper-button-next swiper-button-next cursor-pointer swiper-control-btns ${atEnd ? 'disabled-button-class' : ''}`}>→</div>
                     </div>
-                    <div className='swiper-pagination custom-swiper-pagination'></div>
+                    <div className='template-pagination swiper-pagination custom-swiper-pagination'></div>
                 </div>
             </div>
 

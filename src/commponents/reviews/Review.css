@@ -21,7 +21,8 @@
     grid-column: 1/3;
 }
 
-.review-item-3, .review-item-4 {
+.review-item-3,
+.review-item-4 {
     position: relative;
     overflow: hidden;
     justify-content: flex-end;
@@ -70,4 +71,38 @@
 
 .review-item-6 {
     grid-column: 3/5;
+}
+
+@media screen and (max-width: 1200px) {
+    .reviews-block {
+        grid-template-columns: 1fr;
+    }
+
+    .review-item {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .review-gradient-overlay {
+        left: 0;
+    }
+
+    .review-item-3,
+    .review-item-4 {
+        padding-bottom: 30px;
+        min-height: 290px;
+    }
+
+    .review-item-4{
+        grid-row: 6/7;
+    }
+
+    .review-item-3::after {
+        right: 0;
+        left: auto;
+        width: 100%;
+    }
+    .review-item-4::after {
+        width: 100%;
+    }
 }
