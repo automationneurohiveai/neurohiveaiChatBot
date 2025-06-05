@@ -1,0 +1,10 @@
+.swiper-parent {
+    width: calc(100% - 488px);
+}
+
+@media screen and (max-width: 1200px) {
+    .swiper-parent {
+        width: 100%;
+    }
+    
+}

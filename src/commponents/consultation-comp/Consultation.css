@@ -1,0 +1,46 @@
+.consultation-container {
+    padding-top: 230px;
+    padding-bottom: 150px;
+    background: url(../../../public/image/pg-bg-1.jpg);
+    background-size: cover;
+}
+
+.consultation-container>div {
+    display: flex;
+    gap: 140px;
+}
+
+.consult-card {
+    height: 160px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: #fff;
+    box-shadow: 0px 3px 20px 5px rgba(193, 191, 191, 0.25);
+    border-radius: 10px;
+    position: relative;
+}
+
+.consult-card p {
+    max-width: 125px;
+}
+
+.consult-card .consultation-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.consultation-form {
+    padding: 50px 50px 40px 50px;
+    background: rgba(247, 247, 247, 1);
+    box-shadow: 0px 4px 18.4px 2px rgba(171, 163, 163, 0.25);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
