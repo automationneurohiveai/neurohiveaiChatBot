@@ -1,15 +1,19 @@
 import "./ChatInfo.css";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePostMessage } from "../../server/usePostMessage";
+import { useForm } from "react-hook-form";
+import InputChatBot from "../InputChatBot/InputChatBot";
 
 export default function ChatInfo() {
   // State variables
   const [showUserMessage, setShowUserMessage] = useState(false);
   const [showResponse, setShowResponse] = useState(false);
   const [animateOrangeText, setAnimateOrangeText] = useState(false);
+  const [userMessage, setUserMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Message data matching Figma design
-  const messages = [
+  const [messages, setMessages] = useState([
     {
       type: "ai",
       text: "Hi there! I'm your personal assistant here to help you explore our ice cream selection and services.\nLet me know what you'd like to know!",
@@ -22,28 +26,77 @@ export default function ChatInfo() {
       type: "ai",
       text: "We deliver across Germany.\n🚚 Free shipping for wholesale orders over €100\n🚛 Express 24h delivery available in major cities\nLet me know your location — I'll check the options for you!",
     },
-  ];
+  ]);
 
-  // Effects for sequential message display
-  useEffect(() => {
-    const timer1 = setTimeout(() => {
+  const { data, submitData } = usePostMessage();
+
+  const { handleSubmit, reset, control, watch } = useForm({
+    defaultValues: {
+      message: "",
+    },
+  });
+
+  const messageValue = watch("message");
+
+
+  const onSubmit = async (formData) => {
+    if (formData.message.trim() && !isLoading) {
+      const message = formData.message.trim();
+      setUserMessage(message);
       setShowUserMessage(true);
-    }, 2000);
+      setIsLoading(true);
 
-    const timer2 = setTimeout(() => {
-      setShowResponse(true);
-    }, 4000);
+      try {
+        await submitData(message);
+        reset(); // Clear the form
+      } catch (error) {
+        console.error("Error sending message:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
-    const timer3 = setTimeout(() => {
-      setAnimateOrangeText(true);
-    }, 4500);
+  // Handle Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (!isLoading) {
+        handleSubmit(onSubmit)();
+      }
+    }
+  };
 
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-    };
-  }, []);
+  // Handle send button click
+  const handleSendClick = () => {
+    if (!isLoading) {
+      handleSubmit(onSubmit)();
+    }
+  };
+
+  // Effects for sequential message display (demo)
+  useEffect(() => {
+    // Only show demo if no real user message
+    if (!userMessage) {
+      const timer1 = setTimeout(() => {
+        setShowUserMessage(true);
+      }, 2000);
+
+      const timer2 = setTimeout(() => {
+        setShowResponse(true);
+      }, 4000);
+
+      const timer3 = setTimeout(() => {
+        setAnimateOrangeText(true);
+      }, 4500);
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+        clearTimeout(timer3);
+      };
+    }
+  }, [userMessage]);
 
   return (
     <motion.div
@@ -131,7 +184,38 @@ export default function ChatInfo() {
               transition={{ duration: 0.5 }}
             >
               <div className="bg-blue-500 text-white rounded-[20px] px-[24px] py-[16px] max-w-[380px]">
-                <p className="text-[16px] leading-[1.5]">{messages[1].text}</p>
+                <p className="text-[16px] leading-[1.5]">
+                  {userMessage || messages[1].text}
+                </p>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Loading indicator */}
+          {isLoading && (
+            <motion.div
+              className="flex justify-start"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="bg-white border border-gray-200 rounded-[20px] px-[28px] py-[20px]">
+                <div className="flex items-center space-x-2">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.1s" }}
+                    ></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.2s" }}
+                    ></div>
+                  </div>
+                  <span className="text-sm text-gray-500">
+                    AI is thinking...
+                  </span>
+                </div>
               </div>
             </motion.div>
           )}
@@ -179,7 +263,7 @@ export default function ChatInfo() {
                     }
                     transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
                   >
-                    {messages[2].text}
+                    {data?.output || messages[2].text}
                   </motion.span>
                 </motion.p>
               </motion.div>
@@ -189,42 +273,58 @@ export default function ChatInfo() {
 
         {/* Chat Input Field */}
         <div className="px-[32px] py-[20px]">
-          <div className="flex items-center bg-white border border-gray-200 rounded-full p-2">
-            <input
-              type="text"
-              placeholder="Ask me anything..."
-              className="flex-1 px-4 py-2 bg-transparent outline-none text-[16px]  placeholder-gray-400"
-            />
-            <motion.button
-              className="ml-2 p-[10px] rounded-full shadow-md hover:shadow-lg"
-              style={{
-                background: "#D6D6D6",
-                opacity: 0.8,
-              }}
-              whileHover={{
-                scale: 1.05,
-                opacity: 1,
-              }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <img
-                  src={`${process.env.PUBLIC_URL}/image/send.png`}
-                  alt="send"
-                  width="18"
-                  height="18"
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex items-center bg-white border border-gray-200 rounded-full p-2">
+              <div className="flex-1" onKeyPress={handleKeyPress}>
+                <InputChatBot
+                  name="message"
+                  control={control}
+                  placeholder="Ask me anything..."
+                  disabled={isLoading}
                 />
-                <path
-                  d="M22 2L15 22L11 13L2 9L22 2Z"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </motion.button>
-          </div>
+              </div>
+              <motion.button
+                type="submit"
+                onClick={handleSendClick}
+                disabled={!messageValue?.trim() || isLoading}
+                className={`ml-2 p-[10px] rounded-full shadow-md hover:shadow-lg transition-all duration-200 ${
+                  messageValue?.trim() && !isLoading
+                    ? "opacity-100"
+                    : "opacity-50 cursor-not-allowed"
+                }`}
+                style={{
+                  background:
+                    messageValue?.trim() && !isLoading ? "#4F46E5" : "#D6D6D6",
+                }}
+                whileHover={
+                  messageValue?.trim() && !isLoading
+                    ? {
+                        scale: 1.05,
+                        opacity: 1,
+                      }
+                    : {}
+                }
+                whileTap={
+                  messageValue?.trim() && !isLoading ? { scale: 0.95 } : {}
+                }
+                transition={{ duration: 0.2 }}
+              >
+                {isLoading ? (
+                  <div className="w-[18px] h-[18px] border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M22 2L15 22L11 13L2 9L22 2Z"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </motion.button>
+            </div>
+          </form>
         </div>
       </motion.div>
     </motion.div>

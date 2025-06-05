@@ -41,7 +41,7 @@ export default function IntroLoading({ websiteUrl }) {
         y: 0,
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="w-full flex flex-col items-center h-auto"
+      className="w-full flex flex-col items-center h-auto "
     >
       {/* Gradient Ball */}
       <div className="relative mb-[10px]">

@@ -1,16 +1,15 @@
-import './App.css';
-import './global.css';
-import Header from './commponents/header/Header';
-import Footer from './commponents/footer/Footer';
-import Home from './pages/Home';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { Route, Routes } from 'react-router-dom';
-import Consultation from './pages/Consultation';
-import Success from './commponents/success-modal/Success';
+import "./App.css";
+import "./global.css";
+import Header from "./commponents/header/Header";
+import Footer from "./commponents/footer/Footer";
+import Home from "./pages/Home";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { Route, Routes } from "react-router-dom";
+import Consultation from "./pages/Consultation";
+import Success from "./commponents/success-modal/Success";
 
 function App() {
-
   const headerRef = useRef(null);
   const introRef = useRef(null);
 
@@ -28,10 +27,21 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:4000/init-session", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Session ID:", data.sessionId);
+      });
+  }, []);
+
   return (
     <div className="App">
-      <main className='relative'>
-        <div className='header-parent' ref={headerRef} style={{ opacity: 0 }}>
+      <main className="relative">
+        <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
           <Header />
         </div>
         <div ref={introRef} style={{ opacity: 0 }}>
@@ -43,7 +53,6 @@ function App() {
       </main>
       <Footer />
       {/* <Success /> */}
-
     </div>
   );
 }
