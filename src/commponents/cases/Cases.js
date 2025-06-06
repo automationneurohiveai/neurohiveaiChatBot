@@ -12,7 +12,7 @@ export default function Cases() {
 
     const sliders = [
         {
-            image: '/image/cases/cases-slider-1.svg',
+            image: '/image/cases/cases-card-1.svg',
             title: 'Automated Recruiting',
             stats: ['ROI 135%', 'FTE Saved 0.0134'],
             input: 'Job description & CVs',
@@ -20,7 +20,7 @@ export default function Cases() {
             result: 'Shortlist in minutes, faster hiring decisions'
         },
         {
-            image: '/image/cases/cases-slider-1.svg',
+            image: '/image/cases/cases-card-1.svg',
             title: 'Invoice Archiver',
             stats: ['ROI 135%', 'FTE Saved 0.0134'],
             input: 'PDF or scanned invoice',
@@ -28,7 +28,7 @@ export default function Cases() {
             result: 'Structured archive, zero manual effort'
         },
         {
-            image: '/image/cases/cases-slider-2.svg',
+            image: '/image/cases/cases-card-2.svg',
             title: 'Automated Recruiting',
             stats: ['ROI 135%', 'FTE Saved 0.0134'],
             input: 'Job description & CVs',
@@ -36,7 +36,7 @@ export default function Cases() {
             result: 'Shortlist in minutes, faster hiring decisions'
         },
         {
-            image: '/image/cases/cases-slider-2.svg',
+            image: '/image/cases/cases-card-2.svg',
             title: 'Automated Recruiting',
             stats: ['ROI 135%', 'FTE Saved 0.0134'],
             input: 'Job description & CVs',
@@ -94,8 +94,10 @@ export default function Cases() {
                         onSlideChange={handleSlideChange}
                     >
                         {sliders.map((item, index) => (
-                            <SwiperSlide key={index} className='cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
-                                <div className='w-full rounded-t-[20px] overflow-hidden'>
+                            <SwiperSlide key={index} className='case-slide slide cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
+                                <div className='slide-image w-full rounded-t-[20px] overflow-hidden'>
+                                    <div className='slide-hover-effect'></div>
+
                                     <img src={`${process.env.PUBLIC_URL}${item.image}`} className='w-full object-cover' alt={item.title} />
                                 </div>
                                 <div className='p-[30px] flex flex-col justify-between flex-grow'>
@@ -133,8 +135,9 @@ export default function Cases() {
                     <div className='flex flex-col gap-[20px]'>
                         {
                             sliders.slice(0, 2).map((item, index) => (
-                                <div key={index} className='cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
-                                    <div className='w-full rounded-t-[20px] overflow-hidden'>
+                                <div key={index} className='case-slide slide cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
+                                    <div className='slide-image w-full rounded-t-[20px] overflow-hidden'>
+                                        <div className='slide-hover-effect'></div>
                                         <img src={`${process.env.PUBLIC_URL}${item.image}`} className='w-full object-cover' alt={item.title} />
                                     </div>
                                     <div className='p-[30px] flex flex-col justify-between flex-grow'>

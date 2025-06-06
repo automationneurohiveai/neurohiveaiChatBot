@@ -10,27 +10,27 @@ export default function Template() {
 
     const sliders = [
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-1.svg',
             title: 'Candidate Pipeline',
             text: 'Track candidates through your hiring stages with customizable pipelines and automated status updates.'
         },
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-2.svg',
             title: 'InAI Screening',
             text: 'Automate candidate screening with AI-powered resume parsing and qualification matching.'
         },
         {
-            image: '/image/template/template-slider-2.svg',
+            image: '/image/template/template-card-el-3.svg',
             title: 'Interview Scheduler',
             text: 'Streamline interview scheduling with automated calendar coordination and reminders.'
         },
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-2.svg',
             title: 'InAI Screening',
             text: 'Automate candidate screening with AI-powered resume parsing and qualification matching.'
         },
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-3.svg',
             title: 'InAI Screening',
             text: 'Automate candidate screening with AI-powered resume parsing and qualification matching.'
         }
@@ -100,15 +100,17 @@ export default function Template() {
                     onSlideChange={handleSlideChange}
                 >
                     {sliders.map((item, index) => (
-                        <SwiperSlide key={index} className='cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
-                            <div className='w-full rounded-t-[20px] overflow-hidden'>
+                        <SwiperSlide key={index} className='slide cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
+                            <div className='slide-image w-full rounded-t-[20px] overflow-hidden flex-grow'>
+                                <div className='slide-hover-effect'></div>
                                 <img src={`${process.env.PUBLIC_URL}${item.image}`} className='w-full object-cover' alt={item.title} />
+                                {/* <div className='gradient-overlay'></div> */}
+
                             </div>
-                            <div className='p-[20px] flex flex-col justify-between flex-grow'>
+                            <div className='p-[20px] flex flex-col justify-between '>
                                 <div className='flex flex-col gap-[10px]'>
                                     <h3 className='subtitle-1'>{item.title}</h3>
                                     <p className='txt-2 text-[#818181]'>{item.text}</p>
-
                                 </div>
                                 <div className='mt-[10px] flex gap-[15px]'>
                                     <button className='white-btn w-full py-[13px]'>View</button>

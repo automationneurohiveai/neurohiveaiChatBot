@@ -1,21 +1,13 @@
 import './App.css';
 import './global.css';
 import Header from './commponents/header/Header';
-import Intro from './commponents/intro/Intro';
+import Footer from './commponents/footer/Footer';
+import Home from './pages/Home';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import About from './commponents/about-ai-agent/About';
-import Autamatation from './commponents/automatation/Autamatation';
-import Footer from './commponents/footer/Footer';
-import Strategy from './commponents/strategy-guide/Strategy';
-import Question from './commponents/question/Question';
-import Methodology from './commponents/methodology/Methodology';
-import Cases from './commponents/cases/Cases';
-import Template from './commponents/templates/Template';
-import Team from './commponents/team/Team';
-import News from './commponents/news/News';
-import Review from './commponents/reviews/Review';
-import Tools from './commponents/tools/Tools';
+import { Route, Routes } from 'react-router-dom';
+import Consultation from './pages/Consultation';
+import Success from './commponents/success-modal/Success';
 
 function App() {
 
@@ -42,22 +34,16 @@ function App() {
         <div className='header-parent' ref={headerRef} style={{ opacity: 0 }}>
           <Header />
         </div>
-        <div ref={introRef} style={{ opacity: 0 }} className='flex flex-col gap-[150px] mob:gap-[120px]'>
-          <Intro />
-          <About />
-          <Autamatation />
-          <Methodology />
-          <Cases />
-          <Template />
-          <Team />
-          <Review />
-          <Tools />
-          <News />
-          <Question />
-          <Strategy />
+        <div ref={introRef} style={{ opacity: 0 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/consultation" element={<Consultation />} />
+          </Routes>
         </div>
       </main>
       <Footer />
+      {/* <Success /> */}
+
     </div>
   );
 }

@@ -1,5 +1,7 @@
 .strategy {
     background: url(../../../public/image/strategy/strategyBg.png);
+    background-size: cover;
+    background-position: center;
     height: 580px;
     display: flex;
     justify-content: center;
