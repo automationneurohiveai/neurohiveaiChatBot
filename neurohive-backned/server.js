@@ -54,6 +54,22 @@ app.post("/api/urlai", async (req, res) => {
   }
 });
 
+app.post("/api/contact-form", async (req, res) => {
+  const contactFormData = req.body;
+  const response = await fetch(
+    "https://n8n.ki-tech.app/webhook-test/fab9256c-7cb5-44d7-beb3-7f16438cef1d",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(contactFormData),
+    }
+  );
+
+  const result = await response.json();
+  console.log("200 OK – Відповідь надіслана", result);
+  res.status(200).json(result);
+});
+
 app.get("/init-session", (req, res) => {
   let sessionId = req.cookies.sessionId;
 
