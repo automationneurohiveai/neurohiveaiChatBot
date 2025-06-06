@@ -24,7 +24,7 @@ app.post("/api/message", async (req, res) => {
     );
 
     const result = await response.json();
-    console.log("📥 Response from n8n:", result.output);
+    console.log("Response from n8n:", result.output);
     res.json(result);
   } catch (err) {
     console.error("Error sending to n8n:", err);
@@ -32,7 +32,7 @@ app.post("/api/message", async (req, res) => {
   }
 });
 
-// 🧠 Сесія
+
 app.get("/init-session", (req, res) => {
   let sessionId = req.cookies.sessionId;
 
