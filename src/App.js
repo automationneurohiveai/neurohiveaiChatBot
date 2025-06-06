@@ -1,15 +1,16 @@
-import "./App.css";
-import "./global.css";
-import Header from "./commponents/header/Header";
-import Footer from "./commponents/footer/Footer";
-import Home from "./pages/Home";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { Route, Routes } from "react-router-dom";
-import Consultation from "./pages/Consultation";
-import Success from "./commponents/success-modal/Success";
+import './App.css';
+import './global.css';
+import Header from './commponents/header/Header';
+import Footer from './commponents/footer/Footer';
+import Home from './pages/Home';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { Route, Routes } from 'react-router-dom';
+import Consultation from './pages/Consultation';
+import Success from './commponents/success-modal/Success';
 
 function App() {
+
   const headerRef = useRef(null);
   const introRef = useRef(null);
 

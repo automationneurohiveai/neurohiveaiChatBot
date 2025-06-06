@@ -12,20 +12,20 @@ import Template from "../commponents/templates/Template";
 import Tools from "../commponents/tools/Tools";
 
 export default function Home() {
-    return (
-        <div className="flex flex-col gap-[150px] mob:gap-[120px]">
-            <Intro />
-            <About />
-            <Autamatation />
-            <Methodology />
-            <Cases />
-            <Template />
-            <Team />
-            <Review />
-            <Tools />
-            <News />
-            <Question />
-            <Strategy />
-        </div>
-    )
+  return (
+    <div className="flex flex-col gap-[150px] mob:gap-[120px]">
+      <Intro />
+      <About />
+      <Autamatation />
+      <Methodology />
+      <Cases />
+      <Template />
+      <Team />
+      <Review />
+      <Tools />
+      <News />
+      <Question />
+      <Strategy />
+    </div>
+  );
 }
