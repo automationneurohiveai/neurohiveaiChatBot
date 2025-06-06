@@ -2,31 +2,7 @@ import "./IntroLoading.css";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-export default function IntroLoading({ websiteUrl }) {
-  const [completedTasks, setCompletedTasks] = useState(0);
-
-  const tasks = [
-    "Scanning pages and structure",
-    "Detecting key call-to-actions",
-    "Understanding user journeys",
-    "Learning your tone of voice",
-    "Preparing to become your assistant",
-  ];
-
-  // Progressive task completion
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCompletedTasks((prev) => {
-        if (prev < tasks.length) {
-          return prev + 1;
-        }
-        return prev;
-      });
-    }, 2000); // Complete one task every 2 seconds
-
-    return () => clearInterval(interval);
-  }, [tasks.length]);
-
+export default function IntroLoading({ completedTasks, tasks }) {
   return (
     <motion.div
       key="loading-content"

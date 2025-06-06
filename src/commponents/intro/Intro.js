@@ -3,14 +3,16 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import IntroLoading from "../IntroLoading/IntroLoading";
 import ChatInfo from "../ChatInfo/ChatInfo";
+import { usePostUrl } from "../../server/usePostUrl";
+import { useForm, Controller } from "react-hook-form";
 
 export default function Intro() {
-  const [inputValue, setInputValue] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
+
   const [showChatInfo, setShowChatInfo] = useState(false);
   const [completedTasks, setCompletedTasks] = useState(0);
 
+  const { dataUrl, submitDataUrl, loadingUrl } = usePostUrl();
   const tasks = [
     "Scanning pages and structure",
     "Detecting key call-to-actions",
@@ -19,9 +21,13 @@ export default function Intro() {
     "Preparing to become your assistant",
   ];
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  const { handleSubmit, control, reset, watch } = useForm({
+    defaultValues: {
+      url: "",
+    },
+  });
+
+  const urlValue = watch("url");
 
   const isValidUrl = (string) => {
     try {
@@ -32,17 +38,18 @@ export default function Intro() {
     }
   };
 
-  const handleStartAnalysis = () => {
+  const onSubmit = async (data) => {
     if (isActive) {
-      setShowLoading(true);
       setCompletedTasks(0); // Reset tasks when starting
       setShowChatInfo(false); // Reset chat info when starting new analysis
+
+      // Submit URL to your API
+      await submitDataUrl(data.url);
     }
   };
 
   useEffect(() => {
-    const hasValidUrl =
-      inputValue.trim() !== "" && isValidUrl(inputValue.trim());
+    const hasValidUrl = urlValue.trim() !== "" && isValidUrl(urlValue.trim());
 
     if (hasValidUrl) {
       const timer = setTimeout(() => {
@@ -53,29 +60,36 @@ export default function Intro() {
     } else {
       setIsActive(false);
     }
-  }, [inputValue]);
+  }, [urlValue]);
 
-  // Progressive task completion when loading
+  // Progressive task completion when loading (stop at 4 tasks, wait for API response)
+  // Progressive task completion when loading (stop at 4 tasks, wait for API response)
   useEffect(() => {
-    if (showLoading) {
+    if (loadingUrl) {
       const interval = setInterval(() => {
         setCompletedTasks((prev) => {
-          if (prev < tasks.length) {
+          if (prev < 4) {
             return prev + 1;
-          } else {
-            // All tasks completed, show ChatInfo after a delay
-            setTimeout(() => {
-              setShowLoading(false);
-              setShowChatInfo(true);
-            }, 1000);
-            return prev;
           }
+          return prev; // Stay at 4 tasks until API responds with data
         });
       }, 2000);
 
       return () => clearInterval(interval);
     }
-  }, [showLoading, tasks.length]);
+  }, [loadingUrl]);
+
+  // Complete final task when API returns data and show chat
+  useEffect(() => {
+    if (dataUrl && completedTasks === 4) {
+      // Complete the final task when data arrives
+      setCompletedTasks(5);
+      // Show chat after a brief delay
+      setTimeout(() => {
+        setShowChatInfo(true);
+      }, 1000);
+    }
+  }, [dataUrl, completedTasks]);
 
   return (
     <section
@@ -98,9 +112,9 @@ export default function Intro() {
         No setup required. Get started in 60 seconds.
       </span>
 
-      <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]">
-        <AnimatePresence mode="wait">
-          {!showLoading && !showChatInfo ? (
+      <AnimatePresence mode="wait">
+        {!loadingUrl && !showChatInfo && completedTasks === 0 ? (
+          <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]">
             <motion.div
               key="intro-content"
               initial={{ opacity: 1 }}
@@ -133,74 +147,93 @@ export default function Intro() {
               <p className="text-[#818181] mt-[40px]">
                 Just paste your link below
               </p>
-              <div className="w-full bg-white rounded-[10px] p-[15px] flex gap-5 items-center justify-between pl-[30px] mt-[24px]  drop-shadow-2xl">
-                <input
-                  type="text"
-                  className="outline-none text-[18px] bg-white flex-1"
-                  placeholder="Paste your website here... "
-                  value={inputValue}
-                  onChange={handleInputChange}
-                />
-                <motion.button
-                  className="py-[11px] px-[34px] rounded-[8px] font-medium relative overflow-hidden"
-                  disabled={!isActive}
-                  onClick={handleStartAnalysis}
-                  animate={{
-                    backgroundColor: isActive ? "#000000" : "#D1D5DB",
-                    color: isActive ? "#FFFFFF" : "#6B7280",
-                    scale: isActive ? 1 : 0.98,
-                  }}
-                  whileHover={
-                    isActive ? { scale: 1.02, backgroundColor: "#1F2937" } : {}
-                  }
-                  whileTap={isActive ? { scale: 0.98 } : {}}
-                  transition={{
-                    duration: 0.3,
-                    ease: "easeInOut",
-                  }}
-                  style={{
-                    cursor: isActive ? "pointer" : "not-allowed",
-                  }}
-                >
-                  Start analysing
-                  {isActive && (
-                    <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-[3px] bg-red-500"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                    />
-                  )}
-                </motion.button>
-              </div>
+              <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+                <div className="w-full bg-white rounded-[10px] p-[15px] flex gap-5 items-center justify-between pl-[30px] mt-[24px]  drop-shadow-2xl">
+                  <Controller
+                    name="url"
+                    control={control}
+                    rules={{
+                      required: "URL is required",
+                      validate: (value) =>
+                        isValidUrl(value) || "Please enter a valid URL",
+                    }}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="text"
+                        className="outline-none text-[18px] bg-white flex-1"
+                        placeholder="Paste your website here... "
+                      />
+                    )}
+                  />
+                  <motion.button
+                    type="submit"
+                    className="py-[11px] px-[34px] rounded-[8px] font-medium relative overflow-hidden"
+                    disabled={!isActive}
+                    animate={{
+                      backgroundColor: isActive ? "#000000" : "#D1D5DB",
+                      color: isActive ? "#FFFFFF" : "#6B7280",
+                      scale: isActive ? 1 : 0.98,
+                    }}
+                    whileHover={
+                      isActive
+                        ? { scale: 1.02, backgroundColor: "#1F2937" }
+                        : {}
+                    }
+                    whileTap={isActive ? { scale: 0.98 } : {}}
+                    transition={{
+                      duration: 0.3,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      cursor: isActive ? "pointer" : "not-allowed",
+                    }}
+                  >
+                    Start analysing
+                    {isActive && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-[3px] bg-red-500"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      />
+                    )}
+                  </motion.button>
+                </div>
+              </form>
             </motion.div>
-          ) : showLoading ? (
+          </div>
+        ) : loadingUrl || (!showChatInfo && completedTasks > 0) ? (
+          <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]">
             <IntroLoading
               key="loading-content"
               completedTasks={completedTasks}
               tasks={tasks}
             />
-          ) : (
-            <motion.div
-              key="chat-info-content"
-              initial={{
-                opacity: 0,
-                scale: 0.9,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: 0,
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="w-full"
-            >
-              <ChatInfo />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </div>
+        ) : (
+          <motion.div
+            key="chat-info-content"
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              opacity: { duration: 0.6, ease: "easeInOut" },
+              y: { duration: 0.8, ease: "easeOut" },
+            }}
+            className="w-full mt-[98px]"
+          >
+            <ChatInfo />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
