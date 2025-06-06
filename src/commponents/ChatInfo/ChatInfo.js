@@ -176,7 +176,6 @@ export default function ChatInfo() {
             </motion.div>
           ))}
 
-          {/* Loading indicator */}
           {isLoading && (
             <motion.div
               className="flex justify-start"

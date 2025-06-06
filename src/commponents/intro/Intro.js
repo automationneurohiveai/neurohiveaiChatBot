@@ -40,8 +40,8 @@ export default function Intro() {
 
   const onSubmit = async (data) => {
     if (isActive) {
-      setCompletedTasks(0); // Reset tasks when starting
-      setShowChatInfo(false); // Reset chat info when starting new analysis
+      setCompletedTasks(0);
+      setShowChatInfo(false);
 
       // Submit URL to your API
       await submitDataUrl(data.url);
@@ -62,8 +62,6 @@ export default function Intro() {
     }
   }, [urlValue]);
 
-  // Progressive task completion when loading (stop at 4 tasks, wait for API response)
-  // Progressive task completion when loading (stop at 4 tasks, wait for API response)
   useEffect(() => {
     if (loadingUrl) {
       const interval = setInterval(() => {
@@ -71,7 +69,7 @@ export default function Intro() {
           if (prev < 4) {
             return prev + 1;
           }
-          return prev; // Stay at 4 tasks until API responds with data
+          return prev;
         });
       }, 2000);
 
@@ -79,12 +77,10 @@ export default function Intro() {
     }
   }, [loadingUrl]);
 
-  // Complete final task when API returns data and show chat
   useEffect(() => {
     if (dataUrl && completedTasks === 4) {
-      // Complete the final task when data arrives
       setCompletedTasks(5);
-      // Show chat after a brief delay
+
       setTimeout(() => {
         setShowChatInfo(true);
       }, 1000);
@@ -114,17 +110,32 @@ export default function Intro() {
 
       <AnimatePresence mode="wait">
         {!loadingUrl && !showChatInfo && completedTasks === 0 ? (
-          <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]">
+          <motion.div
+            key="form-container"
+            className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{
+              opacity: 0,
+              scale: 0.9,
+              y: -30,
+              filter: "blur(10px)",
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.25, 0.4, 0.25, 1],
+              exit: { duration: 0.8, ease: "easeInOut" },
+            }}
+          >
             <motion.div
               key="intro-content"
-              initial={{ opacity: 1 }}
+              className="w-full flex flex-col items-center"
               exit={{
                 opacity: 0,
-                scale: 0.95,
+                scale: 0.8,
                 y: -20,
               }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="w-full flex flex-col items-center"
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <div className="relative mb-[10px]">
                 <img
@@ -202,15 +213,40 @@ export default function Intro() {
                 </div>
               </form>
             </motion.div>
-          </div>
+          </motion.div>
         ) : loadingUrl || (!showChatInfo && completedTasks > 0) ? (
-          <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]">
+          <motion.div
+            key="loading-container"
+            className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]"
+            initial={{
+              opacity: 0,
+              y: 30,
+              scale: 0.9,
+              filter: "blur(10px)",
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: "blur(0px)",
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.95,
+              y: -20,
+            }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.4, 0.25, 1],
+              filter: { duration: 0.6 },
+            }}
+          >
             <IntroLoading
               key="loading-content"
               completedTasks={completedTasks}
               tasks={tasks}
             />
-          </div>
+          </motion.div>
         ) : (
           <motion.div
             key="chat-info-content"
@@ -228,7 +264,7 @@ export default function Intro() {
               opacity: { duration: 0.6, ease: "easeInOut" },
               y: { duration: 0.8, ease: "easeOut" },
             }}
-            className="w-full mt-[98px]"
+            className="w-full"
           >
             <ChatInfo />
           </motion.div>

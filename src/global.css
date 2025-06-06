@@ -94,7 +94,6 @@ button {
 .section-2 {
   width: calc((100% - 1200px) / 2 + 1200px);
   margin: auto;
-  margin-right: 0;
   overflow: hidden;
 }
 
