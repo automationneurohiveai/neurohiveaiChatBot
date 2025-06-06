@@ -1,14 +1,15 @@
 import "./ChatInfo.css";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePostMessage } from "../../server/usePostMessage";
 import { useForm } from "react-hook-form";
 import InputChatBot from "../InputChatBot/InputChatBot";
 
 export default function ChatInfo() {
-  // State variables
   const [userMessage, setUserMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const messagesEndRef = useRef(null);
 
   const [messages, setMessages] = useState([
     {
@@ -16,6 +17,20 @@ export default function ChatInfo() {
       text: "Hi there! I'm your personal assistant here to help you explore our ice cream selection and services.\nLet me know what you'd like to know!",
     },
   ]);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      const chatContainer = messagesEndRef.current.closest(".chat-content");
+      if (chatContainer) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      } else {
+        messagesEndRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }
+  };
 
   const { data, submitData } = usePostMessage();
 
@@ -33,12 +48,15 @@ export default function ChatInfo() {
       setUserMessage(message);
       setIsLoading(true);
 
-      // Add user message to messages array
       setMessages((prev) => [...prev, { type: "user", text: message }]);
+
+      setTimeout(() => {
+        scrollToBottom();
+      }, 100);
 
       try {
         await submitData(message);
-        reset(); // Clear the form
+        reset();
       } catch (error) {
         console.error("Error sending message:", error);
       } finally {
@@ -47,7 +65,6 @@ export default function ChatInfo() {
     }
   };
 
-  // Handle Enter key press
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -57,17 +74,19 @@ export default function ChatInfo() {
     }
   };
 
-  // Handle send button click
   const handleSendClick = () => {
     if (!isLoading) {
       handleSubmit(onSubmit)();
     }
   };
 
-  // Add AI response when data is received
   useEffect(() => {
     if (data?.output) {
       setMessages((prev) => [...prev, { type: "ai", text: data.output }]);
+
+      setTimeout(() => {
+        scrollToBottom();
+      }, 150);
     }
   }, [data]);
 
@@ -78,7 +97,6 @@ export default function ChatInfo() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Chat Widget Container - State 3 Design from Figma */}
       <motion.div
         className="chat-widget rounded-[20px] p-0 shadow-2xl border border-gray-100 w-full max-w-[712px] h-auto overflow-hidden"
         style={{ backgroundColor: "#F7F7F7" }}
@@ -98,7 +116,6 @@ export default function ChatInfo() {
           ease: "easeOut",
         }}
       >
-        {/* Header - NeuroHive AI Agent with Orange Ball */}
         <motion.div
           className="chat-header px-[32px] py-[24px] border-b-0"
           initial={{ y: -20, opacity: 0 }}
@@ -132,9 +149,7 @@ export default function ChatInfo() {
           </div>
         </motion.div>
 
-        {/* Chat Content - Conversation with proper alignment */}
         <div className="chat-content px-[40px] py-[32px] h-[365px] flex flex-col justify-start space-y-[20px] overflow-y-auto">
-          {/* Render all messages */}
           {messages.map((message, index) => (
             <motion.div
               key={index}
@@ -189,9 +204,10 @@ export default function ChatInfo() {
               </div>
             </motion.div>
           )}
+
+          <div ref={messagesEndRef} />
         </div>
 
-        {/* Chat Input Field */}
         <div className="px-[32px] py-[20px]">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center bg-white border border-gray-200 rounded-full p-2">

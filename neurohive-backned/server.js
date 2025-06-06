@@ -37,7 +37,7 @@ app.post("/api/urlai", async (req, res) => {
 
   try {
     const response = await fetch(
-      "https://n8n.ki-tech.app/webhook/send_to_analyze",
+      "https://n8n.ki-tech.app/webhook/3b0e5dbc-f404-4cab-a7fe-c0e53aca3d10",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

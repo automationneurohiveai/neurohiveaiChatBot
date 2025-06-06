@@ -1,6 +1,7 @@
 import About from "../commponents/about-ai-agent/About";
 import Autamatation from "../commponents/automatation/Autamatation";
 import Cases from "../commponents/cases/Cases";
+import ChatInfo from "../commponents/ChatInfo/ChatInfo";
 import Intro from "../commponents/intro/Intro";
 import Methodology from "../commponents/methodology/Methodology";
 import News from "../commponents/news/News";
