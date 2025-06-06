@@ -41,7 +41,7 @@ export default function IntroLoading({ websiteUrl }) {
         y: 0,
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="w-full flex flex-col items-center h-auto "
+      className="w-full flex flex-col items-center justify-center min-h-[440px]"
     >
       {/* Gradient Ball */}
       <div className="relative mb-[10px]">
@@ -58,7 +58,7 @@ export default function IntroLoading({ websiteUrl }) {
 
       {/* Main Title */}
       <motion.h2
-        className="text-[36px] font-bold text-gray-800 mb-[50px] text-center leading-tight"
+        className="text-[36px] font-bold text-gray-800 text-center leading-tight mb-[40px]"
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
@@ -71,7 +71,7 @@ export default function IntroLoading({ websiteUrl }) {
         {tasks.map((task, index) => (
           <motion.div
             key={index}
-            className="flex items-center mb-[20px] text-[18px]"
+            className="flex items-center mb-[24.7px] text-[18px]"
             initial={{ x: -30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{

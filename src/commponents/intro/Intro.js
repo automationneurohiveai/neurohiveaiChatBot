@@ -47,7 +47,7 @@ export default function Intro() {
     if (hasValidUrl) {
       const timer = setTimeout(() => {
         setIsActive(true);
-      }, 2000);
+      }, 100);
 
       return () => clearTimeout(timer);
     } else {
@@ -98,7 +98,7 @@ export default function Intro() {
         No setup required. Get started in 60 seconds.
       </span>
 
-      <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg">
+      <div className="w-[711px] p-[40px] bg-[#F7F7F7] rounded-[10px] flex flex-col items-center mt-[98px] shadow-lg h-[520px]">
         <AnimatePresence mode="wait">
           {!showLoading && !showChatInfo ? (
             <motion.div
