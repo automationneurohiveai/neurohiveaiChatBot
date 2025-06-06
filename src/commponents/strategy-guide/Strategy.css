@@ -1,5 +1,7 @@
 .strategy {
     background: url(../../../public/image/strategy/strategyBg.png);
+    background-size: cover;
+    background-position: center;
     height: 580px;
     display: flex;
     justify-content: center;
@@ -15,4 +17,15 @@
     border: none;
     outline: none;
     color: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+    .strategy ul {
+        flex-direction: column;
+        gap: 2px;
+    }
+    .strategy input {
+        background: #1B1B1B;
+        border-radius: 10px;
+    }
 }

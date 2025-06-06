@@ -1,17 +1,18 @@
 .intro {
-    padding-top: 150px;
-    background-image: url('../../../public/image/intro/intro-bg.png');
-    background-size: cover;
+  padding-top: 150px;
+  background-image: url("../../../public/image/intro/intro-bg.png");
+  background-size: cover;
+  padding: 20px;
 }
 
 .intro h1 {
-    max-width: 800px;
-    background: linear-gradient(90deg, #930202 0%, #DE2322 49%, #FEC802 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  max-width: 800px;
+  background: linear-gradient(90deg, #930202 0%, #de2322 49%, #fec802 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .intro > h2 {
-    max-width: 420px;
-    text-align: center;
+  max-width: 420px;
+  text-align: center;
 }

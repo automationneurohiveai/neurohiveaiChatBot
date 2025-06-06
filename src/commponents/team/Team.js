@@ -4,8 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import useIsDesktop from '../useIsDesktop';
 
 export default function Team() {
+    const isDesktop = useIsDesktop();
 
     const sliders = [
         {
@@ -103,9 +105,9 @@ export default function Team() {
                 onSlideChange={handleSlideChange}
             >
                 {sliders.map((item, index) => (
-                    <SwiperSlide key={index} className='team-item cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
-                        <div className='w-full rounded-t-[20px] relative team-user-image'>
-                            <div className='team-user-hover-effect'></div>
+                    <SwiperSlide key={index} className='slide team-item cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
+                        <div className='slide-image w-full rounded-t-[20px] relative team-user-image'>
+                            <div className='slide-hover-effect'></div>
                             <img src={`${process.env.PUBLIC_URL}${item.image}`} className='w-full object-cover rounded-t-[20px]' alt={item.name} />
                             {/* <img src={`${process.env.PUBLIC_URL}/image/Gradient-Overlay.svg`} className='absolute w-full bottom-[-41px] h-[83px]' /> */}
                             <div className='gradient-overlay'></div>
@@ -126,7 +128,11 @@ export default function Team() {
                 ))}
 
             </Swiper>
-            
+            {!isDesktop && (
+                <div className='w-full justify-between items-center hidden mob:flex'>
+                    <div className='team-pagination swiper-pagination custom-swiper-pagination'></div>
+                </div>
+            )}
 
         </div>
     );

@@ -1,9 +1,17 @@
 
 import { NavLink } from 'react-router-dom';
 import './Header.css';
+import BugrerMenu from './BurgerMenu';
+import { useState } from 'react';
 
 
 export default function Header() {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleBurger = () => {
+        setIsOpen(isOpen => (!isOpen))
+    }
 
     return (
         <header className="header w-[1029px] py-[11px] pl-[35px] pr-[25px] flex justify-between items-center rounded-[10px]">
@@ -26,6 +34,12 @@ export default function Header() {
                 </select>
                 <button className='black-btn py-[12px] px-[54px]'>Try now</button>
             </div>
+            <div className={`burger-menu-btn ${isOpen ? 'burger-close ' : ''}`} onClick={toggleBurger}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <BugrerMenu isOpen={isOpen} />
         </header>
     )
 }

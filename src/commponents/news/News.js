@@ -4,8 +4,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './News.css';
 import { useRef, useState } from 'react';
+import useIsDesktop from '../useIsDesktop';
 
 export default function News() {
+
+    const isDesktop = useIsDesktop();
 
     const sliders = [
         {
@@ -72,7 +75,7 @@ export default function News() {
                         News</span>
                     <h2 className='text-linear title-2'>Latest from NeuroHive</h2>
                 </div>
-                <div className='flex items-end justify-end h-full'>
+                <div className='flex items-end justify-end h-full mob:hidden'>
                     <div className='flex items-center gap-[50px]'>
                         <div className={`news-swiper-button-prev swiper-button-prev cursor-pointer swiper-control-btns ${atStart ? 'disabled-button-class' : ''}`}>←</div>
                         <div className={`news-swiper-button-next swiper-button-next cursor-pointer swiper-control-btns ${atEnd ? 'disabled-button-class' : ''}`}>→</div>
@@ -80,15 +83,19 @@ export default function News() {
                 </div>
             </div>
             <Swiper
-                className='w-full h-[500px]'
+                className='w-full h-[500px] mob:h-[400px]'
                 spaceBetween={20}
-                slidesPerView={3.2}
+                slidesPerView={1.2}
                 loop={false}
                 navigation={{
                     nextEl: '.news-swiper-button-next',
                     prevEl: '.news-swiper-button-prev',
                 }}
-               
+                breakpoints={{
+                    1200: {
+                        slidesPerView: 3.2,
+                    }
+                }}
                 modules={[Navigation, Pagination]}
                 pagination={{
                     el: '.news-pagination',
@@ -110,7 +117,7 @@ export default function News() {
                             <div className='flex flex-col'>
                                 <ul className="flex gap-[15px]">
                                     {item.stats.map((stat, i) => (
-                                        <li key={i} className="relative pl-[22px] py-[5px] px-[10px] text-[#FB5D21] bg-[#fb5f2123] rounded-[4px] before:content-['•'] before:absolute before:left-[10px] before:text-[#FB5D21] before:text-[20px] before:top-1/2 before:-translate-y-1/2">
+                                        <li key={i} className="relative pl-[22px] py-[5px] px-[10px] text-[#FB5D21] bg-[#fb5f2123] rounded-[4px] before:content-['•'] before:absolute before:left-[10px] before:text-[#FB5D21] before:text-[20px] before:top-1/2 before:-translate-y-1/2 mob:text-[11px]">
                                             {stat}
                                         </li>
                                     ))}
@@ -124,6 +131,12 @@ export default function News() {
                 ))}
 
             </Swiper>
+            {!isDesktop && (
+                <div className='w-full justify-between items-center hidden mob:flex'>
+                    <div className='news-pagination swiper-pagination custom-swiper-pagination'></div>
+                </div>
+            )}
+
         </section >
     )
 }

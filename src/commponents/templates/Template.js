@@ -10,27 +10,27 @@ export default function Template() {
 
     const sliders = [
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-1.svg',
             title: 'Candidate Pipeline',
             text: 'Track candidates through your hiring stages with customizable pipelines and automated status updates.'
         },
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-2.svg',
             title: 'InAI Screening',
             text: 'Automate candidate screening with AI-powered resume parsing and qualification matching.'
         },
         {
-            image: '/image/template/template-slider-2.svg',
+            image: '/image/template/template-card-el-3.svg',
             title: 'Interview Scheduler',
             text: 'Streamline interview scheduling with automated calendar coordination and reminders.'
         },
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-2.svg',
             title: 'InAI Screening',
             text: 'Automate candidate screening with AI-powered resume parsing and qualification matching.'
         },
         {
-            image: '/image/template/template-slider-1.svg',
+            image: '/image/template/template-card-el-3.svg',
             title: 'InAI Screening',
             text: 'Automate candidate screening with AI-powered resume parsing and qualification matching.'
         }
@@ -47,7 +47,7 @@ export default function Template() {
 
 
     return (
-        <section className="section-2 flex gap-[70px]" id='templates'>
+        <section className="section-2 flex gap-[70px] mob:flex-col" id='templates'>
             <div className='min-w-[418px] flex flex-col'>
                 <span className="title-top-type">
                     <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,15 +100,17 @@ export default function Template() {
                     onSlideChange={handleSlideChange}
                 >
                     {sliders.map((item, index) => (
-                        <SwiperSlide key={index} className='cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
-                            <div className='w-full rounded-t-[20px] overflow-hidden'>
+                        <SwiperSlide key={index} className='slide cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
+                            <div className='slide-image w-full rounded-t-[20px] overflow-hidden flex-grow'>
+                                <div className='slide-hover-effect'></div>
                                 <img src={`${process.env.PUBLIC_URL}${item.image}`} className='w-full object-cover' alt={item.title} />
+                                {/* <div className='gradient-overlay'></div> */}
+
                             </div>
-                            <div className='p-[20px] flex flex-col justify-between flex-grow'>
+                            <div className='p-[20px] flex flex-col justify-between '>
                                 <div className='flex flex-col gap-[10px]'>
                                     <h3 className='subtitle-1'>{item.title}</h3>
                                     <p className='txt-2 text-[#818181]'>{item.text}</p>
-
                                 </div>
                                 <div className='mt-[10px] flex gap-[15px]'>
                                     <button className='white-btn w-full py-[13px]'>View</button>
@@ -120,7 +122,7 @@ export default function Template() {
 
                 </Swiper>
                 <div className='w-full flex justify-between items-center pr-[120px]'>
-                    <div className='flex items-center gap-[50px]'>
+                    <div className='flex items-center gap-[50px] mob:hidden'>
                         <div className={`template-swiper-button-prev swiper-button-prev cursor-pointer swiper-control-btns ${atStart ? 'disabled-button-class' : ''}`}>←</div>
                         <div className={`template-swiper-button-next swiper-button-next cursor-pointer swiper-control-btns ${atEnd ? 'disabled-button-class' : ''}`}>→</div>
                     </div>
