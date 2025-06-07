@@ -424,14 +424,17 @@ button {
   top: 0;
   background: rgba(78, 78, 78, 0.3);
   backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1111111111;
+  padding: 20px;
 }
 
 .modal-content {
-  width: 366px;
+  width: 100%;
+  max-width: 366px;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -439,31 +442,146 @@ button {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0px 24px 41.6px 1px rgba(147, 147, 147, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-@media screen and (max-width: 1201px) {
+/* ================================ */
+/* MODAL RESPONSIVE STYLES */
+/* ================================ */
+
+/* Tablet: 768px - 991px */
+@media screen and (max-width: 991px) {
+  .modal-content {
+    max-width: 400px;
+    padding: 28px;
+    border-radius: 16px;
+  }
+}
+
+/* Mobile Large: 576px - 767px */
+@media screen and (max-width: 767px) {
+  .modal-cont {
+    padding: 16px;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .modal-content h2 {
+    font-size: 20px;
+  }
+
+  .modal-content .txt-caption {
+    font-size: 13px;
+  }
+}
+
+/* Mobile Small: 320px - 575px */
+@media screen and (max-width: 575px) {
+  .modal-cont {
+    padding: 12px;
+  }
+
+  .modal-content {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .modal-content h2 {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+
+  .modal-content .txt-caption {
+    font-size: 12px;
+    margin-top: 12px;
+    max-width: 220px;
+  }
+
+  .modal-content .black-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+    margin-top: 24px;
+  }
+
+  .modal-content img:first-child {
+    width: 100px;
+  }
+}
+
+/* ================================ */
+/* RESPONSIVE BREAKPOINTS SYSTEM */
+/* ================================ */
+
+/* Large Desktop: 1200px+ */
+/* Default styles already defined above */
+
+/* Desktop: 992px - 1199px */
+@media screen and (max-width: 1199px) {
   .section {
-    max-width: 347px;
+    width: 100%;
+    max-width: 960px;
+    padding: 0 20px;
   }
 
   .section-2 {
     width: 100%;
-    max-width: 347px;
+    max-width: 960px;
     margin: auto;
+    padding: 0 20px;
+  }
+
+  .title-1 {
+    font-size: 70px;
+  }
+
+  .title-2 {
+    font-size: 42px;
   }
 
   .section-title {
-    font-size: 40px;
-    letter-spacing: -2.1px;
+    font-size: 42px;
+  }
+}
+
+/* Tablet: 768px - 991px */
+@media screen and (max-width: 991px) {
+  .section {
+    max-width: 720px;
+    padding: 0 24px;
+  }
+
+  .section-2 {
+    max-width: 720px;
+    padding: 0 24px;
+  }
+
+  .title-1 {
+    font-size: 56px;
+  }
+
+  .title-2 {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 36px;
+  }
+
+  .subtitle-cover {
+    font-size: 26px;
   }
 
   .header-parent {
-    width: calc(100% - 60px);
+    width: calc(100% - 48px);
   }
 
   .header {
     width: 100%;
-    padding: 11px 15px;
+    padding: 12px 20px;
   }
 
   .desktop-head-right,
@@ -474,29 +592,40 @@ button {
   .burger-menu-btn {
     display: flex;
   }
+}
 
-  .intro {
-    padding: 0 16px;
-    padding-top: 110px;
+/* Mobile Large: 576px - 767px */
+@media screen and (max-width: 767px) {
+  .section {
+    max-width: 100%;
+    padding: 0 20px;
   }
 
-  .intro h1 {
+  .section-2 {
     max-width: 100%;
-    font-size: 54px;
+    padding: 0 20px;
   }
 
-  .intro > h2 {
-    margin-top: 24px;
-    line-height: 100%;
-    max-width: 100%;
+  .title-1 {
+    font-size: 48px;
+    line-height: 110%;
   }
 
   .title-2 {
-    font-size: 30px;
+    font-size: 32px;
+  }
+
+  .section-title {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .subtitle-cover {
+    font-size: 24px;
   }
 
   .subtitle-1 {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .title-3 {
@@ -505,6 +634,101 @@ button {
 
   .txt-caption {
     font-size: 14px;
+  }
+
+  .intro {
+    padding: 24px 20px;
+    padding-top: 120px;
+  }
+
+  .intro h1 {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .intro > h2 {
+    margin-top: 24px;
+    line-height: 110%;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+/* Mobile Small: 320px - 575px */
+@media screen and (max-width: 575px) {
+  .section {
+    padding: 0 16px;
+  }
+
+  .section-2 {
+    padding: 0 16px;
+  }
+
+  .title-1 {
+    font-size: 40px;
+    line-height: 110%;
+  }
+
+  .title-2 {
+    font-size: 28px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    letter-spacing: -1.5px;
+  }
+
+  .subtitle-cover {
+    font-size: 22px;
+  }
+
+  .subtitle-1 {
+    font-size: 18px;
+  }
+
+  .title-3 {
+    font-size: 15px;
+  }
+
+  .txt-caption {
+    font-size: 13px;
+  }
+
+  .main-txt {
+    font-size: 13px;
+  }
+
+  .header-parent {
+    width: calc(100% - 32px);
+  }
+
+  .header {
+    padding: 10px 16px;
+  }
+
+  .intro {
+    padding: 20px 16px;
+    padding-top: 100px;
+  }
+
+  .intro h1 {
+    font-size: 36px;
+  }
+
+  .intro > h2 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  /* Buttons adaptation */
+  .black-btn, .white-btn {
+    font-size: 15px;
+    padding: 12px 24px;
+  }
+
+  .orange-btn {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 }
 

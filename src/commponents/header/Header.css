@@ -3,3 +3,121 @@
     -webkit-backdrop-filter: blur(10px);
     background-color: rgba(78, 78, 78, 0.3);
 } */
+
+/* Header Base Styles */
+.header {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(78, 78, 78, 0.3);
+    transition: all 0.3s ease;
+}
+
+.header img {
+    max-height: 40px;
+    width: auto;
+}
+
+.nav-desktop ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-desktop li button,
+.nav-desktop li a {
+    transition: opacity 0.3s ease;
+}
+
+.nav-desktop li button:hover,
+.nav-desktop li a:hover {
+    opacity: 0.8;
+}
+
+.desktop-head-right select {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* ================================ */
+/* HEADER RESPONSIVE STYLES */
+/* ================================ */
+
+/* Desktop: 992px - 1199px */
+@media screen and (max-width: 1199px) {
+    .header {
+        max-width: 900px;
+        padding: 12px 24px;
+    }
+
+    .header img {
+        max-height: 36px;
+    }
+
+    .nav-desktop ul {
+        gap: 32px;
+    }
+
+    .desktop-head-right {
+        gap: 32px;
+    }
+
+    .black-btn {
+        padding: 10px 40px;
+        font-size: 16px;
+    }
+}
+
+/* Tablet: 768px - 991px */
+@media screen and (max-width: 991px) {
+    .header {
+        max-width: 100%;
+    }
+
+    .header img {
+        max-height: 32px;
+    }
+
+    /* Desktop navigation hidden, burger shown */
+    .nav-desktop,
+    .desktop-head-right {
+        display: none;
+    }
+
+    .burger-menu-btn {
+        display: flex;
+    }
+}
+
+/* Mobile Large: 576px - 767px */
+@media screen and (max-width: 767px) {
+    .header {
+        padding: 10px 16px;
+        border-radius: 8px;
+    }
+
+    .header img {
+        max-height: 28px;
+    }
+}
+
+/* Mobile Small: 320px - 575px */
+@media screen and (max-width: 575px) {
+    .header {
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+
+    .header img {
+        max-height: 26px;
+    }
+
+    .burger-menu-btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .burger-menu-btn span {
+        height: 2px;
+    }
+}

@@ -44,3 +44,183 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* ================================ */
+/* CONSULTATION RESPONSIVE STYLES */
+/* ================================ */
+
+/* Desktop: 992px - 1199px */
+@media screen and (max-width: 1199px) {
+    .consultation-container {
+        padding-top: 200px;
+        padding-bottom: 120px;
+    }
+
+    .consultation-container .section {
+        gap: 80px;
+    }
+
+    .consultation-form {
+        padding: 40px 40px 35px 40px;
+        min-width: 400px;
+    }
+
+    .consult-card {
+        height: 140px;
+        padding: 16px;
+    }
+
+    .consult-card .consultation-img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Tablet: 768px - 991px */
+@media screen and (max-width: 991px) {
+    .consultation-container {
+        padding-top: 160px;
+        padding-bottom: 100px;
+    }
+
+    .consultation-container .section {
+        flex-direction: column;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .consultation-form {
+        padding: 35px 35px 30px 35px;
+        width: 100%;
+        max-width: 500px;
+        min-width: unset;
+    }
+
+    .consult-card {
+        height: 120px;
+        padding: 14px;
+    }
+
+    .consult-card p {
+        max-width: 150px;
+    }
+
+    .consult-card .consultation-img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Mobile Large: 576px - 767px */
+@media screen and (max-width: 767px) {
+    .consultation-container {
+        padding-top: 140px;
+        padding-bottom: 80px;
+    }
+
+    .consultation-container .section {
+        gap: 40px;
+    }
+
+    .consultation-form {
+        padding: 30px 24px 25px 24px;
+        border-radius: 16px;
+        max-width: 100%;
+    }
+
+    .consult-card {
+        height: 110px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .consult-card p {
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .consult-card h3 {
+        font-size: 15px;
+    }
+
+    .consult-card .consultation-img {
+        width: 50px;
+        height: 50px;
+        right: 8px;
+        bottom: 8px;
+    }
+
+    /* Grid layout for cards */
+    .consultation-container .section > div:first-child .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* Mobile Small: 320px - 575px */
+@media screen and (max-width: 575px) {
+    .consultation-container {
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+
+    .consultation-container .section {
+        gap: 32px;
+    }
+
+    .consultation-form {
+        padding: 24px 20px 20px 20px;
+        border-radius: 12px;
+    }
+
+    .consultation-form h3 {
+        font-size: 20px;
+    }
+
+    .consultation-form p {
+        font-size: 12px;
+        max-width: 280px;
+    }
+
+    .consult-card {
+        height: 100px;
+        padding: 10px;
+    }
+
+    .consult-card p {
+        font-size: 12px;
+        line-height: 120%;
+    }
+
+    .consult-card h3 {
+        font-size: 14px;
+    }
+
+    .consult-card .consultation-img {
+        width: 45px;
+        height: 45px;
+        right: 6px;
+        bottom: 6px;
+    }
+
+    /* Stack cards in single column */
+    .consultation-container .section > div:first-child .grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .consultation-container .section > div:first-child {
+        max-width: 100%;
+    }
+
+    .consultation-container .section > div:first-child h2 {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .consultation-container .section > div:first-child p {
+        text-align: center;
+        margin-top: 16px;
+    }
+}

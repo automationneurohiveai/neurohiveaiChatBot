@@ -2,69 +2,183 @@
   font-family: inherit;
 }
 
-.loading-container-clean {
-  padding: 40px 20px;
+.loading-container {
+  position: relative;
+  background: #F7F7F7;
+  border-radius: 15px;
+  box-shadow: 0px 24px 42px 1px rgba(147, 147, 147, 0.25);
+  padding: 40px;
+}
+
+/* Simple Ball */
+.gradient-ball-container {
+  position: relative;
 }
 
 .gradient-ball {
-  filter: drop-shadow(0 20px 40px rgba(255, 107, 53, 0.3));
+  border-radius: 50%;
+  width: 115px;
+  height: 115px;
 }
 
+/* Title Gradient from Figma */
+.title-text {
+  background: linear-gradient(135deg, #D127F1 0%, #3E17D2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  letter-spacing: -1%;
+}
+
+/* Clean Task List */
 .task-list {
-  animation: fadeInUp 0.6s ease-out;
+  position: relative;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.task-item {
+  margin-bottom: 10px;
+  position: relative;
 }
 
-@media (max-width: 768px) {
-  .loading-container-clean {
-    padding: 30px 16px;
+.task-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  transition: none;
+}
+
+.task-indicator {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.task-content.completed .task-indicator {
+  background: linear-gradient(135deg, #DF3210 0%, #EB9A19 100%);
+}
+
+.task-content.pending .task-indicator {
+  background: #FFFFFF;
+}
+
+.task-text {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Inter Tight', sans-serif;
+  line-height: 1.33;
+  text-align: left;
+  color: #818181;
+}
+
+.task-content.completed .task-text {
+  color: #1B1B1B;
+}
+
+/* ================================ */
+/* MOBILE RESPONSIVE STYLES */
+/* ================================ */
+
+/* Tablet: 768px - 991px */
+@media screen and (max-width: 991px) {
+  .loading-container {
+    min-height: 380px !important;
+    padding: 30px 20px;
   }
 
-  .intro-loading h1 {
+  .title-text {
     font-size: 32px !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 35px !important;
   }
 
   .gradient-ball {
-    margin-bottom: 40px !important;
-  }
-
-  .gradient-ball div {
-    width: 100px !important;
-    height: 100px !important;
+    width: 90px !important;
+    height: 90px !important;
   }
 
   .task-list {
-    max-width: 100% !important;
+    max-width: 280px !important;
   }
 
-  .task-list .flex {
+  .task-text {
     font-size: 16px !important;
-    margin-bottom: 16px !important;
+  }
+
+  .task-indicator {
+    width: 24px !important;
+    height: 24px !important;
   }
 }
 
-/* Smooth loading animation */
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+/* Mobile Large: 576px - 767px */
+@media screen and (max-width: 767px) {
+  .loading-container {
+    min-height: 340px !important;
+    padding: 25px 15px;
   }
-  50% {
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+
+  .title-text {
+    font-size: 28px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .gradient-ball {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .task-list {
+    max-width: 260px !important;
+  }
+
+  .task-text {
+    font-size: 15px !important;
+  }
+
+  .task-indicator {
+    width: 22px !important;
+    height: 22px !important;
   }
 }
 
-.loading-container {
-  animation: pulse-glow 3s ease-in-out infinite;
+/* Mobile Small: 320px - 575px */
+@media screen and (max-width: 575px) {
+  .loading-container {
+    min-height: 320px !important;
+    padding: 20px 12px;
+  }
+
+  .title-text {
+    font-size: 24px !important;
+    margin-bottom: 25px !important;
+  }
+
+  .gradient-ball {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .task-list {
+    max-width: 240px !important;
+  }
+
+  .task-text {
+    font-size: 14px !important;
+  }
+
+  .task-indicator {
+    width: 20px !important;
+    height: 20px !important;
+  }
 }
