@@ -5,6 +5,7 @@ import IntroLoading from "../IntroLoading/IntroLoading";
 import ChatInfo from "../ChatInfo/ChatInfo";
 import { usePostUrl } from "../../server/usePostUrl";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export default function Intro() {
   const [isActive, setIsActive] = useState(false);
@@ -13,6 +14,7 @@ export default function Intro() {
   const [completedTasks, setCompletedTasks] = useState(0);
 
   const { dataUrl, submitDataUrl, loadingUrl } = usePostUrl();
+  const navigate = useNavigate();
   const tasks = [
     "Scanning pages and structure",
     "Detecting key call-to-actions",
@@ -97,7 +99,10 @@ export default function Intro() {
         Boost your team's productivity by 40% with AI automation
       </h2>
       <div className="flex items-center mt-[35px] gap-[20px]">
-        <button className="black-btn py-[16px] px-[48px]">
+        <button 
+          className="black-btn py-[16px] px-[48px]"
+          onClick={() => navigate('/consultation')}
+        >
           Get a consultation
         </button>
         <button className="white-btn py-[16px] px-[66.5px]">

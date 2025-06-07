@@ -1,29 +1,80 @@
-
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import BugrerMenu from './BurgerMenu';
 import { useState } from 'react';
 
-
 export default function Header() {
-
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const toggleBurger = () => {
         setIsOpen(isOpen => (!isOpen))
     }
 
+    // Handle navigation to sections
+    const handleSectionNavigation = (sectionId) => {
+        if (location.pathname !== '/') {
+            // If not on home page, navigate to home first then scroll to section
+            navigate('/');
+            setTimeout(() => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        } else {
+            // If on home page, just scroll to section
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+
+    // Handle logo click - always go to home page and scroll to intro
+    const handleLogoClick = () => {
+        if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+                const element = document.getElementById('intro');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        } else {
+            const element = document.getElementById('intro');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+
     return (
         <header className="header w-[1029px] py-[11px] pl-[35px] pr-[25px] flex justify-between items-center rounded-[10px]">
             <div className='flex gap-[60px] items-center'>
-                <a href='#intro'>
+                <button onClick={handleLogoClick} className="cursor-pointer">
                     <img src={`${process.env.PUBLIC_URL}/image/NeuroHiveAILK.png`} alt="NeuroLk" />
-                </a>
+                </button>
                 <nav className='nav-desktop'>
                     <ul className='flex gap-[40px]'>
-                        <li><a href='#templates' className='txt-1 text-white'>Templates</a></li>
-                        <li><a href='#cases' className='txt-1 text-white'>Use Cases</a></li>
-                        <li><NavLink to='/' className='txt-1 text-white'>Contact</NavLink></li>
+                        <li>
+                            <button 
+                                onClick={() => handleSectionNavigation('templates')} 
+                                className='txt-1 text-white cursor-pointer bg-transparent border-none'
+                            >
+                                Templates
+                            </button>
+                        </li>
+                        <li>
+                            <button 
+                                onClick={() => handleSectionNavigation('cases')} 
+                                className='txt-1 text-white cursor-pointer bg-transparent border-none'
+                            >
+                                Use Cases
+                            </button>
+                        </li>
+                        <li><NavLink to='/consultation' className='txt-1 text-white'>Contact</NavLink></li>
                         <li><NavLink to='/' className='txt-1 text-white'>Knowledge Hub</NavLink></li>
                     </ul>
                 </nav>
@@ -39,7 +90,7 @@ export default function Header() {
                 <span></span>
                 <span></span>
             </div>
-            <BugrerMenu isOpen={isOpen} />
+            <BugrerMenu isOpen={isOpen} onSectionClick={handleSectionNavigation} onLogoClick={handleLogoClick} />
         </header>
     )
 }

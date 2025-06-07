@@ -1,4 +1,19 @@
-export default function Success() {
+import { useNavigate } from 'react-router-dom';
+
+export default function Success({ onClose }) {
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    onClose(); // Close the modal first
+    navigate('/'); // Navigate to home page
+    setTimeout(() => {
+      const element = document.getElementById('intro');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <div className="modal-cont">
       <div className="modal-content">
@@ -18,7 +33,10 @@ export default function Success() {
           Our experts will get in touch within 24 hours to schedule your free
           consultation
         </span>
-        <button className="black-btn py-[13px] w-full mt-[30px]">
+        <button 
+          className="black-btn py-[13px] w-full mt-[30px]"
+          onClick={handleBackToHome}
+        >
           Back to homepage
         </button>
       </div>

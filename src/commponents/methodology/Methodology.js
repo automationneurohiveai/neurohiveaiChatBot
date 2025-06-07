@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Methodology.css";
 import useIsDesktop from "../useIsDesktop";
 
@@ -84,8 +84,105 @@ export default function Methodology() {
 
   console.log(isDesktop);
 
-  const [activeMethod, setActiveMethod] = useState(0);
-  const [activeMethod2, setActiveMethod2] = useState(0);
+  const [activeMethod, setActiveMethod] = useState(0); // Активный элемент в левом столбце (0-4)
+  const [activeMethod2, setActiveMethod2] = useState(0); // Активный элемент в правом столбце (0-4)
+  const [currentPhase, setCurrentPhase] = useState('left'); // 'left', 'right', 'completed'
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const intervalRef = useRef(null);
+
+  // Функция для автоматического переключения
+  const startAutoPlay = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    
+    intervalRef.current = setInterval(() => {
+      if (!isUserInteracting && currentPhase !== 'completed') {
+        if (currentPhase === 'left') {
+          setActiveMethod(prev => {
+            if (prev < 4) {
+              return prev + 1; // Переходим к следующему пункту в левом столбце
+            } else {
+              setCurrentPhase('right'); // Переключаемся на правый столбец
+              return 4; // Оставляем левый на 05 (индекс 4)
+            }
+          });
+        } else if (currentPhase === 'right') {
+          setActiveMethod2(prev => {
+            if (prev < 4) {
+              return prev + 1; // Переходим к следующему пункту в правом столбце
+            } else {
+              setCurrentPhase('completed'); // Завершаем автопрокрутку
+              stopAutoPlay();
+              return 4; // Оставляем на последнем элементе
+            }
+          });
+        }
+      }
+    }, 3000); // Переключение каждые 3 секунды
+  };
+
+  // Функция для остановки автопроигрывания
+  const stopAutoPlay = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  // Обработчик клика по шагу в левом столбце
+  const handleLeftStepClick = (stepIndex) => {
+    setIsUserInteracting(true);
+    setActiveMethod(stepIndex);
+    stopAutoPlay();
+    
+    setTimeout(() => {
+      setIsUserInteracting(false);
+      if (currentPhase !== 'completed') {
+        startAutoPlay();
+      }
+    }, 5000);
+  };
+
+  // Обработчик клика по шагу в правом столбце
+  const handleRightStepClick = (stepIndex) => {
+    setIsUserInteracting(true);
+    setActiveMethod2(stepIndex);
+    stopAutoPlay();
+    
+    setTimeout(() => {
+      setIsUserInteracting(false);
+      if (currentPhase !== 'completed') {
+        startAutoPlay();
+      }
+    }, 5000);
+  };
+
+  // Обработчик клика в мобильной версии
+  const handleMobileStepClick = (stepIndex) => {
+    setIsUserInteracting(true);
+    if (stepIndex < 5) {
+      setActiveMethod(stepIndex);
+    } else {
+      setActiveMethod2(stepIndex - 5);
+    }
+    stopAutoPlay();
+    
+    setTimeout(() => {
+      setIsUserInteracting(false);
+      if (currentPhase !== 'completed') {
+        startAutoPlay();
+      }
+    }, 5000);
+  };
+
+  // Запуск автопроигрывания при монтировании компонента
+  useEffect(() => {
+    startAutoPlay();
+    
+    return () => stopAutoPlay(); // Очистка при размонтировании
+  }, []);
+
+  // Вычисляем активный шаг для мобильной версии
+  const mobileActiveStep = currentPhase === 'left' ? activeMethod : activeMethod2 + 5;
 
   const toggleMethod = (index, state, setState) => {
     if (index !== state) {
@@ -129,9 +226,7 @@ export default function Methodology() {
                 <div
                   className={`methodology-task-item ${index === activeMethod ? "methodology-task-item-active" : ""}`}
                   key={index}
-                  onClick={() =>
-                    toggleMethod(index, activeMethod, setActiveMethod)
-                  }
+                  onClick={() => handleLeftStepClick(index)}
                 >
                   <div className="flex items-center gap-[5px]">
                     <p className="subtitle-1 text-[#818181]">
@@ -173,9 +268,7 @@ export default function Methodology() {
                 <div
                   className={`methodology-task-item ${index === activeMethod2 ? "methodology-task-item-active" : ""}`}
                   key={index}
-                  onClick={() =>
-                    toggleMethod(index, activeMethod2, setActiveMethod2)
-                  }
+                  onClick={() => handleRightStepClick(index)}
                 >
                   <div className="flex items-center gap-[5px]">
                     <p className="subtitle-1 text-[#818181]">
@@ -199,14 +292,16 @@ export default function Methodology() {
               ))}
             </div>
           </div>
+          
+
         </div>
       ) : (
         <div>
           {methodConected.map((method, index) => (
             <div
-              className={`methodology-task-item ${index === activeMethod ? "methodology-task-item-active" : ""}`}
+              className={`methodology-task-item ${index === mobileActiveStep ? "methodology-task-item-active" : ""}`}
               key={index}
-              onClick={() => toggleMethod(index, activeMethod, setActiveMethod)}
+              onClick={() => handleMobileStepClick(index)}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-[5px]">
@@ -250,7 +345,7 @@ export default function Methodology() {
                   </defs>
                 </svg>
               </div>
-              {index === activeMethod && (
+              {index === mobileActiveStep && (
                 <div className="flex flex-col">
                   <div className="flex flex-col gap-[5px] mt-[10px] max-w-[272px]">
                     <p className="title-3 text-[#818181]">Task:{method.task}</p>

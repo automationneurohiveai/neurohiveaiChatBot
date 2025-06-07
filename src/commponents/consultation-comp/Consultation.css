@@ -5,7 +5,7 @@
     background-size: cover;
 }
 
-.consultation-container>div {
+.consultation-container .section {
     display: flex;
     gap: 140px;
 }

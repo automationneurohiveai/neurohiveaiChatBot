@@ -1,8 +1,7 @@
 import './BurgerMenu.css';
 import { NavLink } from 'react-router-dom';
 
-export default function BugrerMenu({ isOpen }) {
-
+export default function BugrerMenu({ isOpen, onSectionClick, onLogoClick }) {
 
     return (
         <div className={`burger-menu ${isOpen ? 'burger-menu-active' : ''}`}>
@@ -12,9 +11,23 @@ export default function BugrerMenu({ isOpen }) {
 
             <nav>
                 <ul className='flex gap-[40px]'>
-                    <li><a href='#templates' className='txt-1 text-white'>Templates</a></li>
-                    <li><a href='#cases' className='txt-1 text-white'>Use Cases</a></li>
-                    <li><NavLink to='/' className='txt-1 text-white'>Contact</NavLink></li>
+                    <li>
+                        <button 
+                            onClick={() => onSectionClick('templates')} 
+                            className='txt-1 text-white cursor-pointer bg-transparent border-none'
+                        >
+                            Templates
+                        </button>
+                    </li>
+                    <li>
+                        <button 
+                            onClick={() => onSectionClick('cases')} 
+                            className='txt-1 text-white cursor-pointer bg-transparent border-none'
+                        >
+                            Use Cases
+                        </button>
+                    </li>
+                    <li><NavLink to='/consultation' className='txt-1 text-white'>Contact</NavLink></li>
                     <li><NavLink to='/' className='txt-1 text-white'>Knowledge Hub</NavLink></li>
                 </ul>
             </nav>

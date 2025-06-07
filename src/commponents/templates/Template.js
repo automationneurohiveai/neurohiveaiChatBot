@@ -100,7 +100,7 @@ export default function Template() {
                     onSlideChange={handleSlideChange}
                 >
                     {sliders.map((item, index) => (
-                        <SwiperSlide key={index} className='slide cases-swiper-slide rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
+                        <SwiperSlide key={index} className='slide cases-swiper-slide saas-hover-effect rounded-[20px] bg-white shadow-md flex-col justify-between h-[calc(100% - 20px)]'>
                             <div className='slide-image w-full rounded-t-[20px] overflow-hidden flex-grow'>
                                 <div className='slide-hover-effect'></div>
                                 <img src={`${process.env.PUBLIC_URL}${item.image}`} className='w-full object-cover' alt={item.title} />
