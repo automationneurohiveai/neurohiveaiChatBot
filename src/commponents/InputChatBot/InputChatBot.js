@@ -36,7 +36,7 @@ const InputChatBot = ({
         {...props}
       />
 
-      {/* Error message */}
+
       {error && (
         <div className="absolute top-full left-0 mt-1 text-sm text-red-600 pt-10">
           {error.message}

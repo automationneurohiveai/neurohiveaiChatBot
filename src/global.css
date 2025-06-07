@@ -87,7 +87,8 @@ button {
 }
 
 .section {
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   margin: auto;
 }
 
@@ -721,7 +722,8 @@ button {
   }
 
   /* Buttons adaptation */
-  .black-btn, .white-btn {
+  .black-btn,
+  .white-btn {
     font-size: 15px;
     padding: 12px 24px;
   }
