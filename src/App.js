@@ -48,30 +48,34 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <div></div>
-      {!visible && (
-        <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
-          <Header />
-        </div>
-      )}
+    <>
+      <div className="App">
+        <div></div>
+        {!visible && (
+          <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
+            <Header />
+          </div>
+        )}
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div ref={introRef} style={{ opacity: 0 }}>
-              <Home />
-            </div>
-          }
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <Home />
+              </div>
+            }
+          />
 
-        <Route path="consultation" element={<Consultation />} />
-      </Routes>
+          <Route path="consultation" element={<Consultation />} />
+        </Routes>
 
+        <Footer />
+      </div>
+
+      {/* Modal outside the main app div to prevent footer from being blurred */}
       {visible && <Success />}
-      <Footer />
-    </div>
+    </>
   );
 }
 

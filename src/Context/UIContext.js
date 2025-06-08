@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
-import { View, Text } from "react-native";
 
-// Створення контексту
 export const UIContext = createContext();
 
 // Провайдер контексту
@@ -14,6 +12,5 @@ export const UIContextProvider = ({ children }) => {
     </UIContext.Provider>
   );
 };
-
 
 export const useUIContext = () => useContext(UIContext);
