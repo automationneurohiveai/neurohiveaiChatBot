@@ -10,7 +10,7 @@ export const usePostMessage = () => {
     });
 
     const { sessionId } = await res.json();
-    console.log("sessionId Message", sessionId);    
+    console.log("sessionId Message", sessionId);
 
     const response = await fetch("http://localhost:4000/api/message", {
       method: "POST",

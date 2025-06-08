@@ -60,7 +60,7 @@ export default function Header() {
           />
         </button>
         <nav className="nav-desktop">
-          <ul className="flex gap-[40px]">
+          <ul className="flex gap-[20px] mr-[20px]">
             <li>
               <button
                 onClick={() => handleSectionNavigation("templates")}
@@ -90,7 +90,7 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-      <div className="flex gap-[40px] items-center desktop-head-right">
+      <div className="flex gap-[30px] items-center desktop-head-right ml-[20px]">
         <select className="py-[4px] px-[8.5px] bg-[white] rounded-[5px] text-[11px]">
           <option className="text-[11px] font-semibold">PL</option>
         </select>

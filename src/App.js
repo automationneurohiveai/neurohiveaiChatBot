@@ -8,11 +8,14 @@ import gsap from "gsap";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Consultation from "./pages/Consultation";
 import Success from "./commponents/success-modal/Success";
+import { useUIContext } from "./Context/UIContext";
 
 function App() {
   const headerRef = useRef(null);
   const introRef = useRef(null);
   const location = useLocation();
+
+  const { visible, setVisible } = useUIContext();
 
   useEffect(() => {
     const target = [headerRef.current, introRef.current].filter(Boolean);
@@ -46,23 +49,26 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname !== "/consultation/success" && (
+      {!visible && (
         <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
           <Header />
         </div>
       )}
 
-      <div ref={introRef} style={{ opacity: 0 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="consultation">
-            <Route index element={<Consultation />} />
-            <Route path="success" element={<Success />} />
-          </Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div ref={introRef} style={{ opacity: 0 }}>
+              <Home />
+            </div>
+          }
+        />
+
+        <Route path="consultation" element={<Consultation />} />
+      </Routes>
+
       <Footer />
-      {/* <Success /> */}
     </div>
   );
 }

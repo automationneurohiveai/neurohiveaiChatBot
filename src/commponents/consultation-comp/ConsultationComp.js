@@ -1,10 +1,9 @@
 import "./Consultation.css";
 import { useState } from "react";
 import Success from "../success-modal/Success";
-import { useNavigate } from "react-router-dom";
+import { useUIContext } from "../../Context/UIContext";
 
 export default function ConsultationComp() {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,8 +14,8 @@ export default function ConsultationComp() {
   });
 
   const [errors, setErrors] = useState({});
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  const { visible, setVisible } = useUIContext();
   // Email validation
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -84,13 +83,13 @@ export default function ConsultationComp() {
     if (validateForm()) {
       // Form submission logic will be here
       console.log("Form is valid:", formData);
-      navigate("/consultation/success");
+      setVisible(true);
     }
   };
 
   return (
     <>
-      <div className="section flex gap-[140px]">
+      <div className="section flex gap-[140px] ">
         <div className="max-w-[468px]">
           <h2 className="title-2 text-linear">Get Your Free AI Consultation</h2>
           <p className="mt-[10px] text-[#818181]">
@@ -241,6 +240,9 @@ export default function ConsultationComp() {
           </button>
         </form>
       </div>
+      {visible && <Success />}
+
+      {/* Success Modal */}
     </>
   );
 }

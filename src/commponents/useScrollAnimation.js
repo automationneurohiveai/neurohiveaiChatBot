@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export const useScrollAnimation = (options = {}) => {
   const elementRef = useRef(null);
@@ -15,7 +15,7 @@ export const useScrollAnimation = (options = {}) => {
       },
       {
         threshold: 0.1,
-        rootMargin: '50px',
+        rootMargin: "50px",
         ...options,
       }
     );
@@ -36,17 +36,17 @@ export const useScrollAnimation = (options = {}) => {
 };
 
 // Компонент-обертка для анимаций
-export const ScrollAnimationWrapper = ({ 
-  children, 
-  className = '', 
-  delay = 0, 
+export const ScrollAnimationWrapper = ({
+  children,
+  className = "",
+  delay = 0,
   duration = 0.6,
-  animationType = 'fadeUp' 
+  animationType = "fadeUp",
 }) => {
   const [ref, isVisible] = useScrollAnimation();
 
   const getAnimationClass = () => {
-    const baseClass = isVisible ? 'animate-visible' : 'animate-hidden';
+    const baseClass = isVisible ? "animate-visible" : "animate-hidden";
     return `${baseClass} ${animationType}`;
   };
 
@@ -62,4 +62,4 @@ export const ScrollAnimationWrapper = ({
       {children}
     </div>
   );
-}; 
+};

@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useUIContext } from "../../Context/UIContext";
 
 export default function Success() {
   const navigate = useNavigate();
 
+  const {  setVisible } = useUIContext();
   const handleBackToHome = () => {
+    setVisible(false);
     navigate("/");
     setTimeout(() => {
       const element = document.getElementById("intro");

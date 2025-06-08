@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 :root {
-    --breakpoint-mob: 1201px;
+  --breakpoint-mob: 1201px;
 }
