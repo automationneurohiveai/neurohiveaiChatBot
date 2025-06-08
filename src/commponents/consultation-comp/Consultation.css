@@ -7,16 +7,20 @@
 
 .consultation-container .section {
   display: flex;
-
   justify-content: space-between;
   align-items: start;
-  padding-block: 100px;
+  height: 900px;
   gap: 64px;
   overflow-x: hidden;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
+@media (min-height: 1600px) {
+  .consultation-container .section {
+    height: 100vh;
+  }
+}
 .consult-card {
   height: 160px;
   padding: 20px;
