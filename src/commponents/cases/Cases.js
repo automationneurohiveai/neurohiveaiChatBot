@@ -69,7 +69,9 @@ export default function Cases() {
             </svg>
             Cases
           </span>
-          <h2 className="text-linear title-2">Real Automation Use Cases</h2>
+          <h2 className="text-linear title-2 w-full sm:w-auto max-w-[75%] sm:max-w-full">
+            Real Automation Use Cases
+          </h2>
         </div>
         <div className="flex items-end justify-end h-full mob:hidden">
           <div className="flex items-center gap-[50px]">

@@ -220,29 +220,21 @@
 /* RESPONSIVE FLEXBOX FOR CARDS   */
 /* =============================== */
 
-/* Default: Two items per row (2x2 grid) for all screen sizes - reduced width */
+/* Default: Single column for mobile phones */
 .consultation-card-item {
-  flex: 1 1 calc(45% - 7.5px);
-  max-width: calc(45% - 7.5px);
+  flex: 1 1 100%;
+  max-width: 100%;
 }
 
-/* Very small screens (max-width: 480px) - still 2 per row but smaller */
-@media screen and (max-width: 480px) {
+/* Mobile phones (max-width: 767px) - single column */
+@media screen and (max-width: 767px) {
   .consultation-card-item {
-    flex: 1 1 calc(46% - 7.5px);
-    max-width: calc(46% - 7.5px);
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 
-/* Mobile screens (481px to 767px) */
-@media screen and (min-width: 481px) and (max-width: 767px) {
-  .consultation-card-item {
-    flex: 1 1 calc(45% - 7.5px);
-    max-width: calc(45% - 7.5px);
-  }
-}
-
-/* Larger screens (768px and up) */
+/* Tablets and larger screens (768px and up) - 2x2 grid */
 @media screen and (min-width: 768px) {
   .consultation-card-item {
     flex: 1 1 calc(47% - 10px);

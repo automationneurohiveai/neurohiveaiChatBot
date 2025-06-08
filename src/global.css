@@ -633,6 +633,7 @@ button {
   .title-1 {
     font-size: 48px;
     line-height: 110%;
+    text-align: center;
   }
 
   .title-2 {
@@ -691,6 +692,7 @@ button {
   .title-1 {
     font-size: 40px;
     line-height: 110%;
+    text-align: center;
   }
 
   .title-2 {
