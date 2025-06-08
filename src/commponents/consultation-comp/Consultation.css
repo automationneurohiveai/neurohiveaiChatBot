@@ -13,13 +13,12 @@
 .consultation-container .section {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  min-height: 950px; /* замінили height на min-height */
-  padding: 64px 0;
+  align-items: start;
+  height: 900px;
   gap: 64px;
-  box-sizing: border-box;
-  margin: 0 auto;
   overflow-x: hidden;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* дуже високі екрани */
@@ -102,117 +101,103 @@
   }
 }
 
-/* Tablet: до 992px */
+/* Mobile First - Vertical Layout */
 @media screen and (max-width: 991px) {
-  .consultation-container {
-    padding-top: 160px;
-    padding-bottom: 100px;
-  }
   .consultation-container .section {
     flex-direction: column;
-    gap: 60px;
+    gap: 40px;
     align-items: center;
+    height: auto;
+    padding: 0 20px;
   }
+
+  .consultation-container .section > div:first-child {
+    order: 1;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .consultation-container .section > div:first-child h2 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .consultation-container .section > div:first-child p {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
   .consultation-form {
+    order: 2;
     width: 100%;
     max-width: 500px;
-    padding: 35px;
+    margin: 0 auto;
+    padding: 35px 25px 30px 25px;
   }
-  .consult-card {
-    height: 120px;
-    padding: 14px;
-  }
-  .consult-card p {
-    max-width: 150px;
-  }
-  .consult-card .consultation-img {
-    width: 60px;
-    height: 60px;
-  }
-}
 
-/* Mobile Large: до 768px */
-@media screen and (max-width: 767px) {
-  .consultation-container {
-    padding-top: 140px;
-    padding-bottom: 80px;
-  }
-  .consultation-container .section {
-    flex-direction: column-reverse;
-    gap: 40px;
-  }
-  .consultation-form {
-    padding: 30px 24px;
-    border-radius: 16px;
+  /* Cards section - move to bottom */
+  .consultation-cards-container {
+    order: 3;
+    margin-top: 40px !important;
     width: 100%;
-  }
-  .consult-card {
-    height: 110px;
-    padding: 12px;
-    border-radius: 8px;
-  }
-  .consult-card p {
     max-width: 100%;
-    font-size: 13px;
   }
+
+  .consultation-card-item {
+    width: calc(50% - 6px);
+    max-width: none;
+    flex: 0 0 calc(50% - 6px);
+  }
+
+  .consult-card {
+    height: 140px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
   .consult-card h3 {
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.2;
   }
+
+  .consult-card p {
+    font-size: 12px;
+    line-height: 1.3;
+    max-width: 100%;
+  }
+
   .consult-card .consultation-img {
     width: 50px;
     height: 50px;
     right: 8px;
     bottom: 8px;
   }
-
-  /* одноколоночний грід для карток */
-  .consultation-container .section > div:first-child .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 20px;
-  }
 }
 
-/* Mobile Small: до 576px */
-@media screen and (max-width: 575px) {
-  .consultation-container {
-    padding-top: 120px;
-    padding-bottom: 60px;
-    flex: 1 1 100%;
-    margin: 5px 0;
-  }
+/* Desktop - Side by Side Layout */
+@media screen and (min-width: 992px) {
   .consultation-container .section {
-    flex-direction: column-reverse;
-    gap: 32px;
+    flex-direction: row;
+    gap: 140px;
   }
+
+  .consultation-container .section > div:first-child {
+    order: unset;
+    max-width: 468px;
+    text-align: left;
+  }
+
   .consultation-form {
-    padding: 24px 20px;
-    border-radius: 12px;
+    order: unset;
+    width: auto;
+    max-width: 450px;
   }
-  .consultation-form h3 {
-    font-size: 20px;
-  }
-  .consultation-form p {
-    font-size: 12px;
-    max-width: 280px;
-  }
-  .consult-card {
-    height: 100px;
-    padding: 10px;
-  }
-  .consult-card p {
-    font-size: 12px;
-    line-height: 1.2;
-  }
-  .consult-card h3 {
-    font-size: 14px;
-  }
-  .consult-card .consultation-img {
-    width: 45px;
-    height: 45px;
-    right: 6px;
-    bottom: 6px;
+
+  .consultation-cards-container {
+    order: unset;
+    margin-top: 30px !important;
   }
 }
 
@@ -239,5 +224,93 @@
   .consultation-card-item {
     flex: 1 1 calc(47% - 10px);
     max-width: calc(47% - 10px);
+  }
+}
+
+/* Consultation Cards Responsive */
+.consultation-cards-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.consultation-card-item {
+  width: calc(50% - 10px);
+  max-width: 220px;
+  flex: 0 0 calc(50% - 10px);
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+  .consultation-cards-container {
+    justify-content: space-between;
+    max-width: 100%;
+    padding: 0 5px;
+    flex-direction: row-reversecha;
+    gap: 12px !important;
+  }
+
+  .consultation-card-item {
+    width: calc(50% - 6px);
+    max-width: none;
+    flex: 0 0 calc(50% - 6px);
+  }
+
+  .consult-card {
+    height: 140px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .consult-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .consult-card p {
+    font-size: 12px;
+    line-height: 1.3;
+    max-width: 100%;
+  }
+
+  .consult-card .consultation-img {
+    width: 50px;
+    height: 50px;
+    right: 8px;
+    bottom: 8px;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 480px) {
+  .consultation-cards-container {
+    padding: 0 2px;
+    gap: 10px !important;
+  }
+
+  .consultation-card-item {
+    width: calc(50% - 5px);
+    flex: 0 0 calc(50% - 5px);
+  }
+
+  .consult-card {
+    height: 120px;
+    padding: 12px;
+  }
+
+  .consult-card h3 {
+    font-size: 13px;
+  }
+
+  .consult-card p {
+    font-size: 11px;
+  }
+
+  .consult-card .consultation-img {
+    width: 45px;
+    height: 45px;
+    right: 6px;
+    bottom: 6px;
   }
 }

@@ -4,7 +4,7 @@ import { useUIContext } from "../../Context/UIContext";
 export default function Success() {
   const navigate = useNavigate();
 
-  const {  setVisible } = useUIContext();
+  const { setVisible } = useUIContext();
   const handleBackToHome = () => {
     setVisible(false);
     navigate("/");

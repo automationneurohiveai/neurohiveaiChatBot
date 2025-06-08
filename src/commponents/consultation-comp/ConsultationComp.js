@@ -121,19 +121,23 @@ export default function ConsultationComp() {
 
   return (
     <>
-      <div className="section flex gap-[140px]">
-        <div className="max-w-[468px]">
-          <h2 className="title-2 text-linear">Get Your Free AI Consultation</h2>
-          <p className="mt-[10px] text-[#818181]">
+      <div className="section flex gap-[140px] lg:gap-[100px] md:gap-[60px] lg:flex-row flex-col lg:items-start items-center">
+        {/* Content Section - Title and Cards - First on Desktop, Second on Mobile */}
+        <div className="max-w-[468px] w-full lg:w-auto lg:max-w-[468px] md:max-w-[600px] sm:max-w-[90%] order-2 lg:order-1">
+          <h2 className="title-2 text-linear text-center lg:text-left">
+            Get Your Free AI Consultation
+          </h2>
+          <p className="mt-[10px] text-[#818181] text-center lg:text-left">
             Discover how AI can boost your business performance. Let's explore
             together how NeuroHive AI can streamline your operations.
           </p>
-          {/* Responsive Cards Flexbox - Mobile Adaptive */}
-          <div className="flex flex-wrap justify-center gap-[15px] md:gap-[20px] mt-[30px] consultation-cards-container">
+
+          {/* Responsive Cards Container */}
+          <div className="flex flex-wrap justify-center lg:justify-start gap-[15px] md:gap-[20px] lg:gap-[20px] mt-[30px] md:mt-[40px] consultation-cards-container">
             {consultationCards.map((card) => (
               <div
                 key={card.id}
-                className="consult-card saas-hover-effect consultation-card-item"
+                className="consult-card saas-hover-effect consultation-card-item w-[calc(50%-8px)] sm:w-[calc(50%-10px)] lg:w-[calc(50%-10px)] max-w-[200px] lg:max-w-[220px]"
               >
                 <h3 className="title-3">{card.title}</h3>
                 <p className="main-txt text-[#818181]">{card.description}</p>
@@ -146,11 +150,17 @@ export default function ConsultationComp() {
             ))}
           </div>
         </div>
-        <form className="consultation-form" onSubmit={handleSubmit}>
+
+        {/* Form Section - Second on Desktop, First on Mobile */}
+        <form
+          className="consultation-form w-full max-w-[500px] lg:max-w-[450px] xl:max-w-[480px] lg:w-auto order-1 lg:order-2"
+          onSubmit={handleSubmit}
+        >
           <h3 className="subtitle-cover">Contact form</h3>
-          <p className="txt-caption-3 max-w-[233px] text-[#818181] text-center">
+          <p className="txt-caption-3 max-w-[233px] text-[#818181] text-center mx-auto lg:mx-0">
             Fill out the form below and we'll get back to you within 24 hours.
           </p>
+
           <div className="flex flex-col gap-[10px] mt-[20px] w-full">
             <div>
               <input
@@ -225,9 +235,9 @@ export default function ConsultationComp() {
             <p className="text-red-500 text-sm mt-1">{errors.terms}</p>
           )}
 
-          <div className="flex mt-[30px] items-center gap-[10px]">
+          <div className="flex mt-[30px] items-center gap-[10px] justify-center lg:justify-start">
             <img src={`${process.env.PUBLIC_URL}/image/lock.svg`} />
-            <p className="text-[#818181] text-[12px]">
+            <p className="text-[#818181] text-[12px] text-center lg:text-left">
               All your information is encrypted and fully protected. Check our
               <a href="" className="text-black">
                 {" "}
