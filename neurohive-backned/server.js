@@ -32,6 +32,24 @@ app.post("/api/message", async (req, res) => {
   }
 });
 
+app.post("/api/email-footer", async (req, res) => {
+  const userData = req.body;
+  try {
+    const response = await fetch(
+      "https://n8n.ki-tech.app/webhook-test/fab9256c-7cb5-44d7-beb3-7f16438cef1d",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      }
+    );
+    const result = await response.json();
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("Error sending to n8n:", err);
+  }
+});
+
 app.post("/api/urlai", async (req, res) => {
   const userData = req.body;
 

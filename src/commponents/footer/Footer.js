@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
 import "./Footer.css";
+import { useForm } from "react-hook-form";
+import { usePostEmailFooter } from "../../server/usePostEmailFooter";
 
 export default function Footer() {
+
+
   return (
     <footer className="footer pt-[50px] pb-[25px] bg-black">
       <div className="section flex flex-col gap-[30px]">
