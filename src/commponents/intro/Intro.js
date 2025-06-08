@@ -71,7 +71,7 @@ export default function Intro() {
         </h2>
 
         {/* Action Buttons */}
-        <div className="flex items-center mt-[35px] gap-[20px]">
+        <div className="flex items-center mt-[35px] gap-[20px] justify-center">
           <button
             className="black-btn py-[16px] px-[48px]"
             onClick={() => navigate("/consultation")}
@@ -83,7 +83,7 @@ export default function Intro() {
           </button>
         </div>
 
-        <span className="text-[#818181] txt-2 mt-[15px]">
+        <span className="text-[#818181] txt-2 mt-[15px] flex justify-center">
           No setup required. Get started in 60 seconds.
         </span>
       </div>

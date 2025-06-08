@@ -17,24 +17,24 @@ export default function IntroLoading({ completedTasks, tasks }) {
         y: 0,
       }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="w-full flex flex-col items-center justify-center min-h-[440px]"
+      className="intro-loading"
     >
-      {/* Gradient Ball */}
-      <div className="relative mb-[10px]">
+      {/* Avatar */}
+      <div className="loading-avatar">
         <img
           src={`${process.env.PUBLIC_URL}/image/intro/intro-gif.gif`}
-          alt="ball"
-          className="object-cover w-[115px]"
+          alt="AI Agent"
+          className="loading-avatar-image"
         />
         <img
           src={`${process.env.PUBLIC_URL}/image/intro/intro-gif-shadow.svg`}
-          className="absolute bottom-[-40px]"
+          className="loading-avatar-shadow"
         />
       </div>
 
       {/* Main Title */}
       <motion.h2
-        className="text-[36px] font-bold text-gray-800 text-center leading-tight mb-[40px]"
+        className="loading-title"
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
@@ -43,11 +43,11 @@ export default function IntroLoading({ completedTasks, tasks }) {
       </motion.h2>
 
       {/* Task List */}
-      <div className="task-list w-full max-w-[450px]">
+      <div className="task-list">
         {tasks.map((task, index) => (
           <motion.div
             key={index}
-            className="flex items-center mb-[24.7px] text-[18px]"
+            className="task-item"
             initial={{ x: -30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{
@@ -56,10 +56,8 @@ export default function IntroLoading({ completedTasks, tasks }) {
             }}
           >
             <motion.div
-              className={`w-[24px] h-[24px] rounded-full mr-[16px] flex items-center justify-center flex-shrink-0 ${
-                index < completedTasks
-                  ? "bg-gradient-to-br from-[#FF6B35] to-[#FFB366]"
-                  : "bg-gray-200"
+              className={`task-icon ${
+                index < completedTasks ? "completed" : "pending"
               }`}
               animate={
                 index < completedTasks
@@ -95,10 +93,8 @@ export default function IntroLoading({ completedTasks, tasks }) {
               )}
             </motion.div>
             <span
-              className={`${
-                index < completedTasks
-                  ? "text-gray-800 font-medium"
-                  : "text-gray-500"
+              className={`task-text ${
+                index < completedTasks ? "completed" : "pending"
               }`}
             >
               {task}

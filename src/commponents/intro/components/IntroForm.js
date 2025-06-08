@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
+import "./IntroForm.css";
 
 const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
   const { handleSubmit, control } = useForm({
-    defaultValues: { url: "" }
+    defaultValues: { url: "" },
   });
 
   const handleFormSubmit = (data) => {
@@ -31,13 +32,11 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
       <div className="intro-text">
         <h2 className="intro-title">Meet your AI Agent</h2>
         <p className="intro-description">
-          Your AI Agent is more than a tool — it's a team member. It
-          learns your processes, talks to clients, and executes tasks — so
-          you can focus on what really matters.
+          Your AI Agent is more than a tool — it's a team member. It learns your
+          processes, talks to clients, and executes tasks — so you can focus on
+          what really matters.
         </p>
-        <p className="intro-instruction">
-          Just paste your link below
-        </p>
+        <p className="intro-instruction">Just paste your link below</p>
       </div>
 
       {/* Form */}
@@ -49,14 +48,16 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
             rules={{
               required: "URL is required",
               validate: (value) => {
-                const isValid = value.trim() !== "" && (() => {
-                  try {
-                    new URL(value);
-                    return true;
-                  } catch (_) {
-                    return false;
-                  }
-                })();
+                const isValid =
+                  value.trim() !== "" &&
+                  (() => {
+                    try {
+                      new URL(value);
+                      return true;
+                    } catch (_) {
+                      return false;
+                    }
+                  })();
                 onUrlChange(value);
                 return isValid || "Please enter a valid URL";
               },
@@ -74,7 +75,7 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
               />
             )}
           />
-          
+
           <motion.button
             type="submit"
             className="intro-submit-button"
@@ -85,9 +86,7 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
               scale: isUrlValid ? 1 : 0.98,
             }}
             whileHover={
-              isUrlValid
-                ? { scale: 1.02, backgroundColor: "#1F2937" }
-                : {}
+              isUrlValid ? { scale: 1.02, backgroundColor: "#1F2937" } : {}
             }
             whileTap={isUrlValid ? { scale: 0.98 } : {}}
             transition={{
@@ -114,4 +113,4 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
   );
 };
 
-export default IntroForm; 
+export default IntroForm;
