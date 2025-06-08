@@ -1,8 +1,10 @@
 import "./Consultation.css";
 import { useState } from "react";
 import Success from "../success-modal/Success";
+import { useNavigate } from "react-router-dom";
 
 export default function ConsultationComp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -82,22 +84,8 @@ export default function ConsultationComp() {
     if (validateForm()) {
       // Form submission logic will be here
       console.log("Form is valid:", formData);
-      setShowSuccessModal(true);
+      navigate("/consultation/success");
     }
-  };
-
-  // Close success modal
-  const closeSuccessModal = () => {
-    setShowSuccessModal(false);
-    // Reset form after successful submission
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      website: "",
-      phone: "",
-      agreedToTerms: false,
-    });
   };
 
   return (
@@ -253,8 +241,6 @@ export default function ConsultationComp() {
           </button>
         </form>
       </div>
-
-      {showSuccessModal && <Success onClose={closeSuccessModal} />}
     </>
   );
 }

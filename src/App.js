@@ -1,25 +1,24 @@
-import './App.css';
-import './global.css';
-import Header from './commponents/header/Header';
-import Footer from './commponents/footer/Footer';
-import Home from './pages/Home';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import Consultation from './pages/Consultation';
-import Success from './commponents/success-modal/Success';
+import "./App.css";
+import "./global.css";
+import Header from "./commponents/header/Header";
+import Footer from "./commponents/footer/Footer";
+import Home from "./pages/Home";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Consultation from "./pages/Consultation";
+import Success from "./commponents/success-modal/Success";
 
 function App() {
-
   const headerRef = useRef(null);
   const introRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    // Применяем GSAP анимацию только на главной странице
-    if (location.pathname === '/') {
-      gsap.fromTo(
-        [headerRef.current, introRef.current],
+    const target = [headerRef.current, introRef.current].filter(Boolean);
+    if (location.pathname === "/") {
+      gsap?.fromTo(
+        target,
         { y: 60, opacity: 0 },
         {
           y: 0,
@@ -30,8 +29,7 @@ function App() {
         }
       );
     } else {
-      // На других страницах сразу показываем контент без анимации
-      gsap.set([headerRef.current, introRef.current], { y: 0, opacity: 1 });
+      gsap.set(target, { y: 0, opacity: 1 });
     }
   }, [location.pathname]);
 
@@ -48,15 +46,21 @@ function App() {
 
   return (
     <div className="App">
-      <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
-        <Header />
-      </div>
-        <div ref={introRef} style={{ opacity: 0 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/consultation" element={<Consultation />} />
-          </Routes>
+      {location.pathname !== "/consultation/success" && (
+        <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
+          <Header />
         </div>
+      )}
+
+      <div ref={introRef} style={{ opacity: 0 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="consultation">
+            <Route index element={<Consultation />} />
+            <Route path="success" element={<Success />} />
+          </Route>
+        </Routes>
+      </div>
       <Footer />
       {/* <Success /> */}
     </div>

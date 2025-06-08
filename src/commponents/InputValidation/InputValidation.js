@@ -1,12 +1,13 @@
 import React from "react";
 import { useController } from "react-hook-form";
 
-const InputChatBot = ({
+const InputValidation = ({
   name = "message",
   control,
   rules = {},
   placeholder = "Ask me anything...",
   disabled = false,
+
   ...props
 }) => {
   const {
@@ -36,7 +37,7 @@ const InputChatBot = ({
         {...props}
       />
 
-
+      {/* Error message */}
       {error && (
         <div className="absolute top-full left-0 mt-1 text-sm text-red-600 pt-10">
           {error.message}
@@ -46,4 +47,4 @@ const InputChatBot = ({
   );
 };
 
-export default InputChatBot;
+export default InputValidation;
