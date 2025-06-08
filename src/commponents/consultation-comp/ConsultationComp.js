@@ -15,6 +15,38 @@ export default function ConsultationComp() {
 
   const [errors, setErrors] = useState({});
 
+  // Cards data array for map method
+  const consultationCards = [
+    {
+      id: 1,
+      title: "+40% Productivity",
+      description: "Boost productivity by 40% with AI automation",
+      icon: "icon-graph.svg",
+      alt: "Consultation Icon 1",
+    },
+    {
+      id: 2,
+      title: "Easy Automation",
+      description: "Automate routine processes easily",
+      icon: "icon-Mashine.svg",
+      alt: "Consultation Icon 2",
+    },
+    {
+      id: 3,
+      title: "Personalized Solutions",
+      description: "Personalized AI solutions for your business",
+      icon: "icon-ai.svg",
+      alt: "Consultation Icon 3",
+    },
+    {
+      id: 4,
+      title: "GDPR Secure",
+      description: "GDPR compliant and data secure",
+      icon: "icon-lock.svg",
+      alt: "Consultation Icon 4",
+    },
+  ];
+
   const { visible, setVisible } = useUIContext();
   // Email validation
   const validateEmail = (email) => {
@@ -96,51 +128,22 @@ export default function ConsultationComp() {
             Discover how AI can boost your business performance. Let's explore
             together how NeuroHive AI can streamline your operations.
           </p>
-          <div className="grid grid-cols-2 gap-[20px] mt-[30px]">
-            <div className="consult-card saas-hover-effect">
-              <h3 className="title-3">+40% Productivity</h3>
-              <p className="main-txt text-[#818181]">
-                Boost productivity by 40% with AI automation
-              </p>
-              <img
-                src={`${process.env.PUBLIC_URL}/image/consultation/icon-graph.svg`}
-                alt="Consultation Icon 1"
-                className="consultation-img"
-              />
-            </div>
-            <div className="consult-card saas-hover-effect">
-              <h3 className="title-3">Easy Automation</h3>
-              <p className="main-txt text-[#818181]">
-                Automate routine processes easily
-              </p>
-              <img
-                src={`${process.env.PUBLIC_URL}/image/consultation/icon-Mashine.svg`}
-                alt="Consultation Icon 2"
-                className="consultation-img"
-              />
-            </div>
-            <div className="consult-card saas-hover-effect">
-              <h3 className="title-3">Personalized Solutions</h3>
-              <p className="main-txt text-[#818181]">
-                Personalized AI solutions for your business
-              </p>
-              <img
-                src={`${process.env.PUBLIC_URL}/image/consultation/icon-ai.svg`}
-                alt="Consultation Icon 3"
-                className="consultation-img"
-              />
-            </div>
-            <div className="consult-card saas-hover-effect">
-              <h3 className="title-3">GDPR Secure</h3>
-              <p className="main-txt text-[#818181]">
-                GDPR compliant and data secure
-              </p>
-              <img
-                src={`${process.env.PUBLIC_URL}/image/consultation/icon-lock.svg`}
-                alt="Consultation Icon 4"
-                className="consultation-img"
-              />
-            </div>
+          {/* Responsive Cards Flexbox - Mobile Adaptive */}
+          <div className="flex flex-wrap justify-center gap-[15px] md:gap-[20px] mt-[30px] consultation-cards-container">
+            {consultationCards.map((card) => (
+              <div
+                key={card.id}
+                className="consult-card saas-hover-effect consultation-card-item"
+              >
+                <h3 className="title-3">{card.title}</h3>
+                <p className="main-txt text-[#818181]">{card.description}</p>
+                <img
+                  src={`${process.env.PUBLIC_URL}/image/consultation/${card.icon}`}
+                  alt={card.alt}
+                  className="consultation-img"
+                />
+              </div>
+            ))}
           </div>
         </div>
         <form className="consultation-form" onSubmit={handleSubmit}>
