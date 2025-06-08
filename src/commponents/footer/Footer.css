@@ -1,3 +1,8 @@
+.footer {
+  position: relative;
+  z-index: 9999999999999;
+}
+
 .footer li {
-    color: #fff;
+  color: #fff;
 }

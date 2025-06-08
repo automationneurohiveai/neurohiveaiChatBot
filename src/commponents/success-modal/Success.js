@@ -17,7 +17,7 @@ export default function Success() {
   };
 
   return (
-    <div className="modal-cont">
+    <div className="modal-cont w-full h-full">
       <div className="modal-content">
         <div className="relative mb-[10px]">
           <img

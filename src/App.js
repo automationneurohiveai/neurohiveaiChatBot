@@ -49,6 +49,7 @@ function App() {
 
   return (
     <div className="App">
+      <div></div>
       {!visible && (
         <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
           <Header />
@@ -68,6 +69,7 @@ function App() {
         <Route path="consultation" element={<Consultation />} />
       </Routes>
 
+      {visible && <Success />}
       <Footer />
     </div>
   );

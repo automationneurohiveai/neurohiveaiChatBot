@@ -8,8 +8,9 @@
 .consultation-container .section {
   display: flex;
   justify-content: space-between;
-  align-items: start;
-  height: 900px;
+  align-items: flex-start;
+  min-height: 950px;
+  padding: 64px 0;
   gap: 64px;
   overflow-x: hidden;
   margin: 0 auto;

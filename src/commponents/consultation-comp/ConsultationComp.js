@@ -240,7 +240,6 @@ export default function ConsultationComp() {
           </button>
         </form>
       </div>
-      {visible && <Success />}
 
       {/* Success Modal */}
     </>
