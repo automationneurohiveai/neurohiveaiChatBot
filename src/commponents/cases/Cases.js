@@ -119,7 +119,7 @@ export default function Cases() {
                 />
               </div>
               <div className="p-[30px] flex flex-col justify-between flex-grow">
-                <div className="flex flex-col">
+                <div className="flex flex-col  h-auto">
                   <h3 className="subtitle-1">{item.title}</h3>
                   <ul className="flex gap-[15px] mt-[5px]">
                     {item.stats.map((stat, i) => (

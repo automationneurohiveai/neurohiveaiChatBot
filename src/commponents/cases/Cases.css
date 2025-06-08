@@ -1,10 +1,10 @@
 .cases-swiper-slide {
-    display: flex;
-    height: calc(100% - 20px);
+  display: flex;
+  /* height: calc(100% - 20px); */
+  height: auto;
 }
 
 .case-slide .slide-image img {
-
-    margin-left: 10px;
-    margin-top: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
