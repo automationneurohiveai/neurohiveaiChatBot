@@ -8,6 +8,7 @@
 .consultation-container .section {
   display: flex;
   justify-content: space-between;
+
   align-items: flex-start;
   min-height: 950px;
   padding: 64px 0;
@@ -133,6 +134,7 @@
 
   .consultation-container .section {
     gap: 40px;
+    flex-direction: column-reverse;
   }
 
   .consultation-form {
@@ -179,6 +181,7 @@
 
   .consultation-container .section {
     gap: 32px;
+    flex-direction: column-reverse;
   }
 
   .consultation-form {

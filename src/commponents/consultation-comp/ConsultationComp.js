@@ -89,7 +89,7 @@ export default function ConsultationComp() {
 
   return (
     <>
-      <div className="section flex gap-[140px] ">
+      <div className="section flex gap-[140px]">
         <div className="max-w-[468px]">
           <h2 className="title-2 text-linear">Get Your Free AI Consultation</h2>
           <p className="mt-[10px] text-[#818181]">
