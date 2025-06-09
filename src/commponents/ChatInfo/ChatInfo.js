@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePostMessage } from "../../server/usePostMessage";
 import { useForm } from "react-hook-form";
 import InputValidation from "../InputValidation/InputValidation";
+import ReactMarkdown from "react-markdown";
 
 export default function ChatInfo() {
   const [userMessage, setUserMessage] = useState("");
@@ -145,7 +146,9 @@ export default function ChatInfo() {
               transition={{ delay: index === 0 ? 0.8 : 0, duration: 0.5 }}
             >
               <div className="message-bubble">
-                <p className="message-text">{message.text}</p>
+                <div className="message-content">
+                  <ReactMarkdown>{message.text}</ReactMarkdown>
+                </div>
               </div>
             </motion.div>
           ))}
