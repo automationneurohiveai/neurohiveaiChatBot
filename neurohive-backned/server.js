@@ -50,8 +50,14 @@ app.post("/api/email-footer", async (req, res) => {
   }
 });
 
+const resultsMap = {};
+
 app.post("/api/urlai", async (req, res) => {
-  const userData = req.body;
+  const { url, sessionId } = req.body;
+
+  if (!sessionId) {
+    return res.status(400).json({ error: "Missing sessionId" });
+  }
 
   try {
     const response = await fetch(
@@ -59,16 +65,25 @@ app.post("/api/urlai", async (req, res) => {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({ url, sessionId }),
       }
     );
 
-    const result = await response.json();
-    console.log("200 OK – Відповідь надіслана", result);
-    res.status(200).json(result);
+    const text = await response.json();
+
+    try {
+      const result = JSON.parse(text);
+      resultsMap[sessionId] = result;
+      console.log("✅ Збережено результат для", sessionId);
+    } catch (err) {
+      console.error("❌ n8n надіслав не JSON:", text);
+    }
+
+    res.status(202).json({ sessionId });
   } catch (err) {
-    console.error("❌ 500 Internal Server Error – Помилка:", err);
-    res.status(500).json({ error: "Failed to send data to n8n" });
+    console.error("❌ n8n error:", err);
+    resultsMap[sessionId] = { error: "n8n failed" };
+    res.status(500).json({ error: "n8n failed" });
   }
 });
 
