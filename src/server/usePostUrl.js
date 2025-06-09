@@ -1,34 +1,38 @@
 import { useState } from "react";
+import { BASE_URL } from "../config/config";
 
 export const usePostUrl = () => {
-  const [dataUrl, setDataUrl] = useState(null);
-  const [loadingUrl, setLoadingUrl] = useState(false);
-  async function submitDataUrl(url) {
-    setLoadingUrl(true);
-    const res = await fetch("http://localhost:4000/init-session", {
+  const [url, setUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  async function submitDataValidationUrl(urlData) {
+    setLoading(true);
+    const res = await fetch(`${BASE_URL}/init-session`, {
       method: "GET",
       credentials: "include",
     });
 
     const { sessionId } = await res.json();
+    console.log("sessionId Message", sessionId);
 
-    console.log("sessionId", sessionId);    
-
-    const response = await fetch("http://localhost:4000/api/urlai", {
+    const response = await fetch(`${BASE_URL}/api/urlai`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        session_id: sessionId,
-        link: url,
-      }),
+      body: JSON.stringify({ url: urlData, sessionId: sessionId }),
     });
 
     const result = await response.json();
-    console.log("📥 Response from n8n:", result);
-    setDataUrl(result);
-    setLoadingUrl(false);
+    console.log("Response from n8n:", result);
+    setUrl(result);
+    setLoading(false);
   }
 
-  return { dataUrl, submitDataUrl, loadingUrl };
+  return {
+    submitDataValidationUrl,
+    loading,
+    loadingUrl: loading, // Alias for compatibility
+    dataUrl: url, // Alias for compatibility
+    url,
+  };
 };

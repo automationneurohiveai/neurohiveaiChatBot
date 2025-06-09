@@ -1,31 +1,31 @@
 .strategy {
-    background: url(../../../public/image/strategy/strategyBg.png);
-    background-size: cover;
-    background-position: center;
-    height: 580px;
-    display: flex;
-    justify-content: center;
-    padding-top: 100px;
+  background: url(../../../public/image/strategy/strategyBg.png);
+  background-size: cover;
+  background-position: center;
+  height: 580px;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
 }
 
 .strategy ul {
-    list-style-type: disc;
+  list-style-type: disc;
 }
 
 .strategy input {
-    background: none;
-    border: none;
-    outline: none;
-    color: #fff;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
 }
 
 @media screen and (max-width: 1200px) {
-    .strategy ul {
-        flex-direction: column;
-        gap: 2px;
-    }
-    .strategy input {
-        background: #1B1B1B;
-        border-radius: 10px;
-    }
+  .strategy ul {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .strategy input {
+    background: #1b1b1b;
+    border-radius: 10px;
+  }
 }

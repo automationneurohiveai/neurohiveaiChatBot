@@ -32,6 +32,13 @@ export default function Strategy() {
             control={control}
             placeholder="Type your E-mail here..."
             className="title-3 mob:bg-[#1B1B1B] mob:px-[30px] mob:py-[15px]"
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address",
+              },
+            }}
           />
           <button
             className="orange-btn"

@@ -183,7 +183,7 @@ export default function ChatInfo() {
                   control={control}
                   placeholder="Ask me anything..."
                   disabled={isLoading}
-                  className="message-input"
+                  className="message-input w-[90%]"
                 />
               </div>
               <motion.button

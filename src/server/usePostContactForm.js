@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { BASE_URL } from "../config/config";
 
 export const usePostContactForm = () => {
   const [data, setData] = useState(null);
 
-  async function submitDataValidation(fullContactFormData) {
-    const res = await fetch("http://localhost:4000/init-session", {
+  async function submitDataValidationContactForm(contactFormData) {
+    const res = await fetch(`${BASE_URL}/init-session`, {
       method: "GET",
       credentials: "include",
     });
@@ -12,11 +13,11 @@ export const usePostContactForm = () => {
     const { sessionId } = await res.json();
     console.log("sessionId Message", sessionId);
 
-    const response = await fetch("http://localhost:4000/api/contact-form", {
+    const response = await fetch(`${BASE_URL}/api/contact-form`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fullContactFormData),
+      body: JSON.stringify(contactFormData),
     });
 
     const result = await response.json();
@@ -24,5 +25,5 @@ export const usePostContactForm = () => {
     setData(result);
   }
 
-  return { submitDataValidation };
+  return { submitDataValidationContactForm };
 };

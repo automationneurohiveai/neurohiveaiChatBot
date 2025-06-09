@@ -17,50 +17,48 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-[150px] mob:gap-[120px]">
       <Intro />
-      
+
       <ScrollAnimationWrapper animationType="fadeUp" delay={0}>
         <About />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="slideInLeft" delay={100}>
         <Autamatation />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="fadeUp" delay={0}>
         <Methodology />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="cardEntrance" delay={150}>
         <Cases />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="slideInRight" delay={100}>
         <Template />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="fadeUp" delay={0}>
         <Team />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="fadeIn" delay={200}>
         <Review />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="slideInLeft" delay={100}>
         <Tools />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="cardEntrance" delay={150}>
         <News />
       </ScrollAnimationWrapper>
-      
+
       <ScrollAnimationWrapper animationType="textReveal" delay={0}>
         <Question />
       </ScrollAnimationWrapper>
-      
-      <ScrollAnimationWrapper animationType="fadeUp" delay={100}>
-        <Strategy />
-      </ScrollAnimationWrapper>
+
+      <Strategy />
     </div>
   );
 }

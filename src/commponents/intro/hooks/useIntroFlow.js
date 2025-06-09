@@ -3,38 +3,39 @@ import { usePostUrl } from "../../../server/usePostUrl";
 
 // Определяем возможные состояния
 const INTRO_STATES = {
-  IDLE: 'idle',
-  ANALYZING: 'analyzing', 
-  CHAT_READY: 'chat_ready'
+  IDLE: "idle",
+  ANALYZING: "analyzing",
+  CHAT_READY: "chat_ready",
 };
 
 // Reducer для управления состояниями
 const introReducer = (state, action) => {
   switch (action.type) {
-    case 'START_ANALYSIS':
+    case "START_ANALYSIS":
       return {
         ...state,
         currentState: INTRO_STATES.ANALYZING,
-        completedTasks: 0
+        completedTasks: 0,
       };
-    case 'UPDATE_PROGRESS':
+    case "UPDATE_PROGRESS":
       return {
         ...state,
-        completedTasks: typeof action.payload === 'function' 
-          ? action.payload(state.completedTasks)
-          : action.payload
+        completedTasks:
+          typeof action.payload === "function"
+            ? action.payload(state.completedTasks)
+            : action.payload,
       };
-    case 'ANALYSIS_COMPLETE':
+    case "ANALYSIS_COMPLETE":
       return {
         ...state,
         currentState: INTRO_STATES.CHAT_READY,
-        completedTasks: 5
+        completedTasks: 5,
       };
-    case 'RESET':
+    case "RESET":
       return {
         ...state,
         currentState: INTRO_STATES.IDLE,
-        completedTasks: 0
+        completedTasks: 0,
       };
     default:
       return state;
@@ -43,17 +44,17 @@ const introReducer = (state, action) => {
 
 const initialState = {
   currentState: INTRO_STATES.IDLE,
-  completedTasks: 0
+  completedTasks: 0,
 };
 
 export const useIntroFlow = () => {
   const [state, dispatch] = useReducer(introReducer, initialState);
   const [isUrlValid, setIsUrlValid] = useState(false);
-  const { dataUrl, submitDataUrl, loadingUrl } = usePostUrl();
+  const { dataUrl, submitDataValidationUrl, loadingUrl } = usePostUrl();
 
   const tasks = [
     "Scanning pages and structure",
-    "Detecting key call-to-actions", 
+    "Detecting key call-to-actions",
     "Understanding user journeys",
     "Learning your tone of voice",
     "Preparing to become your assistant",
@@ -72,9 +73,13 @@ export const useIntroFlow = () => {
   // Обработка отправки формы
   const handleSubmit = async (url) => {
     if (!isUrlValid) return;
-    
-    dispatch({ type: 'START_ANALYSIS' });
-    await submitDataUrl(url);
+
+    // Add timeout delay before showing loading
+    setTimeout(() => {
+      dispatch({ type: "START_ANALYSIS" });
+    }, 2000);  // 1000 * 60 * 5)  5 min delay after click
+
+    await submitDataValidationUrl(url);
   };
 
   // Валидация URL при изменении
@@ -87,9 +92,9 @@ export const useIntroFlow = () => {
   useEffect(() => {
     if (loadingUrl && state.currentState === INTRO_STATES.ANALYZING) {
       const interval = setInterval(() => {
-        dispatch({ 
-          type: 'UPDATE_PROGRESS', 
-          payload: (prev) => Math.min(prev + 1, 4)
+        dispatch({
+          type: "UPDATE_PROGRESS",
+          payload: (prev) => Math.min(prev + 1, 4),
         });
       }, 2000);
 
@@ -101,7 +106,7 @@ export const useIntroFlow = () => {
   useEffect(() => {
     if (dataUrl && state.completedTasks === 4) {
       setTimeout(() => {
-        dispatch({ type: 'ANALYSIS_COMPLETE' });
+        dispatch({ type: "ANALYSIS_COMPLETE" });
       }, 1000);
     }
   }, [dataUrl, state.completedTasks]);
@@ -114,11 +119,11 @@ export const useIntroFlow = () => {
     loadingUrl,
     tasks,
     STATES: INTRO_STATES,
-    
+
     // Методы
     handleSubmit,
     handleUrlChange,
     isValidUrl,
-    reset: () => dispatch({ type: 'RESET' })
+    reset: () => dispatch({ type: "RESET" }),
   };
-}; 
+};

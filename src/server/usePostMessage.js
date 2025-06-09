@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { BASE_URL } from "../config/config";
 
 export const usePostMessage = () => {
-  const [data, setData] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  async function submitData(messageText) {
-    const res = await fetch("http://localhost:4000/init-session", {
+  async function submitDataValidationMessage(messageData) {
+    const res = await fetch(`${BASE_URL}/init-session`, {
       method: "GET",
       credentials: "include",
     });
@@ -12,20 +13,17 @@ export const usePostMessage = () => {
     const { sessionId } = await res.json();
     console.log("sessionId Message", sessionId);
 
-    const response = await fetch("http://localhost:4000/api/message", {
+    const response = await fetch(`${BASE_URL}/api/message`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        session_id: sessionId,
-        body: messageText,
-      }),
+      body: JSON.stringify(messageData),
     });
 
     const result = await response.json();
-    console.log("📥 Response from n8n:", result);
-    setData(result);
+    console.log("Response from n8n:", result);
+    setMessage(result);
   }
 
-  return { data, submitData };
+  return { submitDataValidationMessage };
 };

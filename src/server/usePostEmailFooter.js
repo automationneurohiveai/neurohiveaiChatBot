@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { BASE_URL } from "../config/config";
 
 export const usePostEmailFooter = () => {
   const [email, setEmail] = useState(null);
 
   async function submitDataValidationEmail(emailFooterData) {
-    const res = await fetch("http://localhost:4000/init-session", {
+    const res = await fetch(`${BASE_URL}/init-session`, {
       method: "GET",
       credentials: "include",
     });
@@ -12,7 +13,7 @@ export const usePostEmailFooter = () => {
     const { sessionId } = await res.json();
     console.log("sessionId Message", sessionId);
 
-    const response = await fetch("http://localhost:4000/api/email-footer", {
+    const response = await fetch(`${BASE_URL}/api/email-footer`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
