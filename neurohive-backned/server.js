@@ -6,13 +6,36 @@ const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+// Исправленные CORS настройки
+const allowedOrigins = [
+  'https://www.neurohiveai.agency',
+  'https://neurohiveai.agency',
+  'http://localhost:3000', // для разработки
+  'http://localhost:3001'  // для разработки
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Разрешаем запросы без origin (например, мобильные приложения)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}));
+
 app.use(cookieParser());
 app.use(express.json());
 
 app.post("/api/message", async (req, res) => {
   const userData = req.body;
-
   try {
     const response = await fetch(
       "https://n8n.ki-tech.app/webhook/chat-webhook",
@@ -22,7 +45,6 @@ app.post("/api/message", async (req, res) => {
         body: JSON.stringify(userData),
       }
     );
-
     const result = await response.json();
     console.log("Response from n8n:", result.output);
     res.json(result);
@@ -50,74 +72,62 @@ app.post("/api/email-footer", async (req, res) => {
   }
 });
 
-const resultsMap = {};
-
 app.post("/api/urlai", async (req, res) => {
-  const { url, sessionId } = req.body;
-
-  if (!sessionId) {
-    return res.status(400).json({ error: "Missing sessionId" });
-  }
-
+  const userData = req.body;
   try {
     const response = await fetch(
       "https://n8n.ki-tech.app/webhook/send_to_analyze",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, sessionId }),
+        body: JSON.stringify(userData),
       }
     );
-
-    const text = await response.json();
-
-    try {
-      const result = JSON.parse(text);
-      resultsMap[sessionId] = result;
-      console.log("✅ Збережено результат для", sessionId);
-    } catch (err) {
-      console.error("❌ n8n надіслав не JSON:", text);
-    }
-
-    res.status(202).json({ sessionId });
+    const result = await response.json();
+    console.log("200 OK – Відповідь надіслана", result);
+    res.status(200).json(result);
   } catch (err) {
-    console.error("❌ n8n error:", err);
-    resultsMap[sessionId] = { error: "n8n failed" };
-    res.status(500).json({ error: "n8n failed" });
+    console.error("❌ 500 Internal Server Error – Помилка:", err);
+    res.status(500).json({ error: "Failed to send data to n8n" });
   }
 });
 
 app.post("/api/contact-form", async (req, res) => {
   const contactFormData = req.body;
-  const response = await fetch(
-    "https://n8n.ki-tech.app/webhook/fab9256c-7cb5-44d7-beb3-7f16438cef1d",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(contactFormData),
-    }
-  );
-
-  const result = await response.json();
-  console.log("200 OK – Відповідь надіслана", result);
-  res.status(200).json(result);
+  try {
+    const response = await fetch(
+      "https://n8n.ki-tech.app/webhook/fab9256c-7cb5-44d7-beb3-7f16438cef1d",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactFormData),
+      }
+    );
+    const result = await response.json();
+    console.log("200 OK – Відповідь надіслана", result);
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("Error sending to contact form:", err);
+    res.status(500).json({ error: "Failed to send contact form data" });
+  }
 });
 
 app.get("/init-session", (req, res) => {
   let sessionId = req.cookies.sessionId;
-
   if (!sessionId) {
     sessionId = uuidv4();
     res.cookie("sessionId", sessionId, {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 дней
+      secure: true,
+      sameSite: 'none' // Важно для cross-origin cookies
     });
     console.log("🆕 New session:", sessionId);
   } else {
     console.log("✅ Existing session:", sessionId);
   }
-
   res.json({ sessionId });
 });
 
-app.listen(4000, () => console.log("Server running at http://localhost:4000"));
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
