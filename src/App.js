@@ -8,6 +8,9 @@ import gsap from 'gsap';
 import { Route, Routes } from 'react-router-dom';
 import Consultation from './pages/Consultation';
 import Success from './commponents/success-modal/Success';
+import Cases from './pages/Cases';
+import Articles from './pages/Articles';
+import Faqs from './pages/Faqs';
 
 function App() {
 
@@ -38,6 +41,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/consultation" element={<Consultation />} />
+            <Route path="/cases" element={<Cases />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/faq" element={<Faqs />} />
           </Routes>
         </div>
       </main>
