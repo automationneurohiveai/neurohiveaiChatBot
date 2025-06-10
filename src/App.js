@@ -37,7 +37,7 @@ function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/init-session", {
+    fetch("https://back-655730749536.europe-west1.run.app/init-session", {
       method: "GET",
       credentials: "include",
     })
