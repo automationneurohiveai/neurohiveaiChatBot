@@ -38,7 +38,7 @@ app.post("/api/message", async (req, res) => {
   const userData = req.body;
   try {
     const response = await fetch(
-      "https://n8n.ki-tech.app/webhook/chat-webhook",
+      "https://n8n.neurohiveai.agency/webhook/chat-webhook",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -58,7 +58,7 @@ app.post("/api/email-footer", async (req, res) => {
   const userData = req.body;
   try {
     const response = await fetch(
-      "https://n8n.ki-tech.app/webhook/fab9256c-7cb5-44d7-beb3-7f16438cef1d",
+      "https://n8n.neurohiveai.agency/webhook/26082c14-eaba-4951-b4e1-76e7a08449d0",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -76,7 +76,7 @@ app.post("/api/urlai", async (req, res) => {
   const userData = req.body;
   try {
     const response = await fetch(
-      "https://n8n.ki-tech.app/webhook/send_to_analyze",
+      "https://n8n.neurohiveai.agency/webhook/send_to_analyze",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,7 +96,7 @@ app.post("/api/contact-form", async (req, res) => {
   const contactFormData = req.body;
   try {
     const response = await fetch(
-      "https://n8n.ki-tech.app/webhook/fab9256c-7cb5-44d7-beb3-7f16438cef1d",
+      "https://n8n.neurohiveai.agency/webhook/26082c14-eaba-4951-b4e1-76e7a08449d0",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -115,7 +115,7 @@ app.post("/api/contact-form", async (req, res) => {
 app.get("/api/status", async (req, res) => {
   const { sessionId } = req.query;
   try {
-    const response = await fetch(`https://n8n.ki-tech.app/webhook/get?sessionId=${sessionId}`, {
+    const response = await fetch(`https://n8n.neurohiveai.agency/webhook/get_status?sessionId=${sessionId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
