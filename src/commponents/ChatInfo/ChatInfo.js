@@ -33,7 +33,7 @@ export default function ChatInfo() {
     }
   };
 
-  const { data, submitData } = usePostMessage();
+  const { message: data, submitDataValidationMessage } = usePostMessage();
 
   const { handleSubmit, reset, control, watch } = useForm({
     defaultValues: {
@@ -56,7 +56,7 @@ export default function ChatInfo() {
       }, 100);
 
       try {
-        await submitData(message);
+        await submitDataValidationMessage({ message: message });
         reset();
       } catch (error) {
         console.error("Error sending message:", error);

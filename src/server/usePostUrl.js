@@ -20,8 +20,9 @@ export const usePostUrl = () => {
     // Функция для проверки статуса
     const checkStatus = async () => {
       try {
-        const statusResponse = await fetch("https://n8n.ki-tech.app/webhook/get", {
+        const statusResponse = await fetch(`${BASE_URL}/api/status?sessionId=${sessionId}`, {
           method: "GET",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
         });
         const statusResult = await statusResponse.json();
@@ -61,48 +62,37 @@ export const usePostUrl = () => {
       const result = await response.json();
       console.log("Response from api/urlai:", result);
 
-      // Если статус false, начинаем циклическую проверку
-      if (initialStatus.status === "false") {
-        let attempts = 0;
-        const maxAttempts = 10;
+      // После отправки данных начинаем циклическую проверку
+      let attempts = 0;
+      const maxAttempts = 10;
+      
+      const pollStatus = async () => {
+        if (attempts >= maxAttempts) {
+          console.log("Max attempts reached, stopping polling");
+          setLoading(false);
+          return;
+        }
         
-        const pollStatus = async () => {
-          if (attempts >= maxAttempts) {
-            console.log("Max attempts reached, stopping polling");
-            setLoading(false);
-            return;
-          }
-          
-          attempts++;
-          console.log(`Status check attempt ${attempts}/${maxAttempts}`);
-          
-          const statusCheck = await checkStatus();
-          
-          if (statusCheck.status === "true") {
-            console.log("Status became true, finishing");
-            setUrl(statusCheck);
-            setLoading(false);
-            return;
-          }
-          
-          if (statusCheck.status === "false") {
-            console.log("Status still false, will check again in 1 minute");
-            setTimeout(pollStatus, 60000); // Проверяем через минуту
-          } else {
-            // Если статус не false и не true, завершаем
-            console.log("Status is neither true nor false, finishing");
-            setUrl(result);
-            setLoading(false);
-          }
-        };
+        attempts++;
+        console.log(`Status check attempt ${attempts}/${maxAttempts}`);
         
-        // Начинаем первую проверку через минуту
-        setTimeout(pollStatus, 60000);
-      } else {
-        // Если статус не false, просто завершаем
-        setUrl(result);
-        setLoading(false);
-      }
+        const statusCheck = await checkStatus();
+        
+        if (statusCheck.status === "true") {
+          console.log("Status became true, finishing");
+          setUrl(statusCheck);
+          setLoading(false);
+          return;
+        }
+        
+        // Если статус не true, продолжаем проверку
+        console.log("Status still not ready, will check again in 1 minute");
+        setTimeout(pollStatus, 60000); // Проверяем через минуту
+      };
+      
+      // Начинаем первую проверку через минуту
+      console.log("Starting status polling in 1 minute");
+      setTimeout(pollStatus, 60000);
       
     } catch (err) {
       console.error("Error sending to api/urlai:", err);

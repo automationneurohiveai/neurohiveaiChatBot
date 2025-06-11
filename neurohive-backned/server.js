@@ -112,6 +112,22 @@ app.post("/api/contact-form", async (req, res) => {
   }
 });
 
+app.get("/api/status", async (req, res) => {
+  const { sessionId } = req.query;
+  try {
+    const response = await fetch(`https://n8n.ki-tech.app/webhook/get?sessionId=${sessionId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const result = await response.json();
+    console.log("Status check result for sessionId", sessionId, ":", result);
+    res.json(result);
+  } catch (err) {
+    console.error("Error checking status:", err);
+    res.status(500).json({ error: "Failed to check status", status: "error" });
+  }
+});
+
 app.get("/init-session", (req, res) => {
   let sessionId = req.cookies.sessionId;
   if (!sessionId) {

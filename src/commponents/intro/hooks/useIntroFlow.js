@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useRef } from "react";
 import { usePostUrl } from "../../../server/usePostUrl";
 
 // Определяем возможные состояния
@@ -51,6 +51,7 @@ export const useIntroFlow = () => {
   const [state, dispatch] = useReducer(introReducer, initialState);
   const [isUrlValid, setIsUrlValid] = useState(false);
   const { dataUrl, submitDataValidationUrl, loadingUrl } = usePostUrl();
+  const timeoutRef = useRef(null);
 
   const tasks = [
     "Scanning pages and structure",
@@ -75,9 +76,9 @@ export const useIntroFlow = () => {
     if (!isUrlValid) return;
 
     // Add timeout delay before showing loading
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       dispatch({ type: "START_ANALYSIS" });
-    }, 2000);  // 1000 * 60 * 5)  5 min delay after click
+    }, 2000);
 
     await submitDataValidationUrl(url);
   };
@@ -110,6 +111,20 @@ export const useIntroFlow = () => {
       }, 1000);
     }
   }, [dataUrl, state.completedTasks]);
+
+  // Эффект для мгновенного завершения, когда данные уже готовы
+  useEffect(() => {
+    if (dataUrl && !loadingUrl && state.currentState === INTRO_STATES.IDLE) {
+      // Если получили данные без загрузки (статус был "true"), сразу переходим к чату
+      console.log("Data ready immediately, completing analysis");
+      // Очищаем timeout, чтобы не запускать анализ
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      dispatch({ type: "ANALYSIS_COMPLETE" });
+    }
+  }, [dataUrl, loadingUrl, state.currentState]);
 
   return {
     // Состояния

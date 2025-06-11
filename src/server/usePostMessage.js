@@ -13,11 +13,17 @@ export const usePostMessage = () => {
     const { sessionId } = await res.json();
     console.log("sessionId Message", sessionId);
 
+    // Добавляем sessionId к данным сообщения
+    const dataWithSession = {
+      ...messageData,
+      sessionId: sessionId
+    };
+
     const response = await fetch(`${BASE_URL}/api/message`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(messageData),
+      body: JSON.stringify(dataWithSession),
     });
 
     const result = await response.json();
@@ -25,5 +31,8 @@ export const usePostMessage = () => {
     setMessage(result);
   }
 
-  return { submitDataValidationMessage };
+  return { 
+    submitDataValidationMessage,
+    message // Экспортируем message для совместимости  
+  };
 };
