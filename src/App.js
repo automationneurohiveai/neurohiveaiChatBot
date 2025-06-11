@@ -44,24 +44,21 @@ function App() {
     }
   }, [location.pathname]);
 
-  // useEffect(() => { cookies
-  //   fetch("https://back-655730749536.europe-west1.run.app/init-session", {
-  //     method: "GET",
-  //     credentials: "include",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("Session ID:", data.sessionId);
-  //     });
-  // }, []);
-
-
-  useConsentManager()
-
-
-
-
-
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://web.cmp.usercentrics.eu/ui/loader.js";
+    script.setAttribute("data-settings-id", "rS03Sgf5Y0Vut3");
+    script.async = true;
+    script.onload = () => {
+      console.log("✅ Скрипт завантажено");
+  
+      window.addEventListener("UC_UI_INITIALIZED", () => {
+        console.log("🎉 UC_UI_INITIALIZED");
+      });
+    };
+    document.head.appendChild(script);
+  }, []);
+  
   return (
     <>
       <div className="App">
@@ -144,8 +141,7 @@ function App() {
               </div>
             }
           />
-
-          
+    
         </Routes>
 
         <Footer />
