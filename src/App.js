@@ -16,6 +16,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import Terms from "./pages/Terms";
 import CompanyInfo from "./pages/CompanyInfo";
+import { useConsentManager } from "./server/useConsentManager";
 
 function App() {
   const headerRef = useRef(null);
@@ -43,16 +44,23 @@ function App() {
     }
   }, [location.pathname]);
 
-  useEffect(() => {
-    fetch("https://back-655730749536.europe-west1.run.app/init-session", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Session ID:", data.sessionId);
-      });
-  }, []);
+  // useEffect(() => { cookies
+  //   fetch("https://back-655730749536.europe-west1.run.app/init-session", {
+  //     method: "GET",
+  //     credentials: "include",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("Session ID:", data.sessionId);
+  //     });
+  // }, []);
+
+
+  useConsentManager()
+
+
+
+
 
   return (
     <>
@@ -143,7 +151,7 @@ function App() {
         <Footer />
       </div>
 
-      {/* Modal outside the main app div to prevent footer from being blurred */}
+     
       {visible && <Success />}
     </>
   );

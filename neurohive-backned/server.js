@@ -136,7 +136,7 @@ app.get("/init-session", (req, res) => {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 дней
       secure: true,
-      sameSite: 'none' // Важно для cross-origin cookies
+      sameSite: 'none' 
     });
     console.log("🆕 New session:", sessionId);
   } else {
