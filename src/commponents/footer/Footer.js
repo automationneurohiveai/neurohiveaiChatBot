@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import { usePostEmailFooter } from "../../server/usePostEmailFooter";
 
 export default function Footer() {
-
-
   return (
     <footer className="footer pt-[50px] pb-[25px] bg-black">
       <div className="section flex flex-col gap-[30px]">
@@ -43,13 +41,17 @@ export default function Footer() {
                   <NavLink>Instagram</NavLink>
                 </li>
               </ul>
-            </div>
-            <div>
               <ul className="flex flex-col gap-[15px]">
-                <li className="txt-18">Warsaw, Poland</li>
-                <li className="txt-18">+1 (415) 555-0123</li>
+                <li className="txt-18">
+                  ul. Prosta 70, 00-838 Warszawa, Polska
+                </li>
+                <li className="txt-18">+48 509 980 939</li>
+                <li className="txt-18">
+                  <a href="mailto:biuro@neurohiveai.io">biuro@neurohiveai.io</a>
+                </li>
               </ul>
             </div>
+         
           </div>
         </div>
         <div className="flex justify-between mob:flex-col-reverse items-center gap-2">
