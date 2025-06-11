@@ -43,6 +43,22 @@
 /* HEADER RESPONSIVE STYLES */
 /* ================================ */
 
+@media (min-width: 992px) and (max-width: 1950px) {
+  .header {
+    max-width: 100%;
+    padding: 0 40px;
+    gap: 70px;
+  }
+
+  .header img {
+    max-width: 120px;
+  }
+
+  .nav-desktop ul {
+    gap: 10px;
+  }
+}
+
 /* Desktop: 992px - 1199px */
 @media screen and (max-width: 1199px) {
   .header {

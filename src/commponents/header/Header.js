@@ -51,8 +51,8 @@ export default function Header() {
   };
 
   return (
-    <header className="header w-full max-w-[1200px] px-4 md:px-8 py-3 flex justify-between items-center rounded-[10px] mx-auto">
-      <div className="flex gap-[60px] items-center">
+    <header className="header w-full px-4 md:px-8 py-3 flex justify-between items-center rounded-[10px] mx-auto">
+      <div className="flex gap-[70px] items-center">
         <button onClick={handleLogoClick} className="cursor-pointer">
           <img
             src={`${process.env.PUBLIC_URL}/image/NeuroHiveAILK.png`}
