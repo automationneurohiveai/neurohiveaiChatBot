@@ -20,8 +20,8 @@
 }
 
 .intro-avatar-image {
-  width: 115px;
-  height: 115px;
+  width: 100;
+  height: 100px;
   object-fit: cover;
 }
 
@@ -184,8 +184,8 @@
   }
 
   .intro-avatar-shadow {
-    bottom: -35px;
-    width: 70px;
+    bottom: -24px;
+    width: 75px;
   }
 
   .intro-text {
@@ -262,8 +262,8 @@
   }
 
   .intro-avatar-shadow {
-    bottom: -30px;
-    width: 60px;
+    bottom: -24px;
+    width: 75px;
   }
 
   .intro-text {
@@ -341,8 +341,8 @@
   }
 
   .intro-avatar-shadow {
-    bottom: -25px;
-    width: 50px;
+    bottom: -18px;
+    width: 60px;
   }
 
   .intro-title {
