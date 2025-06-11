@@ -1,0 +1,11 @@
+.invoice {
+    padding-top: 220px;
+    background: url(../../../public/image/pg-bg-1.svg);
+    background-size: cover;
+}
+
+@media screen and (max-width:1200px) {
+    .invoice {
+        padding-top: 150px;
+    }
+}

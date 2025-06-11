@@ -83,7 +83,7 @@ export default function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" className="txt-1 text-white">
+              <NavLink to="/faq" className="txt-1 text-white">
                 Knowledge Hub
               </NavLink>
             </li>

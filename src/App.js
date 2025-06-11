@@ -9,6 +9,9 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Consultation from "./pages/Consultation";
 import Success from "./commponents/success-modal/Success";
 import { useUIContext } from "./Context/UIContext";
+import Cases from "./pages/Cases";
+import Articles from "./pages/Articles";
+import Faqs from "./pages/Faqs";
 
 function App() {
   const headerRef = useRef(null);
@@ -50,7 +53,6 @@ function App() {
   return (
     <>
       <div className="App">
-        <div></div>
         {!visible && (
           <div className="header-parent" ref={headerRef} style={{ opacity: 0 }}>
             <Header />
@@ -66,8 +68,38 @@ function App() {
               </div>
             }
           />
-
-          <Route path="consultation" element={<Consultation />} />
+          <Route
+            path="/consultation"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <Consultation />
+              </div>
+            }
+          />
+          <Route
+            path="/cases"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <Cases />
+              </div>
+            }
+          />
+          <Route
+            path="/articles"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <Articles />
+              </div>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <Faqs />
+              </div>
+            }
+          />
         </Routes>
 
         <Footer />
