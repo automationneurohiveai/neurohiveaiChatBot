@@ -60,19 +60,19 @@ export default function Question() {
             Got questions? We’ve got answers. Here’s everything you need to know
             before getting started with NeuroHive.
           </p>
+          {isDesktop && (
+            <div className="mt-[90px]">
+              <h3 className="title-3">Still have questions?</h3>
+              <p className="subtitle-16 text-[#818181] mt-[8px]">
+                If you didn’t find the answer you were looking for, feel free
+                search for an answer in our Knowledge Hub.
+              </p>
+              <button className="black-btn w-[235px] mt-[20px] py-[16px]">
+                Go to Hub{" "}
+              </button>
+            </div>
+          )}
         </div>
-        {isDesktop && (
-          <div>
-            <h3 className="title-3">Still have questions?</h3>
-            <p className="subtitle-16 text-[#818181] mt-[8px]">
-              If you didn’t find the answer you were looking for, feel free
-              search for an answer in our Knowledge Hub.
-            </p>
-            <button className="black-btn w-[235px] mt-[20px] py-[16px]">
-              Go to Hub{" "}
-            </button>
-          </div>
-        )}
       </div>
       <div className="flex flex-col gap-[15px] flex-grow">
         {questions.map((item, index) => (
