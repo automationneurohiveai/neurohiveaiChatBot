@@ -11,6 +11,7 @@ export default function ConsultationComp() {
     website: "",
     phone: "",
     agreedToTerms: false,
+    agreedToMarketing: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -113,8 +114,19 @@ export default function ConsultationComp() {
     e.preventDefault();
 
     if (validateForm()) {
-      // Form submission logic will be here
-      console.log("Form is valid:", formData);
+      // Add consent data to form submission
+      const submissionData = {
+        ...formData,
+        consentData: {
+          termsAndPrivacy: formData.agreedToTerms,
+          marketing: formData.agreedToMarketing,
+          timestamp: new Date().toISOString(),
+          ipAddress: "client-ip", // Will be populated by backend
+        },
+      };
+
+      console.log("Form is valid:", submissionData);
+      // Here you would send submissionData to your CRM/database
       setVisible(true);
     }
   };
@@ -218,28 +230,65 @@ export default function ConsultationComp() {
             />
           </div>
 
-          <label className="custom-checkbox-label mt-[15px] w-full">
-            <input
-              type="checkbox"
-              checked={formData.agreedToTerms}
-              onChange={(e) =>
-                handleInputChange("agreedToTerms", e.target.checked)
-              }
-            />
-            <div className="checkmark"></div>
-            <span className="main-txt text-[#818181]">
-              I agree to the terms and privacy policy
-            </span>
-          </label>
-          {errors.terms && (
-            <p className="text-red-500 text-sm mt-1">{errors.terms}</p>
-          )}
+          <div className="consent-checkboxes mt-[15px] w-full">
+            <label className="custom-checkbox-label mb-[10px] w-full">
+              <input
+                type="checkbox"
+                checked={formData.agreedToTerms}
+                onChange={(e) =>
+                  handleInputChange("agreedToTerms", e.target.checked)
+                }
+              />
+              <div className="checkmark"></div>
+              <span className="main-txt text-[#818181]">
+                I agree to the{" "}
+                <a
+                  href="/terms"
+                  target="_blank"
+                  className="text-blue-600 hover:underline"
+                >
+                  terms of service
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/privacy-policy"
+                  target="_blank"
+                  className="text-blue-600 hover:underline"
+                >
+                  privacy policy
+                </a>{" "}
+                <span className="text-red-500">*</span>
+              </span>
+            </label>
+            {errors.terms && (
+              <p className="text-red-500 text-sm mt-1">{errors.terms}</p>
+            )}
+
+            <label className="custom-checkbox-label mt-[10px] w-full">
+              <input
+                type="checkbox"
+                checked={formData.agreedToMarketing}
+                onChange={(e) =>
+                  handleInputChange("agreedToMarketing", e.target.checked)
+                }
+              />
+              <div className="checkmark"></div>
+              <span className="main-txt text-[#818181]">
+                I would like to receive marketing communications and updates
+                about NeuroHive AI products and services (optional)
+              </span>
+            </label>
+          </div>
 
           <div className="flex mt-[30px] items-center gap-[10px] justify-center lg:justify-start">
             <img src={`${process.env.PUBLIC_URL}/image/lock.svg`} />
             <p className="text-[#818181] text-[12px] text-center lg:text-left">
               All your information is encrypted and fully protected. Check our
-              <a href="" className="text-black">
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                className="text-blue-600 hover:underline"
+              >
                 {" "}
                 Privacy Policy
               </a>

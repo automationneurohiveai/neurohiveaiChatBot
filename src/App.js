@@ -12,6 +12,10 @@ import { useUIContext } from "./Context/UIContext";
 import Cases from "./pages/Cases";
 import Articles from "./pages/Articles";
 import Faqs from "./pages/Faqs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CookiePolicy from "./pages/CookiePolicy";
+import Terms from "./pages/Terms";
+import CompanyInfo from "./pages/CompanyInfo";
 
 function App() {
   const headerRef = useRef(null);
@@ -100,6 +104,40 @@ function App() {
               </div>
             }
           />
+          <Route
+            path="/privacy-policy"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <PrivacyPolicy />
+              </div>
+            }
+          />
+          <Route
+            path="/cookie-policy"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <CookiePolicy />
+              </div>
+            }
+          />
+          <Route
+            path="/terms"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <Terms />
+              </div>
+            }
+          />
+          <Route
+            path="/company-info"
+            element={
+              <div ref={introRef} style={{ opacity: 0 }}>
+                <CompanyInfo />
+              </div>
+            }
+          />
+
+          
         </Routes>
 
         <Footer />
