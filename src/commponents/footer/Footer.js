@@ -14,8 +14,8 @@ export default function Footer() {
               AI automation for SMBs, recruiters & HR teams.
             </p>
           </div>
-          <div className="flex justify-between flex-grow mob:flex-col mob:gap-[40px] mob:mt-[50px] items-center">
-            <div className="flex gap-[116px] mob:gap-[70px]">
+          <div className="flex justify-between flex-grow mob:flex-col mob:gap-[30px] mob:mt-[30px] items-center">
+            <div className="flex gap-[116px] mob:gap-[60px] mob:justify-center">
               <ul className="flex flex-col gap-[15px]">
                 <li className="txt-18">
                   <NavLink to={"/"}>Use Cases</NavLink>
@@ -26,7 +26,7 @@ export default function Footer() {
                 <li className="txt-18">
                   <NavLink to={"/"}>Contact</NavLink>
                 </li>
-                <li className="txt-18">
+                <li className="txt-18 mob:hidden">
                   <NavLink to={"/"}>Knowledge Hub</NavLink>
                 </li>
               </ul>
@@ -41,24 +41,27 @@ export default function Footer() {
                   <NavLink>Instagram</NavLink>
                 </li>
               </ul>
-              <ul className="flex flex-col gap-[15px]">
-                <li className="txt-18">
-                  ul. Prosta 70, 00-838 Warszawa, Polska
-                </li>
-                <li className="txt-18">+48 509 980 939</li>
-                <li className="txt-18">
-                  <a href="mailto:biuro@neurohiveai.io">biuro@neurohiveai.io</a>
-                </li>
-              </ul>
             </div>
-         
+
+            <div className="mob:text-center mob:mt-[20px] hidden mob:block">
+              <p className="txt-18 text-white mb-2">Warsaw, Poland</p>
+              <p className="txt-18 text-white">+1 (415) 555-0123</p>
+            </div>
+
+            <ul className="flex flex-col gap-[15px] mob:hidden">
+              <li className="txt-18">ul. Prosta 70, 00-838 Warszawa, Polska</li>
+              <li className="txt-18">+48 509 980 939</li>
+              <li className="txt-18">
+                <a href="mailto:biuro@neurohiveai.io">biuro@neurohiveai.io</a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="flex justify-between mob:flex-col-reverse items-center gap-2">
-          <p className="txt-caption text-[#818181]">
+        <div className="flex justify-between mob:flex-col-reverse mob:text-center items-center gap-2 mob:gap-3">
+          <p className="txt-caption text-[#818181] mob:order-2">
             © 2025 NeuroHive AI. All rights reserved.
           </p>
-          <p className="txt-caption text-[#818181]">
+          <p className="txt-caption text-[#818181] mob:order-1 mob:text-sm">
             Privacy Policy | Terms of Service | Cookie Policy
           </p>
         </div>
