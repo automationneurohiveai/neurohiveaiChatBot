@@ -73,13 +73,10 @@ export default function Intro() {
         {/* Action Buttons */}
         <div className="flex items-center mt-[35px] gap-[20px] justify-center">
           <button
-            className="black-btn py-[16px] px-[48px]"
+            className="black-btn py-[16px] px-[48px] min-w-[400px]"
             onClick={() => navigate("/consultation")}
           >
             Get a consultation
-          </button>
-          <button className="white-btn py-[16px] px-[66.5px]">
-            Try the demo
           </button>
         </div>
 

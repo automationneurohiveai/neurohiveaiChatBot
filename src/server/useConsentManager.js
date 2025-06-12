@@ -11,7 +11,7 @@ export const useConsentManager = () => {
           (c) => c.status === true && c.isEssential === false
         );
 
-        if (hasConsent) {
+        if (true) { // true для localhost
           await fetch(`${BASE_URL}/init-session`, {
             method: "POST",
             credentials: "include",

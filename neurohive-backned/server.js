@@ -150,7 +150,9 @@ app.post("/init-session", (req, res) => {
     sessionId = uuidv4();
     res.cookie("sessionId", sessionId, {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 дней
+      maxAge: 1000 * 60 * 60 * 24 * 7, 
+      secure: true,
+      sameSite: "None",
     });
     console.log("New session:", sessionId);
   } else {
