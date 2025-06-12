@@ -34,66 +34,73 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-app.post("/api/message", async (req, res) => {
-  const userData = req.body;
-  try {
-    const response = await fetch(
-      "https://n8n.neurohiveai.agency/webhook/chat-webhook",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      }
-    );
-    const result = await response.json();
-    console.log("Response from n8n:", result.output);
-    res.json(result);
-  } catch (err) {
-    console.error("Error sending to n8n:", err);
-    res.status(500).json({ error: "Failed to send data to n8n" });
-  }
-});
-
-app.post("/api/email-footer", async (req, res) => {
-  const userData = req.body;
-  try {
-    const response = await fetch(
-      "https://n8n.neurohiveai.agency/webhook/26082c14-eaba-4951-b4e1-76e7a08449d0",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      }
-    );
-    const result = await response.json();
-    res.status(200).json(result);
-  } catch (err) {
-    console.error("Error sending to n8n:", err);
-  }
-});
-
 app.post("/api/urlai", async (req, res) => {
+  const sessionId = req.cookies.sessionId; // ✅ з cookie
   const userData = req.body;
+
+  if (!sessionId) {
+    return res.status(401).json({ error: "Session ID is missing" });
+  }
+
   try {
     const response = await fetch(
       "https://n8n.neurohiveai.agency/webhook/send_to_analyze",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({
+          ...userData,
+          sessionId, 
+        }),
       }
     );
+
     const result = await response.json();
-    console.log("200 OK – Відповідь надіслана", result);
+    console.log("✅ /urlai – Відповідь від n8n:", result);
     res.status(200).json(result);
   } catch (err) {
-    console.error("❌ 500 Internal Server Error – Помилка:", err);
+    console.error("❌ /urlai – Помилка:", err);
     res.status(500).json({ error: "Failed to send data to n8n" });
   }
 });
 
+
+app.post("/api/contact-form", async (req, res) => {
+  const sessionId = req.cookies.sessionId; // ✅ з cookie
+  const contactFormData = req.body;
+
+  if (!sessionId) {
+    return res.status(401).json({ error: "Session ID is missing" });
+  }
+
+  try {
+    const response = await fetch(
+      "https://n8n.neurohiveai.agency/webhook/26082c14-eaba-4951-b4e1-76e7a08449d0",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...contactFormData,
+          sessionId, // теж додаємо для зв'язку
+        }),
+      }
+    );
+
+    const result = await response.json();
+    console.log("✅ /contact-form – Відповідь від n8n:", result);
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("❌ /contact-form – Помилка:", err);
+    res.status(500).json({ error: "Failed to send contact form data" });
+  }
+});
+
+
+
+
 app.post("/api/contact-form", async (req, res) => {
   const contactFormData = req.body;
+  // const { sessionId } = req.query;
   try {
     const response = await fetch(
       "https://n8n.neurohiveai.agency/webhook/26082c14-eaba-4951-b4e1-76e7a08449d0",
@@ -113,12 +120,21 @@ app.post("/api/contact-form", async (req, res) => {
 });
 
 app.get("/api/status", async (req, res) => {
-  const { sessionId } = req.query;
+  const sessionId = req.cookies.sessionId;
+
+  if (!sessionId) {
+    return res.status(401).json({ error: "Session ID not found in cookies" });
+  }
+
   try {
-    const response = await fetch(`https://n8n.neurohiveai.agency/webhook/get_status?sessionId=${sessionId}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `https://n8n.neurohiveai.agency/webhook/get_status?sessionId=${sessionId}`, // ✅ передаємо sessionId до n8n
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
     const result = await response.json();
     console.log("Status check result for sessionId", sessionId, ":", result);
     res.json(result);
@@ -128,19 +144,17 @@ app.get("/api/status", async (req, res) => {
   }
 });
 
-app.get("/init-session", (req, res) => {
+app.post("/init-session", (req, res) => {
   let sessionId = req.cookies.sessionId;
   if (!sessionId) {
     sessionId = uuidv4();
     res.cookie("sessionId", sessionId, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 дней
-      secure: true,
-      sameSite: 'none' 
     });
-    console.log("🆕 New session:", sessionId);
+    console.log("New session:", sessionId);
   } else {
-    console.log("✅ Existing session:", sessionId);
+    console.log("Existing session:", sessionId);
   }
   res.json({ sessionId });
 });

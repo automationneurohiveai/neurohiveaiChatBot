@@ -5,14 +5,7 @@ export const usePostEmailFooter = () => {
   const [email, setEmail] = useState(null);
 
   async function submitDataValidationEmail(emailFooterData) {
-    const res = await fetch(`${BASE_URL}/init-session`, {
-      method: "GET",
-      credentials: "include",
-    });
-
-    const { sessionId } = await res.json();
-    console.log("sessionId Message", sessionId);
-
+  
     const response = await fetch(`${BASE_URL}/api/email-footer`, {
       method: "POST",
       credentials: "include",
