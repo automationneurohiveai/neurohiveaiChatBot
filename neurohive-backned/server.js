@@ -8,10 +8,9 @@ const app = express();
 
 // Исправленные CORS настройки
 const allowedOrigins = [
-  'https://www.neurohiveai.agency',
-  'https://neurohiveai.agency',
+  'https://neurohive-1.onrender.com',
   'http://localhost:3000', // для разработки
-  'http://localhost:3001'  // для разработки
+ 
 ];
 
 app.use(cors({
@@ -65,35 +64,6 @@ app.post("/api/urlai", async (req, res) => {
 });
 
 
-app.post("/api/contact-form", async (req, res) => {
-  const sessionId = req.cookies.sessionId; // ✅ з cookie
-  const contactFormData = req.body;
-
-  if (!sessionId) {
-    return res.status(401).json({ error: "Session ID is missing" });
-  }
-
-  try {
-    const response = await fetch(
-      "https://n8n.neurohiveai.agency/webhook/26082c14-eaba-4951-b4e1-76e7a08449d0",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...contactFormData,
-          sessionId, // теж додаємо для зв'язку
-        }),
-      }
-    );
-
-    const result = await response.json();
-    console.log("✅ /contact-form – Відповідь від n8n:", result);
-    res.status(200).json(result);
-  } catch (err) {
-    console.error("❌ /contact-form – Помилка:", err);
-    res.status(500).json({ error: "Failed to send contact form data" });
-  }
-});
 
 
 
