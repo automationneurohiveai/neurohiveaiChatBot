@@ -11,6 +11,18 @@
   align-items: center;
 }
 
+/* New chatbot-only styling */
+.intro-chatbot-only {
+  background: #f8fafc;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .intro h1 {
   max-width: 800px;
   background: linear-gradient(90deg, #930202 0%, #de2322 49%, #fec802 100%);
@@ -110,6 +122,11 @@
     min-height: 450px;
     margin-top: 60px;
   }
+
+  /* Responsive styles for chatbot-only */
+  .intro-chatbot-only {
+    padding: 30px 15px;
+  }
 }
 
 /* Mobile Large: 576px - 767px */
@@ -179,6 +196,11 @@
 
   .intro .flex.items-center button:last-child {
     order: 1; /* "Try the demo" moves to top */
+  }
+
+  /* Responsive styles for chatbot-only */
+  .intro-chatbot-only {
+    padding: 20px 10px;
   }
 }
 
@@ -259,6 +281,11 @@
   .intro .white-btn {
     width: 100% !important;
     max-width: 300px;
+  }
+
+  /* Responsive styles for chatbot-only */
+  .intro-chatbot-only {
+    padding: 15px 8px;
   }
 }
 
