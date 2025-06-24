@@ -1,0 +1,76 @@
+/* Swiper container styles */
+.swiper-parent {
+  width: calc(100% - 488px);
+}
+
+/* Tablet and below */
+@media screen and (max-width: 1200px) {
+  .swiper-parent {
+    width: 100%;
+  }
+}
+
+/* Mobile specific styles */
+@media screen and (max-width: 767px) {
+  .swiper-parent {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  /* Adjust slide content for mobile */
+  .cases-swiper-slide {
+    margin-bottom: 10px !important;
+  }
+
+  .cases-swiper-slide .slide-image {
+    height: 200px;
+    min-height: 200px;
+  }
+
+  .cases-swiper-slide .slide-image img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Better button layout on mobile */
+  .cases-swiper-slide .p-\[20px\] {
+    padding: 15px;
+  }
+
+  .cases-swiper-slide .mt-\[10px\] {
+    margin-top: 15px;
+  }
+
+  /* Pagination center on mobile */
+  .template-pagination {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* Hide navigation arrows on mobile as they're not needed */
+  .template-swiper-button-prev,
+  .template-swiper-button-next {
+    display: none;
+  }
+}
+
+/* Very small mobile devices */
+@media screen and (max-width: 480px) {
+  .cases-swiper-slide .slide-image {
+    height: 180px;
+    min-height: 180px;
+  }
+
+  .cases-swiper-slide .p-\[20px\] {
+    padding: 12px;
+  }
+
+  .cases-swiper-slide .subtitle-1 {
+    font-size: 16px;
+  }
+
+  .cases-swiper-slide .txt-2 {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}

@@ -1,0 +1,52 @@
+.kpi-item {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  background-size: cover;
+  display: flex;
+  height: 300px;
+}
+
+.kpi-item-1 {
+  gap: 120px;
+  grid-column: 1/3;
+  background-image: url("../../../public/image/kpi/kpi-1.png");
+}
+
+.kpi-item-2 {
+  flex-direction: column;
+  gap: 20px;
+  background-image: url("../../../public/image/kpi/kpi-2.png");
+}
+
+.kpi-item-3 {
+  background-image: url("../../../public/image/kpi/kpi-3.png");
+}
+
+.kpi-item-4 {
+  background-image: url("../../../public/image/kpi/kpi-4.png");
+}
+
+.kpi-item-5 {
+  background-image: url("../../../public/image/kpi/kpi-5.png");
+}
+
+.kpi-item-6 {
+  grid-column: 3/5;
+  background-image: url("../../../public/image/kpi/kpi-6.png");
+}
+
+.kpi-item-6 {
+  grid-column: 3/5;
+  background-image: url("../../../public/image/kpi/kpi-6.png");
+}
+
+@media screen and (max-width: 1200px) {
+  .kpi-item {
+    padding: 30px;
+    flex-direction: column;
+    height: 260px;
+    gap: 20px;
+    grid-column: auto;
+  }
+}

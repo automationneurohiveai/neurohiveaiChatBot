@@ -1,0 +1,9 @@
+.cases-swiper-slide {
+  display: flex;
+  height: auto;
+}
+
+.case-slide .slide-image img {
+  margin-left: 10px;
+  margin-top: 10px;
+}
