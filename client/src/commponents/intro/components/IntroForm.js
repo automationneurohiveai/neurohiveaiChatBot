@@ -14,7 +14,7 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
   };
 
   return (
-    <div className="intro-form-content">
+    <div className="">
       {/* AI Avatar */}
       <div className="intro-avatar">
         <img
