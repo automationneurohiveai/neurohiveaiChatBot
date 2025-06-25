@@ -1,29 +1,111 @@
 body, html {
-  background: transparent;
+  background: transparent !important;
 }
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   background: transparent !important;
-
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-
 }
 
 body {
-  background: transparent;
+  background: transparent !important;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
-
 }
 
+/* Make all main page containers transparent except chatbot */
+.App {
+  background: transparent !important;
+}
+
+.intro-chatbot-only {
+  background: transparent !important;
+}
+
+.intro-form-container,
+.intro-loading-container,
+.intro-chat-container {
+  background: transparent !important;
+}
+
+/* Remove any background images that might interfere */
+.intro,
+.intro-chatbot-only,
+.intro-fixed-container {
+  background-image: none !important;
+}
+
+/* Modal positioning and layout */
+.modal-cont {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1111111111;
+  padding: 20px;
+  height: 100vh;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 366px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0px 24px 41.6px 1px rgba(147, 147, 147, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modal-content h2,
+.modal-content span,
+.modal-content p {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep form and loading components visible but with subtle transparency */
+.intro-form-content {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.intro-loading-content {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Ensure text remains visible on transparent backgrounds */
+.intro-form-content h1,
+.intro-form-content h2,
+.intro-form-content p,
+.intro-loading-content h2,
+.intro-loading-content p {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep chatbot components opaque for functionality */
+.chat-info-container .chat-widget {
+  background: #f7f7f7 !important;
+  /* Chatbot remains opaque for usability */
+}
 
 img,
 svg,
@@ -456,34 +538,6 @@ button {
   border: solid white;
   border-width: 0 0.15em 0.15em 0;
   transform: rotate(45deg);
-}
-
-.modal-cont {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background: rgba(78, 78, 78, 0.3);
-  backdrop-filter: blur(35px);
-  -webkit-backdrop-filter: blur(35px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1111111111;
-  padding: 20px;
-}
-
-.modal-content {
-  width: 100%;
-  max-width: 366px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0px 24px 41.6px 1px rgba(147, 147, 147, 0.25);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ================================ */

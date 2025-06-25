@@ -12,7 +12,7 @@ function App() {
   
   return (
     <>
-      <div className="App min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="App min-h-screen flex items-center justify-center">
         <div className="w-full max-w-4xl">
           <Intro />
         </div>
