@@ -22,10 +22,6 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
           alt="AI Agent"
           className="intro-avatar-image"
         />
-        <img
-          src={`${process.env.PUBLIC_URL}/image/intro/intro-gif-shadow.svg`}
-          className="intro-avatar-shadow"
-        />
       </div>
 
       {/* Title and Description */}

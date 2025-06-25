@@ -26,10 +26,7 @@ export default function IntroLoading({ completedTasks, tasks }) {
           alt="AI Agent"
           className="loading-avatar-image"
         />
-        <img
-          src={`${process.env.PUBLIC_URL}/image/intro/intro-gif-shadow.svg`}
-          className="loading-avatar-shadow"
-        />
+      
       </div>
 
       {/* Main Title */}
