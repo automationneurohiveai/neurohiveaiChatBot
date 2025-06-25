@@ -7,6 +7,9 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+    background: transparent !important;
+
 }
 
 body {
@@ -14,6 +17,10 @@ body {
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
 
+}
+
+html, body {
+  background: transparent !important;
 }
 
 img,
