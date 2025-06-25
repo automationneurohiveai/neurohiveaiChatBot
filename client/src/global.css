@@ -35,43 +35,16 @@ body {
   background: transparent !important;
 }
 
-/* Remove any background images that might interfere */
-.intro,
-.intro-chatbot-only,
-.intro-fixed-container {
-  background-image: none !important;
-}
-
-/* Modal positioning and layout */
+/* Make success modal transparent */
 .modal-cont {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
   background: rgba(0, 0, 0, 0.3) !important;
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1111111111;
-  padding: 20px;
-  height: 100vh;
 }
 
 .modal-content {
-  width: 100%;
-  max-width: 366px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  box-shadow: 0px 24px 41.6px 1px rgba(147, 147, 147, 0.25);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .modal-content h2,
@@ -84,7 +57,7 @@ body {
 .intro-form-content {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(10px);
-
+  border: 0 solid rgba(255, 255, 255, 0.2);
 }
 
 .intro-loading-content {
@@ -105,6 +78,13 @@ body {
 .chat-info-container .chat-widget {
   background: #f7f7f7 !important;
   /* Chatbot remains opaque for usability */
+}
+
+/* Remove any background images that might interfere */
+.intro,
+.intro-chatbot-only,
+.intro-fixed-container {
+  background-image: none !important;
 }
 
 img,
