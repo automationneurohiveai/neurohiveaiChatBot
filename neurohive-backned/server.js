@@ -9,7 +9,7 @@ const app = express();
 // Исправленные CORS настройки
 const allowedOrigins = [
   'https://neurohive-1.onrender.com',
-  'http://localhost:3000', // для разработки
+  'http://localhost:3000', 
  
 ];
 
@@ -55,10 +55,10 @@ app.post("/api/urlai", async (req, res) => {
     );
 
     const result = await response.json();
-    console.log("✅ /urlai – Відповідь від n8n:", result);
+    console.log("urlai – Відповідь від n8n:", result);
     res.status(200).json(result);
   } catch (err) {
-    console.error("❌ /urlai – Помилка:", err);
+    console.error("/urlai – Помилка:", err);
     res.status(500).json({ error: "Failed to send data to n8n" });
   }
 });
