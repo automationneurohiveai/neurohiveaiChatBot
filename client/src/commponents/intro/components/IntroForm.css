@@ -2,7 +2,7 @@
 /* INTRO FORM STYLES */
 /* ================================ */
 
-. {
+.intro-form-content {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -18,6 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.intro-avatar-image {
   margin: auto;
 }
 
