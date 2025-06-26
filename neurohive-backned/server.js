@@ -173,7 +173,7 @@ app.post("/api/urlai", async (req, res) => {
   }
   try {
     const response = await fetch(
-      "https://n8n.neurohiveai.agency/webhook-test/send_to_analyze",
+      "https://n8n.neurohiveai.agency/webhook/send_to_analyze",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
