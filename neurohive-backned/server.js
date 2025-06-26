@@ -144,9 +144,7 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 // Исправленные CORS настройки
 const allowedOrigins = [
-  'https://neurohiveaichatbot-backend.onrender.com/',
-  'http://localhost:3000', 
-  
+  'https://neurohiveaichatbot.onrender.com'
 ];
 app.use(cors({
   origin: function (origin, callback) {
@@ -250,6 +248,8 @@ app.post("/init-session", (req, res) => {
   }
   res.json({ sessionId });
 });
+
+
 app.get("/check-session", (req, res) => {
   const sessionId = req.cookies.sessionId;
   if (!sessionId) {

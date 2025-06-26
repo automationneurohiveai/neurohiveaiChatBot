@@ -3,12 +3,21 @@ import "./global.css";
 import { useUIContext } from "./Context/UIContext";
 import Intro from "./commponents/intro/Intro";
 import Success from "./commponents/success-modal/Success";
-import { useConsentManager } from "./server/useConsentManager";
+import { useEffect } from "react";
+import { BASE_URL } from "./config/config";
 
 function App() {
   const { visible } = useUIContext();
 
-  useConsentManager();
+  useEffect(() => {
+    (async()=>{
+       const res = await fetch(`${BASE_URL}/init-session`, {
+         method: "POST",
+         credentials: "include",
+       });
+       console.log("dfgsdgdfgdfgdfg",res);
+    })()  
+   }, []);
   
   return (
     <>
