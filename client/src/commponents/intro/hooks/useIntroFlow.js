@@ -1,5 +1,6 @@
 import { useState, useEffect, useReducer, useRef } from "react";
 import { usePostUrl } from "../../../server/usePostUrl";
+import { getTranslation } from "../translations";
 
 // Определяем возможные состояния
 const INTRO_STATES = {
@@ -47,19 +48,13 @@ const initialState = {
   completedTasks: 0,
 };
 
-export const useIntroFlow = () => {
+export const useIntroFlow = (lang = 'en') => {
   const [state, dispatch] = useReducer(introReducer, initialState);
   const [isUrlValid, setIsUrlValid] = useState(false);
   const { dataUrl, submitDataValidationUrl, loadingUrl } = usePostUrl();
   const timeoutRef = useRef(null);
 
-  const tasks = [
-    "Scanning pages and structure",
-    "Detecting key call-to-actions",
-    "Understanding user journeys",
-    "Learning your tone of voice",
-    "Preparing to become your assistant",
-  ];
+  const tasks = getTranslation(lang, 'tasks');
 
   // Валидация URL
   const isValidUrl = (string) => {

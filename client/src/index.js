@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { UIContextProvider } from "./Context/UIContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <UIContextProvider>
-    <App />
-  </UIContextProvider>
+  <BrowserRouter>
+    <UIContextProvider>
+      <App />
+    </UIContextProvider>
+  </BrowserRouter>
 );

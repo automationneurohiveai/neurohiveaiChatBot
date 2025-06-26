@@ -8,7 +8,7 @@ import IntroContainer from "./components/IntroContainer";
 import IntroLoading from "../IntroLoading/IntroLoading";
 import ChatInfo from "../ChatInfo/ChatInfo";
 
-export default function Intro() {
+export default function Intro({ lang = 'en' }) {
   // Используем наш custom hook для всей логики
   const {
     currentState,
@@ -18,7 +18,7 @@ export default function Intro() {
     STATES,
     handleSubmit,
     handleUrlChange,
-  } = useIntroFlow();
+  } = useIntroFlow(lang);
 
   // Рендерим контент в зависимости от состояния
   const renderContent = () => {
@@ -30,6 +30,7 @@ export default function Intro() {
               onSubmit={handleSubmit}
               isUrlValid={isUrlValid}
               onUrlChange={handleUrlChange}
+              lang={lang}
             />
           </IntroContainer>
         );
@@ -37,14 +38,14 @@ export default function Intro() {
       case STATES.ANALYZING:
         return (
           <IntroContainer state="analyzing">
-            <IntroLoading completedTasks={completedTasks} tasks={tasks} />
+            <IntroLoading completedTasks={completedTasks} tasks={tasks} lang={lang} />
           </IntroContainer>
         );
 
       case STATES.CHAT_READY:
         return (
           <IntroContainer state="chat_ready">
-            <ChatInfo />
+            <ChatInfo lang={lang} />
           </IntroContainer>
         );
 

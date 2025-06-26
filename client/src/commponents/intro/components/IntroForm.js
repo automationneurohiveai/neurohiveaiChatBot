@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import "./IntroForm.css";
+import { getTranslation } from "../translations";
 
-const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
+const IntroForm = ({ onSubmit, isUrlValid, onUrlChange, lang = 'en' }) => {
   const { handleSubmit, control } = useForm({
     defaultValues: { url: "" },
   });
@@ -26,13 +27,11 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
 
       {/* Title and Description */}
       <div className="intro-text">
-        <h2 className="intro-title">Meet your AI Agent</h2>
+        <h2 className="intro-title">{getTranslation(lang, 'title')}</h2>
         <p className="intro-description">
-          Your AI Agent is more than a tool — it's a team member. It learns your
-          processes, talks to clients, and executes tasks — so you can focus on
-          what really matters.
+          {getTranslation(lang, 'description')}
         </p>
-        <p className="intro-instruction">Just paste your link below</p>
+        <p className="intro-instruction">{getTranslation(lang, 'instruction')}</p>
       </div>
 
       {/* Form */}
@@ -63,7 +62,7 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
                 {...field}
                 type="text"
                 className="intro-input"
-                placeholder="Paste your website here..."
+                placeholder={getTranslation(lang, 'placeholder')}
                 onChange={(e) => {
                   field.onChange(e);
                   onUrlChange(e.target.value);
@@ -93,7 +92,7 @@ const IntroForm = ({ onSubmit, isUrlValid, onUrlChange }) => {
               cursor: isUrlValid ? "pointer" : "not-allowed",
             }}
           >
-            Start analysing
+            {getTranslation(lang, 'buttonText')}
             {isUrlValid && (
               <motion.div
                 className="intro-button-indicator"

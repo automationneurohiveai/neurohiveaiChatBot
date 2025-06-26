@@ -5,8 +5,9 @@ import { usePostMessage } from "../../server/usePostMessage";
 import { useForm } from "react-hook-form";
 import InputValidation from "../InputValidation/InputValidation";
 import ReactMarkdown from "react-markdown";
+import { getTranslation } from "../intro/translations";
 
-export default function ChatInfo() {
+export default function ChatInfo({ lang = 'en' }) {
   const [userMessage, setUserMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,9 +16,19 @@ export default function ChatInfo() {
   const [messages, setMessages] = useState([
     {
       type: "ai",
-      text: "Hi there! I'm your personal assistant here to help you explore our ice cream selection and services.\nLet me know what you'd like to know!",
+      text: getTranslation(lang, 'initialMessage'),
     },
   ]);
+
+  // Update initial message when language changes
+  useEffect(() => {
+    setMessages([
+      {
+        type: "ai",
+        text: getTranslation(lang, 'initialMessage'),
+      },
+    ]);
+  }, [lang]);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -122,7 +133,7 @@ export default function ChatInfo() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          <h3 className="header-title">NeuroHive AI Agent</h3>
+          <h3 className="header-title">{getTranslation(lang, 'headerTitle')}</h3>
           <div className="header-avatar">
             <img
               src={`${process.env.PUBLIC_URL}/image/intro/intro-gif.gif`}
@@ -166,7 +177,7 @@ export default function ChatInfo() {
                   <div className="typing-dot"></div>
                   <div className="typing-dot"></div>
                 </div>
-                <span className="loading-text">AI is thinking...</span>
+                <span className="loading-text">{getTranslation(lang, 'loadingText')}</span>
               </div>
             </motion.div>
           )}
@@ -181,7 +192,7 @@ export default function ChatInfo() {
                 <InputValidation
                   name="message"
                   control={control}
-                  placeholder="Ask me anything..."
+                  placeholder={getTranslation(lang, 'placeholder')}
                   disabled={isLoading}
                   className="message-input w-[90%]"
                 />

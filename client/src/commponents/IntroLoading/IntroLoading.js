@@ -1,8 +1,9 @@
 import "./IntroLoading.css";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { getTranslation } from "../intro/translations";
 
-export default function IntroLoading({ completedTasks, tasks }) {
+export default function IntroLoading({ completedTasks, tasks, lang = 'en' }) {
   return (
     <motion.div
       key="loading-content"
@@ -36,7 +37,7 @@ export default function IntroLoading({ completedTasks, tasks }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
       >
-        Analysing your website...
+        {getTranslation(lang, 'loadingTitle')}
       </motion.h2>
 
       {/* Task List */}
