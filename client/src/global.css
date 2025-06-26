@@ -15,24 +15,23 @@ html {
 }
 
 body {
-  background: transparent !important;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
 }
 
-/* Make all main page containers transparent except chatbot */
+/* Make main page containers have subtle background */
 .App {
-  background: transparent !important;
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .intro-chatbot-only {
-  background: transparent !important;
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .intro-form-container,
 .intro-loading-container,
 .intro-chat-container {
-  background: transparent !important;
+  background: rgba(255, 255, 255, 0.95);
 }
 
 /* Make success modal transparent */
