@@ -14,7 +14,7 @@
 /* New chatbot-only styling */
 .intro-chatbot-only {
   background: transparent !important;
-  padding: 40px 20px;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;

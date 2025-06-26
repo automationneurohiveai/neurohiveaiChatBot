@@ -249,9 +249,10 @@ app.post("/api/message", async (req, res) => {
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({...chatWebhookData, session_id: sessionId}),
+      body: JSON.stringify({ ...chatWebhookData, session_id: sessionId }),
     }
   );
+  
   const result = await response.json();
   console.log("Chat webhook received", result);
   res.status(200).json(result);
