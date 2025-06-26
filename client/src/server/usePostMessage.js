@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BASE_URL } from "../config/config";
 
-export const usePostMessage = () => {
+export const  = () => {
   const [message, setMessage] = useState(null);
 
   async function submitDataValidationMessage(messageData) {
