@@ -5,19 +5,7 @@ export const usePostMessage = () => {
   const [message, setMessage] = useState(null);
 
   async function submitDataValidationMessage(messageData) {
-    // const res = await fetch(`${BASE_URL}/init-session`, {
-    //   method: "GET",
-    //   credentials: "include",
-    // });
-
-    // const { sessionId } = await res.json();
-    // console.log("sessionId Message", sessionId);
-
-    // // Добавляем sessionId к данным сообщения
-    // const dataWithSession = {
-    //   ...messageData,
-    //   sessionId: sessionId
-    // };
+  
 
     const response = await fetch(`${BASE_URL}/api/message`, {
       method: "POST",
