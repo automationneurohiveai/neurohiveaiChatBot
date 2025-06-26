@@ -144,10 +144,9 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 // Исправленные CORS настройки
 const allowedOrigins = [
-  'https://www.neurohiveai.agency',
-  'https://neurohiveai.agency',
-  'http://localhost:3000', // для разработки
-  'http://localhost:3001'  // для разработки
+  'https://neurohive-1.onrender.com',
+  'http://localhost:3000', 
+  
 ];
 app.use(cors({
   origin: function (origin, callback) {
