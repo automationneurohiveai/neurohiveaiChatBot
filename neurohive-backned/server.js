@@ -144,7 +144,7 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 // Исправленные CORS настройки
 const allowedOrigins = [
-  'https://neurohive-1.onrender.com',
+  'https://neurohiveaichatbot-backend.onrender.com/',
   'http://localhost:3000', 
   
 ];
