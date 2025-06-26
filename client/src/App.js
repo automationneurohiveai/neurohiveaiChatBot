@@ -5,10 +5,17 @@ import Intro from "./commponents/intro/Intro";
 import Success from "./commponents/success-modal/Success";
 import { useEffect } from "react";
 import { BASE_URL } from "./config/config";
-import { useParams, Routes, Route } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function App() {
   const { visible } = useUIContext();
+  const [searchParams] = useSearchParams();
+  
+  // Get language from URL query parameter (?lang=en)
+  const langParam = searchParams.get('lang');
+  
+  // Normalize language - support en, uk, pl with en as default
+  const normalizedLang = ['en', 'uk', 'pl'].includes(langParam) ? langParam : 'en';
   
   useEffect(() => {
     (async()=>{
@@ -22,30 +29,14 @@ function App() {
   
   return (
     <>
-      <Routes>
-        {/* Route without language parameter (defaults to English) */}
-        <Route path="/" element={<IntroPage />} />
-        {/* Route with language parameter */}
-        <Route path="/:lang" element={<IntroPage />} />
-      </Routes>
+      <div className="App min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-4xl">
+          <Intro lang={normalizedLang}/>
+        </div>
+      </div>
 
       {visible && <Success />}
     </>
-  );
-}
-
-function IntroPage() {
-  const {lang} = useParams();
-  
-  // Normalize language - support en, uk, pl with en as default
-  const normalizedLang = ['en', 'uk', 'pl'].includes(lang) ? lang : 'en';
-  
-  return (
-    <div className="App min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-4xl">
-        <Intro lang={normalizedLang}/>
-      </div>
-    </div>
   );
 }
 
