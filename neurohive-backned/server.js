@@ -8,9 +8,8 @@ const app = express();
 
 // Исправленные CORS настройки
 const allowedOrigins = [
-  'https://neurohive-1.onrender.com',
-  'http://localhost:3000', 
- 
+  'https://neurohiveaichatbot.onrender.com',
+
 ];
 
 app.use(cors({
@@ -34,11 +33,13 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.post("/api/urlai", async (req, res) => {
-  const sessionId = req.cookies.sessionId; 
+  const sessionId = req.cookies.sessionId; // ✅ з cookie
   const userData = req.body;
+
   if (!sessionId) {
     return res.status(401).json({ error: "Session ID is missing" });
   }
+
   try {
     const response = await fetch(
       "https://n8n.neurohiveai.agency/webhook/send_to_analyze",
@@ -51,11 +52,12 @@ app.post("/api/urlai", async (req, res) => {
         }),
       }
     );
+
     const result = await response.json();
-    console.log("✅ /urlai – Відповідь від n8n:", result);
+    console.log("urlai – Відповідь від n8n:", result);
     res.status(200).json(result);
   } catch (err) {
-    console.error("❌ /urlai – Помилка:", err);
+    console.error("/urlai – Помилка:", err);
     res.status(500).json({ error: "Failed to send data to n8n" });
   }
 });
@@ -88,9 +90,11 @@ app.post("/api/contact-form", async (req, res) => {
 
 app.get("/api/status", async (req, res) => {
   const sessionId = req.cookies.sessionId;
+
   if (!sessionId) {
     return res.status(401).json({ error: "Session ID not found in cookies" });
   }
+
   try {
     const response = await fetch(
       `https://n8n.neurohiveai.agency/webhook/get_status?sessionId=${sessionId}`, // ✅ передаємо sessionId до n8n
@@ -99,6 +103,7 @@ app.get("/api/status", async (req, res) => {
         headers: { "Content-Type": "application/json" },
       }
     );
+
     const result = await response.json();
     console.log("Status check result for sessionId", sessionId, ":", result);
     res.json(result);
@@ -158,7 +163,32 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // }));
 // app.use(cookieParser());
 // app.use(express.json());
-
+// app.post("/api/urlai", async (req, res) => {
+//   const sessionId = req.cookies.sessionId; 
+//   const userData = req.body;
+//   if (!sessionId) {
+//     return res.status(401).json({ error: "Session ID is missing" });
+//   }
+//   try {
+//     const response = await fetch(
+//       "https://n8n.neurohiveai.agency/webhook/send_to_analyze",
+//       {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//           ...userData,
+//           sessionId, 
+//         }),
+//       }
+//     );
+//     const result = await response.json();
+//     console.log("✅ /urlai – Відповідь від n8n:", result);
+//     res.status(200).json(result);
+//   } catch (err) {
+//     console.error("❌ /urlai – Помилка:", err);
+//     res.status(500).json({ error: "Failed to send data to n8n" });
+//   }
+// });
 
 // app.post("/api/contact-form", async (req, res) => {
 //   const contactFormData = req.body;
@@ -180,7 +210,27 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 //     res.status(500).json({ error: "Failed to send contact form data" });
 //   }
 // });
-
+// app.get("/api/status", async (req, res) => {
+//   const sessionId = req.cookies.sessionId;
+//   if (!sessionId) {
+//     return res.status(401).json({ error: "Session ID not found in cookies" });
+//   }
+//   try {
+//     const response = await fetch(
+//       `https://n8n.neurohiveai.agency/webhook/get_status?sessionId=${sessionId}`, // ✅ передаємо sessionId до n8n
+//       {
+//         method: "GET",
+//         headers: { "Content-Type": "application/json" },
+//       }
+//     );
+//     const result = await response.json();
+//     console.log("Status check result for sessionId", sessionId, ":", result);
+//     res.json(result);
+//   } catch (err) {
+//     console.error("Error checking status:", err);
+//     res.status(500).json({ error: "Failed to check status", status: "error" });
+//   }
+// });
 // app.post("/init-session", (req, res) => {
 //   let sessionId = req.cookies.sessionId;
 //   if (!sessionId) {
