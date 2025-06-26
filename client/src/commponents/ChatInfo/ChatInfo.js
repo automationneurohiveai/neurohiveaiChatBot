@@ -129,10 +129,7 @@ export default function ChatInfo() {
               alt="AI Agent"
               className="avatar-image"
             />
-            <img
-              src={`${process.env.PUBLIC_URL}/image/intro/intro-gif-shadow.svg`}
-              className="avatar-shadow"
-            />
+           
           </div>
         </motion.div>
 

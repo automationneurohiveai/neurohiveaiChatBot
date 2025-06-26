@@ -9,18 +9,15 @@ export const usePostUrl = () => {
     setLoading(true);
     
     // Получаем sessionId
-    const res = await fetch(`${BASE_URL}/init-session`, {
-      method: "GET",
-      credentials: "include",
-    });
+ 
 
-    const { sessionId } = await res.json();
-    console.log("sessionId Message", sessionId);
+
+   
 
     // Функция для проверки статуса
     const checkStatus = async () => {
       try {
-        const statusResponse = await fetch(`${BASE_URL}/api/status?sessionId=${sessionId}`, {
+        const statusResponse = await fetch(`${BASE_URL}/api/status`, {
           method: "GET",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -56,7 +53,7 @@ export const usePostUrl = () => {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: urlData, sessionId: sessionId }),
+        body: JSON.stringify({ url: urlData}),
       });
 
       const result = await response.json();

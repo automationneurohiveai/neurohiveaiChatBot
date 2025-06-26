@@ -231,22 +231,7 @@ app.get("/api/status", async (req, res) => {
     res.status(500).json({ error: "Failed to check status", status: "error" });
   }
 });
-// app.post("/init-session", (req, res) => {
-//   let sessionId = req.cookies.sessionId;
-//   if (!sessionId) {
-//     sessionId = uuidv4();
-//     res.cookie("sessionId", sessionId, {
-//       httpOnly: true,
-//       maxAge: 1000 * 60 * 60 * 24 * 7, 
-//       secure: process.env.BACKEND_PROD === "production",
-//       sameSite: process.env.BACKEND_PROD === "production" ? "None" : "Lax",
-//     });
-//     console.log("New session:", sessionId);
-//   } else {
-//     console.log("Existing session:", sessionId);
-//   }
-//   res.json({ sessionId });
-// });
+
 app.post("/init-session", (req, res) => {
   let sessionId = req.cookies.sessionId;
   if (!sessionId) {
