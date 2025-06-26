@@ -143,7 +143,9 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 // Исправленные CORS настройки
 const allowedOrigins = [
-  'https://neurohiveaichatbot.onrender.com'
+   'https://neurohiveaichatbot.onrender.com',
+  'http://localhost:3000',
+ 
 ];
 app.use(cors({
   origin: function (origin, callback) {
@@ -171,7 +173,7 @@ app.post("/api/urlai", async (req, res) => {
   }
   try {
     const response = await fetch(
-      "https://n8n.neurohiveai.agency/webhook/send_to_analyze",
+      "https://n8n.neurohiveai.agency/webhook-test/send_to_analyze",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -212,10 +214,12 @@ app.post("/api/contact-form", async (req, res) => {
 });
 app.get("/api/status", async (req, res) => {
   const sessionId = req.cookies.sessionId;
+  console.log("sessionId", sessionId);
   if (!sessionId) {
     return res.status(401).json({ error: "Session ID not found in cookies" });
   }
   try {
+    
     const response = await fetch(
       `https://n8n.neurohiveai.agency/webhook/get_status?sessionId=${sessionId}`, // ✅ передаємо sessionId до n8n
       {
@@ -230,6 +234,32 @@ app.get("/api/status", async (req, res) => {
     console.error("Error checking status:", err);
     res.status(500).json({ error: "Failed to check status", status: "error" });
   }
+});
+
+
+app.post("/api/message", async (req, res) => {
+  const chatWebhookData = req.body;
+  const sessionId = req.cookies.sessionId;
+  if (!sessionId) {
+    return res.status(401).json({ error: "Session ID not found in cookies" });
+  }
+ try {
+  const response = await fetch(
+    "https://n8n.neurohiveai.agency/webhook/chat-webhook",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(chatWebhookData),
+      
+    }
+  );
+  const result = await response.json();
+  console.log("Chat webhook received", result);
+  res.status(200).json(result);
+} catch (err) {
+  console.error("Error sending to chat webhook:", err);
+  res.status(500).json({ error: "Failed to send chat webhook data" });
+}
 });
 
 app.post("/init-session", (req, res) => {

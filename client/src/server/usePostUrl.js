@@ -7,11 +7,6 @@ export const usePostUrl = () => {
 
   async function submitDataValidationUrl(urlData) {
     setLoading(true);
-    
-    // Получаем sessionId
- 
-
-
    
 
     // Функция для проверки статуса
@@ -34,20 +29,23 @@ export const usePostUrl = () => {
     // Первоначальная проверка статуса
     const initialStatus = await checkStatus();
     
-    if (initialStatus.status === "true") {
-      // Если статус true, сразу завершаем
-      console.log("Status is true, finishing immediately");
-      setUrl(initialStatus);
-      setLoading(false);
-      return;
-    }
+    // if (initialStatus.status) {
+    //   // Если статус true, сразу завершаем
+    //   console.log("Status is true, finishing immediately");
+    //   setUrl(initialStatus);
+    //   setLoading(false);
+    //   return;
+    // }
 
-    // Если статус nok, отправляем данные на api/urlai
-    if (initialStatus.status !== "nok") {
-      console.log("Status is not 'nok', finishing without sending data");
-      setLoading(false);
-      return;
-    }
+    // // Если статус nok, отправляем данные на api/urlai
+    // if (!initialStatus.status ) {
+    //   console.log("Status is not 'nok', finishing without sending data");
+    //   setLoading(false);
+    //   return;
+    // }
+
+
+
     try {
       const response = await fetch(`${BASE_URL}/api/urlai`, {
         method: "POST",
@@ -100,8 +98,8 @@ export const usePostUrl = () => {
   return {
     submitDataValidationUrl,
     loading,
-    loadingUrl: loading, 
-    dataUrl: url, 
+    loadingUrl: loading, // Alias for compatibility
+    dataUrl: url, // Alias for compatibility
     url,
   };
 };
