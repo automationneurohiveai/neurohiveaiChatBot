@@ -18,7 +18,7 @@ function App() {
       if (event.origin !== 'https://neurohiveai.agency') return;
 
       const { type, lang } = event.data;
-      if (type === "set-language" && ['en', 'uk', 'pl'].includes("en")) {
+      if (type === "set-language" && ['en', 'uk', 'pl'].includes(lang)) {
         setLang(lang);
       }
     };
