@@ -73,3 +73,43 @@ export default App;
 
 
 
+
+
+
+
+
+
+
+
+
+// function getLanguageFromUrl() {
+//   const path = window.location.pathname.toLowerCase(); 
+//   if (path.startsWith('/uk/')) {
+//     console.log('Language detected: uk');
+//     return 'uk';
+//   } else if (path.startsWith('/pl/')) {
+//     console.log('Language detected: pl');
+//     return 'pl';
+//   } else {
+//     console.log('Language detected: en (default)');
+//     return 'en';
+//   }
+// }
+
+
+
+
+//   const iframe = document.querySelector('iframe');
+
+//   const lang = getLanguageFromUrl();
+//    const data = {
+//      type: "set-language",
+//      lang: lang
+//    };
+  
+//      iframe.contentWindow.postMessage(
+//        JSON.stringify(data),                 
+//        "https://neurohiveaichatbot.onrender.com"       
+//      );
+   
+
