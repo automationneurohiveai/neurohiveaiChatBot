@@ -11,43 +11,42 @@ function App() {
   const { visible } = useUIContext();
   const [searchParams] = useSearchParams();
   const [lang, setLang] = useState('en');
-  
-  // Get language from URL query parameter (?lang=en)
-  // const langParam = searchParams.get('lang');
-
- 
-
 
   useEffect(() => {
+
     const handleMessage = (event) => {
-        if(event.origin !== 'https://neurohive.ai') {
-          return;
-        }
-        const {type, lang} = event.data;
-        if(type === "set-language" && ['en', 'uk', 'pl'].includes(lang)) {
-          setLang(lang);
-        }
+      if (event.origin !== 'https://neurohiveai.agency') return;
 
-        window.addEventListener('message', handleMessage);
-
-        return () => {
-          window.removeEventListener('message', handleMessage);
-        }
+      const { type, lang } = event.data;
+      if (type === "set-language" && ['en', 'uk', 'pl'].includes("en")) {
+        setLang(lang);
+      }
     };
-  }, [searchParams]);
-  
+
+
+    console.log("lang", lang);
+
+    window.addEventListener('message', handleMessage);
+
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
 
   const normalizedLang = ['en', 'uk', 'pl'].includes(lang) ? lang : 'en';
-  
+
+  console.log("lang", normalizedLang);
+
   useEffect(() => {
-    (async()=>{
-       const res = await fetch(`${BASE_URL}/init-session`, {
-         method: "POST",
-         credentials: "include",
-       });
-       console.log("dfgsdgdfgdfgdfg",res);
-    })()  
-   }, []);
+    (async () => {
+      const res = await fetch(`${BASE_URL}/init-session`, {
+        method: "POST",
+        credentials: "include",
+      });
+      console.log("Session started", res);
+    })();
+  }, []);
   
   return (
     <>
