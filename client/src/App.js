@@ -31,9 +31,9 @@ function App() {
         console.warn("❌ Помилка при парсингу повідомлення:", event.data);
       }
     };
-  
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
+    handleMessage();
+    // window.addEventListener("message", handleMessage);
+    // return () => window.removeEventListener("message", handleMessage);
   }, []);
   
 
