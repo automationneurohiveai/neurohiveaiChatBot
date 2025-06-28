@@ -17,7 +17,7 @@ function App() {
     const handleMessage = (event) => {
       console.log("📩 Отримано повідомлення:", event);
   
-      if (event.origin !== "https://neurohiveai.agency" ||"https://neurohiveai.agency/uk" ||"https://neurohiveai.agency/pl") return;
+      if (event.origin !== "https://neurohiveai.agency" ) return;
   
       try {
         const data = JSON.parse(event.data);
