@@ -3,19 +3,41 @@ import "./global.css";
 import { useUIContext } from "./Context/UIContext";
 import Intro from "./commponents/intro/Intro";
 import Success from "./commponents/success-modal/Success";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "./config/config";
 import { useSearchParams } from "react-router-dom";
 
 function App() {
   const { visible } = useUIContext();
   const [searchParams] = useSearchParams();
+  const [lang, setLang] = useState('en');
   
   // Get language from URL query parameter (?lang=en)
-  const langParam = searchParams.get('lang');
+  // const langParam = searchParams.get('lang');
+
+ 
+
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+        if(event.origin !== 'https://neurohive.ai') {
+          return;
+        }
+        const {type, lang} = event.data;
+        if(type === "set-language" && ['en', 'uk', 'pl'].includes(lang)) {
+          setLang(lang);
+        }
+
+        window.addEventListener('message', handleMessage);
+
+        return () => {
+          window.removeEventListener('message', handleMessage);
+        }
+    };
+  }, [searchParams]);
   
-  // Normalize language - support en, uk, pl with en as default
-  const normalizedLang = ['en', 'uk', 'pl'].includes(langParam) ? langParam : 'en';
+
+  const normalizedLang = ['en', 'uk', 'pl'].includes(lang) ? lang : 'en';
   
   useEffect(() => {
     (async()=>{
@@ -41,3 +63,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
