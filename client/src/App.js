@@ -12,23 +12,36 @@ function App() {
   const [searchParams] = useSearchParams();
   const [lang, setLang] = useState('en');
 
+  const [data, setData] = useState(null);
   useEffect(() => {
 
     const handleMessage = (event) => {
-      if (event.origin !== 'https://neurohiveai.agency') return;
+
+      console.log("before",event.origin !== 'https://neurohiveai.agency');
+      if (event.origin !== 'https://neurohiveai.agency') {
+        return;
+      }
+      console.log("after",event.origin !== 'https://neurohiveai.agency');
+
 
       const parseData = JSON.parse(event.data);
-      console.log("parseData", parseData);
+
+
+       console.log("parseData", parseData);
+      
+    
       if (parseData.type === "set-language" && ['en', 'uk', 'pl'].includes(parseData.lang)) {
         setLang(parseData.lang);
+
+      
+        console.log("parseData.lang", parseData.lang);
       }
     };
 
 
-    console.log("lang", lang);
+
 
     window.addEventListener('message', handleMessage);
-
 
     return () => {
       window.removeEventListener('message', handleMessage);
@@ -37,7 +50,10 @@ function App() {
 
   const normalizedLang = ['en', 'uk', 'pl'].includes(lang) ? lang : 'en';
 
-  console.log("lang", normalizedLang);
+
+
+
+
 
   useEffect(() => {
     (async () => {
