@@ -14,39 +14,28 @@ function App() {
 
   const [data, setData] = useState(null);
   useEffect(() => {
-
     const handleMessage = (event) => {
-
-      console.log("before",event.origin !== 'https://neurohiveai.agency');
-      if (event.origin !== 'https://neurohiveai.agency') {
-        return;
-      }
-      console.log("after",event.origin !== 'https://neurohiveai.agency');
-
-
-      const parseData = JSON.parse(event.data);
-
-
-       console.log("parseData", parseData);
-      
-    
-      if (parseData.type === "set-language" && ['en', 'uk', 'pl'].includes(parseData.lang)) {
-        setLang(parseData.lang);
-
-      
-        console.log("parseData.lang", parseData.lang);
+      console.log("📩 Отримано повідомлення:", event);
+  
+      if (event.origin !== "https://neurohiveai.agency") return;
+  
+      try {
+        const data = JSON.parse(event.data);
+        console.log("✅ Розпарсено повідомлення:", data);
+  
+        if (data.type === "set-language" && ['en', 'pl', 'uk'].includes(data.lang)) {
+          console.log("🌐 Мова отримана:", data.lang);
+          setLang(data.lang);
+        }
+      } catch (err) {
+        console.warn("❌ Помилка при парсингу повідомлення:", event.data);
       }
     };
-
-
-
-
-    window.addEventListener('message', handleMessage);
-
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
+  
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, []);
+  
 
   const normalizedLang = ['en', 'uk', 'pl'].includes(lang) ? lang : 'en';
 
