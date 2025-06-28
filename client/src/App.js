@@ -17,9 +17,10 @@ function App() {
     const handleMessage = (event) => {
       if (event.origin !== 'https://neurohiveai.agency') return;
 
-      const { type, lang } = event.data;
-      if (type === "set-language" && ['en', 'uk', 'pl'].includes(lang)) {
-        setLang(lang);
+      const parseData = JSON.parse(event.data);
+      console.log("parseData", parseData);
+      if (parseData.type === "set-language" && ['en', 'uk', 'pl'].includes(parseData.lang)) {
+        setLang(parseData.lang);
       }
     };
 
