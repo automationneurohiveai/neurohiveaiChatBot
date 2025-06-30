@@ -75,7 +75,17 @@ export const useIntroFlow = (lang = 'en') => {
       dispatch({ type: "START_ANALYSIS" });
     }, 2000);
 
-    await submitDataValidationUrl(url);
+    const data = {
+      url: url,
+      lang: lang || "en"  
+    } 
+
+
+
+    await submitDataValidationUrl(data);
+
+
+    
   };
 
   // Валидация URL при изменении

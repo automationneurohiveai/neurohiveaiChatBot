@@ -9,6 +9,10 @@ export const usePostUrl = () => {
     setLoading(true);
    
 
+
+
+    console.log("UrlDataMainsdfgsdfsd", urlData);
+
     // Функция для проверки статуса
     const checkStatus = async () => {
       try {
@@ -29,21 +33,7 @@ export const usePostUrl = () => {
     // Первоначальная проверка статуса
     const initialStatus = await checkStatus();
     
-    // if (initialStatus.status) {
-    //   // Если статус true, сразу завершаем
-    //   console.log("Status is true, finishing immediately");
-    //   setUrl(initialStatus);
-    //   setLoading(false);
-    //   return;
-    // }
-
-    // // Если статус nok, отправляем данные на api/urlai
-    // if (!initialStatus.status ) {
-    //   console.log("Status is not 'nok', finishing without sending data");
-    //   setLoading(false);
-    //   return;
-    // }
-
+  
 
 
     try {
