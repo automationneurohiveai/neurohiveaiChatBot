@@ -147,6 +147,9 @@ const allowedOrigins = [
   'http://localhost:3000',
  
 ];
+
+
+
 app.use(cors({
   origin: function (origin, callback) {
     // Разрешаем запросы без origin (например, мобильные приложения)
