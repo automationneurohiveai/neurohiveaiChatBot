@@ -55,10 +55,10 @@ export const translations = {
 
 	pl: {
 		// IntroForm translations
-		title: "Poznaj swojego AI Agenta",
+		title: "Poznaj swojego Agenta AI",
 		description:
-			"Twój AI Agent to więcej niż narzędzie — to członek zespołu. Uczy się Twoich procesów, rozmawia z klientami i wykonuje zadania — abyś mógł skupić się na tym, co naprawdę ważne.",
-		instruction: "Po prostu wklej swój link poniżej",
+			"Twój Agent AI to coś więcej niż tylko narzędzie — to członek zespołu. Uczy się Twoich procesów, rozmawia z klientami i wykonuje zadania — dzięki czemu możesz skupić się na tym, co naprawdę ważne.",
+		instruction: "Wklej swój link poniżej",
 		placeholder: "Wklej tutaj swoją stronę internetową...",
 		buttonText: "Rozpocznij analizę",
 
@@ -76,7 +76,7 @@ export const translations = {
 		headerTitle: "NeuroHive AI Agent",
 		initialMessage:
 			"Cześć! Jestem Twoim osobistym asystentem, gotowym pomóc Ci poznać naszą ofertę lodów i usług.\nDaj mi znać, co chciałbyś wiedzieć!",
-		placeholder: "Zapytaj mnie o cokolwiek...",
+		placeholder: "Zadaj mi pytanie...",
 		loadingText: "AI myśli...",
 	},
 };
